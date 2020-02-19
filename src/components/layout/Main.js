@@ -4,75 +4,13 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+
 import Routers from "./routes";
 import NotFound from "../notfound/404";
-import clsx from "clsx";
-const drawerWidth = 240;
+import styles from "../../assets/styles/MainStyle";
+const useStyles = makeStyles(styles);
 
-const useStyles = makeStyles(theme => ({
-  toolbar: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    overflow: "auto",
-    position: "relative",
-    float: "right",
-    transition: "all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1)",
-    maxHeight: "100%",
-    width: "100%"
-    // overflowScrolling: "touch"
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  paper: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column"
-  },
-  fixedHeight: {
-    height: 850
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  drawerClose: {
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    marginLeft: theme.spacing(7) + 1,
-    overflowX: "hidden",
-    width: "100%" - theme.spacing(7) + 1,
-    [theme.breakpoints.down("sm")]: {
-      width: "100%" - theme.spacing(7) + 1
-    }
-  },
-  mainPanel: {
-    position: "relative",
-    height: 850,
-    maxHeight: "100%",
-    // [theme.breakpoints.down("md")]: {
-    //   width: `calc(100% - ${drawerWidth}px)`
-    // }
-  }
-}));
 
 let ps;
 

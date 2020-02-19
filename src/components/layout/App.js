@@ -9,13 +9,14 @@ import AppRoutes from "../layout/routes";
 import bgImage from "../../images/cc.jpg";
 import logo from "../../images/CL/CL1.jpg";
 import Routers from "./routes";
-
-function App() {
+import changeTheme from "../../actions/theme-actions"
+function App(props) {
+  const { theme,changeTheme } = props;
   const [open, setOpen] = useState(true);
   // eslint-disable-next-line
   const [image, setImage] = useState(bgImage);
   // eslint-disable-next-line
-  const [color, setColor] = useState("blue");
+  // const [color, setColor] = useState(theme);
   // eslint-disable-next-line
   const handleDrawerToggle = () => {
     open ? setOpen(false) : setOpen(true);
@@ -47,22 +48,27 @@ function App() {
         logoText={"HUANG"}
         logo={logo}
         image={image}
-        color={color}
+        color={theme}
+        {...props}
       />
       <Navbar
         open={open}
         handleDrawerToggle={handleDrawerToggle}
         Routers={Routers}
+        {...props}
       />
 
-      <Main open={open} />
+      <Main open={open} {...props} />
     </div>
   );
 }
 
 const mapStateToProps = (state, ownProps) => ({
   isAuthenticated: state.loginReducer.isAuthenticated,
-  data: state.reduxReducer.data
+  data: state.reduxReducer.data,
+  theme: state.themeReducer.color
 });
-
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  changeTheme: theme => dispatch(changeTheme(theme))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);

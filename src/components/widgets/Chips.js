@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Chip from "@material-ui/core/Chip";
@@ -35,19 +36,11 @@ const useStyles = makeStyles(theme => ({
 
 const options = [
   "None",
-  "Atria",
-  "Callisto",
-  "Dione",
-  "Ganymede",
-  "Hangouts Call",
-  "Luna",
-  "Oberon",
-  "Phobos",
-  "Pyxis",
-  "Sedna",
-  "Titania",
-  "Triton",
-  "Umbriel"
+  "purple",
+  "blue",
+  "green",
+  "orange",
+  "red",
 ];
 
 function ConfirmationDialogRaw(props) {
@@ -120,10 +113,11 @@ function ConfirmationDialogRaw(props) {
   );
 }
 
-export default function Chips(props) {
+function Chips(props) {
   const classes = useStyles();
+  const {changeTheme} = props
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("Dione");
+  const [value, setValue] = React.useState("none");
   // eslint-disable-next-line
   const { img, data } = props;
   const handleOpen = () => {
@@ -135,6 +129,8 @@ export default function Chips(props) {
 
     if (newValue) {
       setValue(newValue);
+      changeTheme(newValue)
+      
     }
   };
 
@@ -164,3 +160,5 @@ export default function Chips(props) {
     </div>
   );
 }
+
+export default Chips;

@@ -18,9 +18,7 @@ import Profile from "./Profile";
 import Icon from "@material-ui/core/Icon";
 import styles from "../../assets/styles/sidebarStyle";
 
-
 const useStyles = makeStyles(styles);
-
 
 function Sidebar(props) {
   const classes = useStyles();
@@ -30,8 +28,6 @@ function Sidebar(props) {
   const { color, logo, image, logoText, AppRoutes } = props;
 
   function activeRoute(routeName) {
-    console.log(routeName)
-    console.log(window.location.href.indexOf(routeName))
     return window.location.href.indexOf(routeName) > -1 ? true : false;
   }
 
@@ -41,7 +37,7 @@ function Sidebar(props) {
         AppRoutes.map((prop, key) => {
           var activePro = " ";
           var listItemClasses;
-          if (prop.path === "/home/") {
+          if (prop.path === "/Home") {
             activePro = classes.activePro + " ";
             listItemClasses = clsx({
               [" " + classes[color]]: true
@@ -85,6 +81,7 @@ function Sidebar(props) {
         })}
     </List>
   );
+
   var brand = (
     <div className={classes.logo}>
       <a
@@ -119,7 +116,11 @@ function Sidebar(props) {
       }}
     >
       {brand}
-      <div className={classes.sidebarWrapper}>
+      <div
+        className={clsx(classes.sidebarWrapper, {
+          [classes.drawerClose]: !open
+        })}
+      >
         {links}
       </div>
       {image !== undefined ? (

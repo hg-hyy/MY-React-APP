@@ -2,7 +2,8 @@ import { combineReducers } from "redux";
 import cartReducer from "./cart-reducer";
 import loginReducer from "./login-reducer";
 import registReducer from "./regist-reducer";
-import reduxReducer from "./redux_reducer";
+import reduxReducer from "./redux-reducer";
+import themeReducer from "./theme-reducers";
 import { postsBySubreddit, selectedsubreddit } from "./subreddit-reducer";
 import todosReducer from "./todos-reducer";
 import visibilityFilter from "./visibilityFilter";
@@ -15,7 +16,8 @@ const allReducers = {
   postsBySubreddit,
   selectedsubreddit,
   reduxReducer,
-  registReducer
+  registReducer,
+  themeReducer
 };
 
 const rootReducer = combineReducers(allReducers);

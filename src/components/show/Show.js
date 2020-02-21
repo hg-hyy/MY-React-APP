@@ -16,7 +16,6 @@ import LovePage from "./LovePage";
 import PublicPage from "./PublicPage";
 import ProtectedPage from "./ProtectedPage";
 import NestingPage from "./NestingPage";
-import Chip from "../widgets/Chips";
 import Hiddens from "../widgets/Hiddens";
 import Iframe from "../widgets/Iframe";
 import NotFound from "../notfound/404";
@@ -58,12 +57,6 @@ function NavBar() {
         to="/show/nesting"
       />
       <BottomNavigationAction
-        label="Chip"
-        icon={<LocationOnIcon />}
-        component={Link}
-        to="/show/chip"
-      />
-      <BottomNavigationAction
         label="hidden"
         icon={<LocationOnIcon />}
         component={Link}
@@ -89,7 +82,7 @@ function AuthButton(props) {
         color="primary"
         onClick={() => {
           signout();
-          history.push("/auth/signin");
+          history.push("/show/signin");
         }}
       >
         Sign out
@@ -124,7 +117,7 @@ function PrivateRoute({ children, isAuthenticated, ...rest }) {
 
 function Show(props) {
   return (
-    <Container>
+    <Container maxWidth="xl">
       <AuthButton {...props} />
       <Switch>
         <Route path="/show/nesting">
@@ -141,9 +134,6 @@ function Show(props) {
         </PrivateRoute>
         <Route exact path="/show">
           <PublicPage />
-        </Route>
-        <Route exact path="/show/chip">
-          <Chip />
         </Route>
         <Route exact path="/show/hidden">
           <Hiddens />

@@ -3,13 +3,16 @@ const drawerWidth = 240;
 const NavbarStyle = theme => ({
   root: {
     width: "100%",
-    maxWidth: 160,
-    padding: 0,
-    margin: 0
-    // backgroundColor: theme.palette.background.paper,
+    display: "flex",
+    flexDirection: "row",
+    marginRight: theme.spacing(2)
+  },
+  typography: {
+    padding: theme.spacing(2)
   },
   inline: {
-    display: "inline"
+    display: "inline",
+    margin: 0
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -17,6 +20,17 @@ const NavbarStyle = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     })
+  },
+  navitems: {marginRight:10},
+  account: {
+    margin: 0,
+    marginRight:10,
+    padding: 0
+  },
+  notify: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper
   },
   large: {
     width: theme.spacing(12),
@@ -46,9 +60,16 @@ const NavbarStyle = theme => ({
     padding: theme.spacing(3)
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    display: "none",
+    color: "white",
+    [theme.breakpoints.up("sm")]: {
+      display: "block"
+    }
   },
   paper: {
+    width: "80%",
+    maxHeight: 435,
     padding: theme.spacing(2),
     display: "flex",
     overflow: "auto",
@@ -69,6 +90,7 @@ const NavbarStyle = theme => ({
       backgroundColor: fade(theme.palette.common.white, 0.25)
     },
     marginLeft: 0,
+    marginRight:10,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
@@ -97,6 +119,15 @@ const NavbarStyle = theme => ({
         width: 200
       }
     }
+  },
+  divider: {
+    color: "white"
+  },
+  formControl: {
+    margin: theme.spacing(0)
+  },
+  popover: {
+    pointerEvents: "none"
   },
 });
 export default NavbarStyle;

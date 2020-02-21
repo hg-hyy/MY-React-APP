@@ -1,7 +1,8 @@
 import { CHANGE_THEME} from "../actions/theme-actions";
 
 const initialState = {
-  color:""
+  color:"blue",
+  img:""
 };
 
 export default function(state = initialState, action) {
@@ -9,7 +10,8 @@ export default function(state = initialState, action) {
     case CHANGE_THEME:
       return {
         ...state,
-        color:action.payload
+        color:action.payload,
+        img:action.payload
       };
     default:
       return state;

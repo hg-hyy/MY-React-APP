@@ -112,7 +112,7 @@ export default function LoginPage(props) {
   return (
     <div style={{ height: 700 }}>
       <p>You must log in to view the page at {from.pathname}</p>
-      <Container style={{ padding: 0 }}>
+      <Container style={{ padding: 0 }} maxWidth="xl">
         <Grid container component="main" className={classes.root}>
           <Grid
             item

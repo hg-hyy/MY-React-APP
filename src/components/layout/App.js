@@ -1,72 +1,117 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import jwt_decode from "jwt-decode";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import Main from "./Main";
 import AppRoutes from "../layout/routes";
-import bgImage from "../../images/cc.jpg";
 import logo from "../../images/CL/CL1.jpg";
 import Routers from "./routes";
-import changeTheme from "../../actions/theme-actions"
+import changeTheme from "../../actions/theme-actions";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import loadScript from "../../assets/utils/loadScript";
+
+let dependenciesLoaded = false;
+
+function loadDependencies() {
+  if (dependenciesLoaded) {
+    return;
+  }
+
+  dependenciesLoaded = true;
+
+  loadScript(
+    "https://buttons.github.io/buttons.js",
+    document.querySelector("head")
+  );
+}
+// const GettingStartedLink = React.forwardRef((props, ref) => {
+//   return <Link href="/getting-started/installation" naked prefetch ref={ref} {...props} />;
+// });
+
 function App(props) {
-  const { theme,changeTheme } = props;
+  React.useEffect(() => {
+    if (
+      window.location.hash !== "" &&
+      window.location.hash !== "#main=content"
+    ) {
+      window.location.replace(
+        `https://v0.material-ui.com/${window.location.hash}`
+      );
+    }
+
+    loadDependencies();
+  }, []);
   const [open, setOpen] = useState(true);
-  // eslint-disable-next-line
-  const [image, setImage] = useState(bgImage);
-  // eslint-disable-next-line
-  // const [color, setColor] = useState(theme);
-  // eslint-disable-next-line
   const handleDrawerToggle = () => {
     open ? setOpen(false) : setOpen(true);
   };
 
-  // useEffect(() => {
-  //   try {
-  //     const decoded = jwt_decode(localStorage.jwToken);
-  //     const currentTime = Date.now() / 1000; //由毫秒转成秒
-  //     console.log(decoded.exp - currentTime);
-  //     // 判断当前时间是否大于token中的exp时间;如果大于是为过期
-  //     if (decoded.exp < currentTime) {
-  //       localStorage.clear();
-  //     }
-  //   } catch (e) {
-  //     return function clearUp() {
-  //       return false;
-  //     };
-  //   }
-  // });
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+  const cl = useSelector(state => state.themeReducer.color);
 
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: prefersDarkMode ? "dark" : "light"
+        }
+      }),
+    [prefersDarkMode]
+  );
+  let history = useHistory();
+  useEffect(() => {
+    setTimeout(checkToken, 25000);
+  });
+
+  function checkToken() {
+    try {
+      const decoded = jwt_decode(localStorage.jwToken);
+      const currentTime = Date.now() / 1000; //由毫秒转成秒
+      console.log(decoded.exp - currentTime);
+      // 判断当前时间是否大于token中的exp时间;如果大于是为过期
+      if (decoded.exp < currentTime) {
+        localStorage.clear();
+        history.push("/regist");
+        console.log("已经退出登录！");
+      }
+    } catch (e) {
+      return false;
+    }
+  }
   return (
-    <div id="div">
-      <CssBaseline />
-      <Sidebar
-        open={open}
-        handleDrawerToggle={handleDrawerToggle}
-        AppRoutes={AppRoutes}
-        logoText={"HUANG"}
-        logo={logo}
-        image={image}
-        color={theme}
-        {...props}
-      />
-      <Navbar
-        open={open}
-        handleDrawerToggle={handleDrawerToggle}
-        Routers={Routers}
-        {...props}
-      />
+    <ThemeProvider theme={theme}>
+      <div id="div">
+        <CssBaseline />
+        <Sidebar
+          open={open}
+          handleDrawerToggle={handleDrawerToggle}
+          AppRoutes={AppRoutes}
+          logoText={"HUANG"}
+          logo={logo}
+          {...props}
+        />
+        <Navbar
+          open={open}
+          handleDrawerToggle={handleDrawerToggle}
+          Routers={Routers}
+          {...props}
+        />
 
-      <Main open={open} {...props} />
-    </div>
+        <Main open={open} {...props} />
+      </div>
+    </ThemeProvider>
   );
 }
 
 const mapStateToProps = (state, ownProps) => ({
   isAuthenticated: state.loginReducer.isAuthenticated,
   data: state.reduxReducer.data,
-  theme: state.themeReducer.color
+  color: state.themeReducer.color,
+  img: state.themeReducer.img
 });
 const mapDispatchToProps = dispatch => ({
   changeTheme: theme => dispatch(changeTheme(theme))

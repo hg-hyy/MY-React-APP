@@ -17,15 +17,14 @@ import Profile from "./Profile";
 // import AdminNavbarLinks from "./AdminNavbarLinks";
 import Icon from "@material-ui/core/Icon";
 import styles from "../../assets/styles/sidebarStyle";
+import { Typography, Divider } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 
 function Sidebar(props) {
   const classes = useStyles();
   // eslint-disable-next-line
-  const { open, handleDrawerToggle } = props;
-
-  const { color, logo, image, logoText, AppRoutes } = props;
+  const { color, logo, img, logoText, AppRoutes,open, handleDrawerToggle } = props;
 
   function activeRoute(routeName) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
@@ -37,7 +36,7 @@ function Sidebar(props) {
         AppRoutes.map((prop, key) => {
           var activePro = " ";
           var listItemClasses;
-          if (prop.path === "/Home") {
+          if (prop.path === "/") {
             activePro = classes.activePro + " ";
             listItemClasses = clsx({
               [" " + classes[color]]: true
@@ -57,10 +56,13 @@ function Sidebar(props) {
               activeClassName="active"
               key={key}
             >
-              <Tooltip title={prop.name} placement="right" key={prop.name}>
+              <Tooltip title={prop.name} placement="right" key={prop.name}  enterDelay={300}>
                 <ListItem button className={classes.itemLink + listItemClasses}>
                   {typeof prop.icon === "string" ? (
-                    <Icon className={clsx(classes.itemIcon, whiteFontClasses)}>
+                    <Icon
+                      className={clsx(classes.itemIcon, whiteFontClasses)}
+                      fontSize="large"
+                    >
                       {prop.icon}
                     </Icon>
                   ) : (
@@ -74,6 +76,7 @@ function Sidebar(props) {
                     className={clsx(classes.itemText, whiteFontClasses)}
                     disableTypography={true}
                   />
+                  <Divider />
                 </ListItem>
               </Tooltip>
             </NavLink>
@@ -81,7 +84,7 @@ function Sidebar(props) {
         })}
     </List>
   );
-
+  // eslint-disable-next-line
   var brand = (
     <div className={classes.logo}>
       <a
@@ -93,7 +96,7 @@ function Sidebar(props) {
         <div className={classes.logoImage}>
           <img src={logo} alt="logo" className={classes.img} />
         </div>
-        {logoText}
+        <Typography variant="h6">{logoText}</Typography>
       </a>
     </div>
   );
@@ -115,7 +118,7 @@ function Sidebar(props) {
         })
       }}
     >
-      {brand}
+      <Profile  {...props}/>
       <div
         className={clsx(classes.sidebarWrapper, {
           [classes.drawerClose]: !open
@@ -123,10 +126,11 @@ function Sidebar(props) {
       >
         {links}
       </div>
-      {image !== undefined ? (
+      {img !== undefined ? (
         <div
           className={classes.background}
-          style={{ backgroundImage: "url(" + image + ")" }}
+          style={{ backgroundImage: "url(" + img + ")" }}
+          // style={{ backgroundImage: 'url("https://source.unsplash.com/random")' }}
         />
       ) : null}
     </Drawer>

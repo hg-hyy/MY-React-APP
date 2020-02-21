@@ -32,74 +32,74 @@ import Photo from "../photo/Photo";
 
 const AppRoutes = [
   {
-    path: "/ToDo",
-    name: "ToDo",
+    path: "/todo",
+    name: "todo",
     icon: Dashboard,
     component: ToDo,
     layout: "/admin",
     auth: true
   },
   {
-    path: "/Cart",
-    name: "Cart",
+    path: "/cart",
+    name: "cart",
     icon: Person,
     component: Cart,
     layout: "/admin",
     auth: true
   },
   {
-    path: "/Blog",
-    name: "Blog",
+    path: "/blog",
+    name: "blog",
     icon: MenuIcon,
     component: Blog,
     layout: "/admin",
     auth: true
   },
   {
-    path: "/Login",
-    name: "Login",
-    icon: LibraryBooks,
-    component: Login,
-    layout: "/admin",
-  },
-  {
-    path: "/Home",
-    name: "Home",
+    path: "/home",
+    name: "home",
     icon: BubbleChart,
     component: Home,
     layout: "/admin",
   },
   {
-    path: "/Regist",
-    name: "Regist",
-    icon: LocationOn,
-    component: Regist,
-    layout: "/admin",
-  },
-  {
-    path: "/Show",
-    name: "Show",
+    path: "/show",
+    name: "show",
     icon: Notifications,
     component: Show,
     layout: "/admin",
     auth: true
   },
   {
+    path: "/photo",
+    name: "photo",
+    icon: Language,
+    component: Photo,
+    layout: "/admin",
+    auth: true
+  },
+  {
+    path: "/login",
+    name: "login",
+    icon: LibraryBooks,
+    component: Login,
+    layout: "/admin",
+  },
+  {
+    path: "/regist",
+    name: "regist",
+    icon: LocationOn,
+    component: Regist,
+    layout: "/admin",
+  },
+  {
     path: "/",
-    name: "Profile",
+    name: "profile",
     icon: Unarchive,
     component: Profile,
     layout: "/admin",
     auth: true,
     exact: true
-  },
-  {
-    path: "/Photo",
-    name: "Photo",
-    icon: Language,
-    component: Photo,
-    layout: "/admin",
-    auth: true
   },
 ];
 

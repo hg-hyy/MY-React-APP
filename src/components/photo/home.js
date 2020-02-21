@@ -8,6 +8,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Facebook from "./Facebook";
+
 const r = require.context("../../images", false, /^\.\/.*\.jpg$/);
 const images = r.keys().map(r);
 
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
   gridList: {
     width: 500,
-    height: 800,
+    height: 400,
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)"
   },
@@ -54,8 +55,8 @@ function Home() {
   const classes = useStyles();
   const { Meta } = Card;
   return (
-    <Container style={{ padding: 0 }}>
-      <Row gutter={16} style={{ marginBottom: 16 }}>
+    <Container style={{ padding: 0 }} maxWidth="xl">
+      <Row gutter={32} style={{ marginBottom: 16 }}>
         <Col span={8}>
           <Card
             hoverable
@@ -70,7 +71,7 @@ function Home() {
           </Card>
         </Col>
         <Col span={8}>
-          <div className={classes.root}>
+          {/* <div className={classes.root}> */}
             <GridList cellHeight={200} spacing={1} className={classes.gridList}>
               {tileData.map(tile => (
                 <GridListTile
@@ -96,7 +97,7 @@ function Home() {
                 </GridListTile>
               ))}
             </GridList>
-          </div>
+          {/* </div> */}
         </Col>
         <Col span={8}>
         <Facebook/>

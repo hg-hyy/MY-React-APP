@@ -47,7 +47,7 @@ const featuredPosts = [
     date: "Nov 12",
     description:
       "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: require("../../images/sarah.jpg"),
+    image: require("../../images/adrey.jpg"),
     imageText: "Image Text"
   },
   {
@@ -55,7 +55,7 @@ const featuredPosts = [
     date: "Nov 11",
     description:
       "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: require("../../images/saraj.jpg"),
+    image: require("../../images/ruslan.jpg"),
     imageText: "Image Text"
   }
 ];
@@ -63,7 +63,7 @@ const featuredPosts = [
 const sidebar = {
   title: "About",
   description:
-    "Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.",
+    "Etiam porta sem malesuada magna mollis euismod.Aenean lacinia bibendum nulla sed consectetur.",
   archives: [
     { title: "March 2020", url: "#" },
     { title: "February 2020", url: "#" },
@@ -88,7 +88,7 @@ export default function Blog(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Header title="Blog" sections={sections} />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />

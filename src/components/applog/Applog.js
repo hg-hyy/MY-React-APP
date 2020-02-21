@@ -157,7 +157,7 @@ class Applog extends React.Component<any, any> {
   }
   render() {
     return (
-      <Container>
+      <Container  fluid={true}>
         <Navbar color="inverse" light expand="md">
           <NavbarBrand href="/"> reactstrap </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />

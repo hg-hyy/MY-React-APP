@@ -26,7 +26,7 @@ const MainStyle = theme => ({
     }),
     marginLeft: theme.spacing(9) + 1,
     overflowX: "hidden",
-    width: "100%" - theme.spacing(7) + 1,
+    width: "100%" - theme.spacing(9) + 1,
     [theme.breakpoints.down("sm")]: {
       width: "100%" - theme.spacing(9) + 1
     }

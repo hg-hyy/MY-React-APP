@@ -14,7 +14,7 @@ export default function Home() {
   let { path } = useRouteMatch(); // /home
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <NavBar />
       <Switch>
         <Route path={`${path}/price`}>

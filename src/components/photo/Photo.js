@@ -80,8 +80,8 @@ class Photo extends React.Component {
 
   render() {
     return (
-      <Container maxWidth="lg">
-        <Menu style={{marginBottom:50}}
+      <Container maxWidth="xl">
+        <Menu style={{marginBottom:10}}
           onClick={this.handleClick}
           selectedKeys={[this.state.current]}
           mode="horizontal"

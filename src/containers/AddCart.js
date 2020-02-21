@@ -38,7 +38,7 @@ export default function AddToCart(props) {
     seleteFromCart
   } = props;
   return (
-    <Container>
+    <Container maxWidth="xl">
     <Grid container spacing={2}>
       <Grid item xs={12} md={8} lg={8}>
         <Paper className={fixedHeightPaper}>

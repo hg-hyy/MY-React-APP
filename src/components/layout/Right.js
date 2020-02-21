@@ -12,7 +12,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import MenuIcon from "@material-ui/icons/Menu";
 const useStyles = makeStyles(theme => ({
   list: {
-    width: 250
+    width: 250,
+
+    marginRight:10
   }
 }));
 
@@ -65,7 +67,7 @@ export default function RightSlide() {
 
   return (
     <div>
-      <Button onClick={toggleDrawer("right", true)}><MenuIcon fontSize="large" color="inherit"/></Button>
+      <Button onClick={toggleDrawer("right", true)} color="inherit"><MenuIcon fontSize="large"/></Button>
       <Drawer
         anchor="right"
         open={state.right}

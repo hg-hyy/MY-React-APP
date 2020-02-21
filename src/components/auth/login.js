@@ -90,7 +90,7 @@ function Login(props) {
   });
 
   return (
-    <Container>
+    <Container maxWidth="xl">
       <Grid container component="main" className={classes.root}>
         <Grid item xs={false} sm={4} md={7} lg={8} className={classes.image} />
         <Grid

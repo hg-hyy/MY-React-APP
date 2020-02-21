@@ -18,6 +18,7 @@ function Main(props) {
   const mainPanel = React.createRef();
   const classes = useStyles();
   const { open } = props;
+  // eslint-disable-next-line
   const [mobileOpen, setMobileOpen] = useState(false);
   const resizeFunction = () => {
     if (window.innerWidth >= 960) {
@@ -29,9 +30,9 @@ function Main(props) {
      ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
         suppressScrollY: false,
-        wheelSpeed: 1,
-        wheelPropagation: true,
-        minScrollbarLength: 20
+        // wheelSpeed: 1,
+        // wheelPropagation: true,
+        // minScrollbarLength: 20
       });
       document.body.style.overflow = "hidden";
     }

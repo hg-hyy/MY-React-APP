@@ -29,9 +29,9 @@ const useStyles = makeStyles(theme => ({
 
 const Profile = (props) => {
   const classes = useStyles();
-  const { logo, img } = props;
+  const { logo, logoText,img } = props;
   const user = {
-    name: "Huangyuan",
+    name: logoText,
     avatar: logo,
     bio: "TRY MORE"
   };

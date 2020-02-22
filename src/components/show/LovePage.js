@@ -3,6 +3,8 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Theme from "../widgets/Theme"
+import App from "../widgets/useContext"
+import Calculator from "../widgets/Calculator"
 const useStyles = makeStyles(theme => ({
   root: {
     "& .MuiTextField-root": {
@@ -51,6 +53,8 @@ export default function LovePage() {
         Click me
       </Button>
       <Theme/>
+      <App/>
+      <Calculator/>
     </form>
   );
 }

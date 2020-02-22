@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles,useTheme  } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
@@ -44,32 +44,10 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { createMuiTheme } from "@material-ui/core/styles";
-import purple from "@material-ui/core/colors/purple";
-import red from "@material-ui/core/colors/red";
 import Tooltip from "@material-ui/core/Tooltip";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 
-const primary = red[500]; // #F44336
-const accent = purple.A200; // #E040FB (替代方法)
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: "#757ce8",
-      main: "#3f50b5",
-      dark: "#002884",
-      contrastText: "#fff"
-    },
-    secondary: {
-      light: "#ff7961",
-      main: "#f44336",
-      dark: "#ba000d",
-      contrastText: "#000"
-    }
-  }
-});
 const useStyles = makeStyles(styles);
 const options = ["None", "purple", "blue", "green", "orange", "red"];
 const names = ["harlen", "moham", "sarah", "visual", "wesley", "zuhri"];
@@ -521,10 +499,11 @@ function Pop(props) {
 export default function NavItems(props) {
   const classes = useStyles();
   const { open, handleDrawerToggle,changeTheme } = props;
+  const theme = useTheme();
   const handleTogglePaletteType = () => {
     const paletteType = theme.palette.type === "light" ? "dark" : "light";
 
-    changeTheme({ paletteType });
+    changeTheme(paletteType );
   };
   return (
     <Grid container direction="row" alignItems="center" justify="space-between">

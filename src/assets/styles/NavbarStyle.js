@@ -15,6 +15,8 @@ const NavbarStyle = theme => ({
     margin: 0
   },
   appBar: {
+    // color:theme.palette.primary.main,
+    background:theme.palette.text.disabled,
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,

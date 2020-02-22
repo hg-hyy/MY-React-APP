@@ -15,11 +15,12 @@ const useStyles = makeStyles(theme => ({
   paper: {
     // padding: theme.spacing(2),
     display: 'flex',
-    overflow: 'auto',
+    // overflow: 'auto',
+    overflow: 'hidden',
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 650,
+    height: 500,
   },
   fixedHeight1: {
     height: 400,

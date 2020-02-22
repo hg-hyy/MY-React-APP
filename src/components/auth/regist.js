@@ -77,11 +77,11 @@ function Regist(props) {
   }
 
   useEffect(() => {
-    console.log(isAuthenticated);
     if (isAuthenticated) {
       history.replace(from);
     }
-  });
+    console.log(isAuthenticated);
+  },[isAuthenticated,from,history]);
 
   return (
     <Container maxWidth="xl">

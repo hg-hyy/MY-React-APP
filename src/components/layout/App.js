@@ -11,28 +11,8 @@ import Routers from "./routes";
 import changeTheme from "../../actions/theme-actions";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+// eslint-disable-next-line
 import loadScript from "../../assets/utils/loadScript";
-import purple from "@material-ui/core/colors/purple";
-import red from "@material-ui/core/colors/red";
-const primary = red[500]; // #F44336
-const accent = purple.A200; // #E040FB (替代方法)
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: "#757ce8",
-      main: "#3f50b5",
-      dark: "#002884",
-      contrastText: "#fff"
-    },
-    secondary: {
-      light: "#ff7961",
-      main: "#f44336",
-      dark: "#ba000d",
-      contrastText: "#000"
-    }
-  }
-});
 let dependenciesLoaded = false;
 
 function loadDependencies() {

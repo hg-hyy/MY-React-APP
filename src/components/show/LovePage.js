@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Theme from "../widgets/Theme"
 import App from "../widgets/useContext"
 import Calculator from "../widgets/Calculator"
+import TempCalc from "../widgets/TempCalc"
 const useStyles = makeStyles(theme => ({
   root: {
     "& .MuiTextField-root": {
@@ -23,9 +24,9 @@ export default function LovePage() {
     setValue(event.target.value);
   };
   // 你可以直接获取 DOM button 的 ref：
-  useEffect(() => {
-    console.log(inputEl.current);
-  });
+  // useEffect(() => {
+  //   console.log(inputEl.current);
+  // });
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
@@ -55,6 +56,7 @@ export default function LovePage() {
       <Theme/>
       <App/>
       <Calculator/>
+      <TempCalc/>
     </form>
   );
 }

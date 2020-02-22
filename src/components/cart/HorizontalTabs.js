@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -19,12 +19,21 @@ import img1 from "../../images/chanel/1.jpg";
 import img2 from "../../images/chanel/2.jpg";
 import img3 from "../../images/chanel/3.jpg";
 import img4 from "../../images/chanel/4.jpg";
-
+import PerfectScrollbar from "perfect-scrollbar";
+import "perfect-scrollbar/css/perfect-scrollbar.css";
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-    width: "100%",
-    backgroundColor: theme.palette.background.paper
+    flexGrow: 1
+    // width: "100%",
+    // backgroundColor: theme.palette.background.paper
+  },
+  mainPanel: {
+    position: "relative",
+    height: 500,
+    maxHeight: "100%"
+    // [theme.breakpoints.down("md")]: {
+    //   width: `calc(100% - ${drawerWidth}px)`
+    // }
   }
 }));
 
@@ -61,12 +70,32 @@ function ImgMediaCard(props) {
     </Card>
   );
 }
-
+let ps;
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const classes = useStyles();
 
+  const { children, value, index, ...other } = props;
+  const mainPanel = React.createRef();
+  useEffect(() => {
+    if (navigator.platform.indexOf("Win") > -1) {
+      ps = new PerfectScrollbar(mainPanel.current, {
+        suppressScrollX: true,
+        suppressScrollY: false,
+        wheelSpeed: 1,
+        wheelPropagation: true,
+        minScrollbarLength: 20
+      });
+    }
+    return function cleanup() {
+      if (navigator.platform.indexOf("Win") > -1) {
+        ps.destroy();
+      }
+    };
+  }, [mainPanel]);
   return (
     <Typography
+      ref={mainPanel}
+      className={classes.mainPanel}
       component="div"
       role="tabpanel"
       hidden={value !== index}
@@ -106,45 +135,30 @@ export default function HorizontalTabs() {
         <Tabs
           value={value}
           onChange={handleChange}
-          variant="scrollable"
-          scrollButtons="on"
+          // variant="scrollable"
+          // scrollButtons="on"
           indicatorColor="primary"
           textColor="primary"
-          aria-label="scrollable force tabs example"
+          aria-label="scrollable force tabs"
+          centered
         >
           <Tab label="Item One" icon={<PhoneIcon />} {...a11yProps(0)} />
           <Tab label="Item Two" icon={<FavoriteIcon />} {...a11yProps(1)} />
           <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(2)} />
           <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(3)} />
-          <Tab label="Item One" icon={<PhoneIcon />} {...a11yProps(4)} />
-          <Tab label="Item Two" icon={<FavoriteIcon />} {...a11yProps(5)} />
-          <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(6)} />
-          <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(7)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <ImgMediaCard img={img1}/>
+        <ImgMediaCard img={img1} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ImgMediaCard img={img2}/>
+        <ImgMediaCard img={img2} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <ImgMediaCard img={img3}/>
+        <ImgMediaCard img={img3} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <ImgMediaCard img={img4}/>
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        <ImgMediaCard img={img1}/>
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        <ImgMediaCard img={img2}/>
-      </TabPanel>
-      <TabPanel value={value} index={6}>
-        <ImgMediaCard img={img3}/>
-      </TabPanel>
-      <TabPanel value={value} index={7}>
-        <ImgMediaCard img={img4}/>
+        <ImgMediaCard img={img4} />
       </TabPanel>
     </div>
   );

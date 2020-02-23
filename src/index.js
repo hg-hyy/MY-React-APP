@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./components/layout/App";
-// import './assets/material-react.css'
+import './assets/material-react.css'
 import "./assets/App.css";
 import * as serviceWorker from "./serviceWorker";
 // eslint-disable-next-line

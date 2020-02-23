@@ -20,21 +20,16 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
 import CartList from "../../containers/CartList";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles(theme => ({
-  root1: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: 350,
-    },
-  },
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: "flex",
-    height: "380",
-    borderRadius: 5,
+    height: 268,
+    borderRadius: 5
+    // overflow: "auto"
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`
@@ -42,35 +37,43 @@ const useStyles = makeStyles(theme => ({
   inline: {
     display: "inline"
   },
+  type: {
+    overflow: "auto",
+    width:"100%"
+  }
 }));
+
 function MultilineTextFields() {
   const classes = useStyles();
-  const [value, setValue] = React.useState('Controlled');
+  const [value, setValue] = React.useState("Controlled");
 
   const handleChange = event => {
     setValue(event.target.value);
   };
 
   return (
-    <form className={classes.root1} noValidate autoComplete="off">
-        <TextField
-          id="outlined-multiline-static"
-          label="Multiline"
-          multiline
-          rows="4"
-          defaultValue="Default Value"
-          variant="outlined"
-          value={value}
-          onChange={handleChange}
-        />
+  <form noValidate autoComplete="off" >
+      <TextField
+      fullWidth
+        id="outlined-multiline-static"
+        label="Multiline"
+        multiline
+        rows="4"
+        variant="outlined"
+        value={value}
+        onChange={handleChange}
+      />
     </form>
   );
 }
 
-function Textarea() {
+ function MaxHeightTextarea() {
+  const classes = useStyles();
+
   return (
     <TextareaAutosize
-      rowsMax={500}
+    className={classes.type}
+      rowsMax={10}
       aria-label="maximum height"
       placeholder="Maximum 4 rows"
       defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -78,9 +81,9 @@ function Textarea() {
     />
   );
 }
+
 const r = require.context("../../images", true, /^\.\/.*\.jpg$/);
 const images = r.keys().map(r);
-
 
 TabPanel.propTypes = {
   children: PropTypes.node,
@@ -103,12 +106,12 @@ function ListOfMes() {
             onClick={event => event.stopPropagation()}
             onFocus={event => event.stopPropagation()}
             control={<Checkbox />}
-            label="I acknowledge that I should stop the click event propagation"
+            label="HtabI should stop the click event propagation"
           />
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography color="textSecondary">
-            The click event of the nested action will propagate up and expand
+            The click event of the nested action
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -124,13 +127,12 @@ function ListOfMes() {
             onClick={event => event.stopPropagation()}
             onFocus={event => event.stopPropagation()}
             control={<Checkbox />}
-            label="I acknowledge that I should stop the focus event propagation"
+            label="HtabI should stop the focus event propagation"
           />
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography color="textSecondary">
-            The focus event of the nested action will propagate up and also
-            focus the expansion
+            The focus event of the nested action will propagate 
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -146,13 +148,12 @@ function ListOfMes() {
             onClick={event => event.stopPropagation()}
             onFocus={event => event.stopPropagation()}
             control={<Checkbox />}
-            label="I acknowledge that I should provide an aria-label on each action that I add"
+            label="HtabI should provide an aria-label on each "
           />
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography color="textSecondary">
-            If you forget to put an aria-label on the nested action, the label
-            of the action will
+            If you forget to put an aria-label on the nested action, 
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -163,8 +164,8 @@ function AlignItemsList() {
   const classes = useStyles();
 
   return (
-    <List>
-      <ListItem alignItems="flex-start">
+    <List >
+      <ListItem alignItems="center">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src={images[0]} />
         </ListItemAvatar>
@@ -234,9 +235,11 @@ function AlignItemsList() {
 }
 
 function TabPanel(props) {
+  const classes = useStyles();
   const { children, value, index, ...other } = props;
   return (
     <Typography
+      className={classes.type}
       component="div"
       role="tabpanel"
       hidden={value !== index}
@@ -244,7 +247,7 @@ function TabPanel(props) {
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
-      {value === index && <Box p={3}>{children}</Box>}
+      {value === index && <Box p={1} >{children}</Box>}
     </Typography>
   );
 }
@@ -255,6 +258,7 @@ function a11yProps(index) {
     "aria-controls": `vertical-tabpanel-${index}`
   };
 }
+
 export default function VerticalTabs({ carts }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -265,21 +269,20 @@ export default function VerticalTabs({ carts }) {
 
   return (
     <div className={classes.root}>
-      <Grid>
-        <Tabs
-          orientation="vertical"
-          variant="scrollable"
-          value={value}
-          onChange={handleChange}
-          aria-label="Vertical tabs example"
-          className={classes.tabs}
-        >
-          <Tab label="AlignList" {...a11yProps(0)} />
-          <Tab label="ListOfMes" {...a11yProps(1)} />
-          <Tab label="CartsList"  {...a11yProps(2)} />
-          <Tab label="Textarea"  {...a11yProps(3)} />
-        </Tabs>
-      </Grid>
+      <Tabs
+        orientation="vertical"
+        variant="scrollable"
+        value={value}
+        onChange={handleChange}
+        aria-label="Vertical tabs example"
+        className={classes.tabs}
+      >
+        <Tab label="AlignList" {...a11yProps(0)} />
+        <Tab label="ListOfMes" {...a11yProps(1)} />
+        <Tab label="CartsList" {...a11yProps(2)} />
+        <Tab label="Textarea" {...a11yProps(3)} />
+        <Tab label="Textarea" {...a11yProps(4)} />
+      </Tabs>
       <TabPanel value={value} index={0}>
         <AlignItemsList />
       </TabPanel>
@@ -290,8 +293,10 @@ export default function VerticalTabs({ carts }) {
         <CartList carts={carts} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-      <MultilineTextFields/>
-      <Textarea/>
+        <MultilineTextFields />
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <MaxHeightTextarea />
       </TabPanel>
     </div>
   );

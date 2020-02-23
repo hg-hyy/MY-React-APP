@@ -14,7 +14,6 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import SearchIcon from "@material-ui/icons/Search";
-
 const useStyles = makeStyles(theme => ({
   mainFeaturedPost: {
     position: "relative",

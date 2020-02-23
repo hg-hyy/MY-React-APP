@@ -46,7 +46,7 @@ function checkToken() {
     return false;
   }
 }
-setTimeout(checkToken, 30000);
+
 
 function App(props) {
   React.useEffect(() => {
@@ -61,6 +61,7 @@ function App(props) {
 
     loadDependencies();
   }, []);
+  
   const [open, setOpen] = useState(true);
   const handleDrawerToggle = () => {
     open ? setOpen(false) : setOpen(true);

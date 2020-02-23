@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -19,22 +19,13 @@ import img1 from "../../images/chanel/1.jpg";
 import img2 from "../../images/chanel/2.jpg";
 import img3 from "../../images/chanel/3.jpg";
 import img4 from "../../images/chanel/4.jpg";
-import PerfectScrollbar from "perfect-scrollbar";
-import "perfect-scrollbar/css/perfect-scrollbar.css";
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
-    // width: "100%",
-    // backgroundColor: theme.palette.background.paper
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+    // maxWidth: 646,
+    width:"100%",
   },
-  mainPanel: {
-    position: "relative",
-    height: 500,
-    maxHeight: "100%"
-    // [theme.breakpoints.down("md")]: {
-    //   width: `calc(100% - ${drawerWidth}px)`
-    // }
-  }
 }));
 
 function ImgMediaCard(props) {
@@ -54,8 +45,7 @@ function ImgMediaCard(props) {
             Lizard
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            Lizards are a widespread group of squamate reptiles
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -70,32 +60,12 @@ function ImgMediaCard(props) {
     </Card>
   );
 }
-let ps;
-function TabPanel(props) {
-  const classes = useStyles();
 
+function TabPanel(props) {
   const { children, value, index, ...other } = props;
-  const mainPanel = React.createRef();
-  useEffect(() => {
-    if (navigator.platform.indexOf("Win") > -1) {
-      ps = new PerfectScrollbar(mainPanel.current, {
-        suppressScrollX: true,
-        suppressScrollY: false,
-        wheelSpeed: 1,
-        wheelPropagation: true,
-        minScrollbarLength: 20
-      });
-    }
-    return function cleanup() {
-      if (navigator.platform.indexOf("Win") > -1) {
-        ps.destroy();
-      }
-    };
-  }, [mainPanel]);
+
   return (
     <Typography
-      ref={mainPanel}
-      className={classes.mainPanel}
       component="div"
       role="tabpanel"
       hidden={value !== index}
@@ -142,23 +112,19 @@ export default function HorizontalTabs() {
           aria-label="scrollable force tabs"
           centered
         >
-          <Tab label="Item One" icon={<PhoneIcon />} {...a11yProps(0)} />
-          <Tab label="Item Two" icon={<FavoriteIcon />} {...a11yProps(1)} />
-          <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(2)} />
-          <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(3)} />
+          <Tab  icon={<PhoneIcon />} {...a11yProps(0)} />
+          <Tab icon={<FavoriteIcon />} {...a11yProps(1)} />
+          <Tab icon={<PersonPinIcon />} {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <ImgMediaCard img={img1} />
+        <ImgMediaCard img={img4} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <ImgMediaCard img={img2} />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <ImgMediaCard img={img3} />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <ImgMediaCard img={img4} />
       </TabPanel>
     </div>
   );

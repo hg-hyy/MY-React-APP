@@ -8,22 +8,21 @@ import Deposits from "../components/cart/Deposits";
 import VerticalTabs from "../components/cart/VerticalTabs";
 import HorizontalTabs from "../components/cart/HorizontalTabs";
 import CartTable from "./CartTable";
-import CartForm from "./CartForm";
+import CartForm from "./CartForm";            
 import { Container } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   paper: {
     // padding: theme.spacing(2),
     display: 'flex',
-    // overflow: 'auto',
-    overflow: 'hidden',
-    flexDirection: 'column',
+    overflow: 'auto',
+    flexDirection: 'row',
   },
   fixedHeight: {
-    height: 500,
+    height: 521,
   },
   fixedHeight1: {
-    height: 400,
+    height: 268,
   },
 }))
 export default function AddToCart(props) {
@@ -41,12 +40,12 @@ export default function AddToCart(props) {
   return (
     <Container maxWidth="xl">
     <Grid container spacing={2}>
-      <Grid item xs={12} md={8} lg={8}>
+      <Grid item xs={12} md={8} lg={5}>
         <Paper className={fixedHeightPaper}>
           <HorizontalTabs />
         </Paper>
       </Grid>
-      <Grid item xs={12} md={4} lg={4}>
+      <Grid item xs={12} md={4} lg={3}>
         <Paper className={fixedHeightPaper}>
           <Deposits />
         </Paper>

@@ -19,33 +19,25 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-
+import NoteOutlinedIcon from "@material-ui/icons/NoteOutlined";
 const useStyles = makeStyles(theme => ({
   root: {
     "& > *": {
       margin: theme.spacing(1),
-      width: 200
-    }
-  },
-  root1: {
-    "& > *": {
-      margin: theme.spacing(1),
-      width: 500
-    }
-  },
-  root2: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
+    },
+    backgroundColor: theme.palette.primary.light
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary
+    textAlign: "center"
+    // color: theme.palette.text.secondary
   },
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 200
+    paddingLeft: theme.spacing(1),
+    minWidth: 50,
+    // marginLeft: theme.spacing(1),
+    // marginRight: theme.spacing(1),
+    width: 193.5,
   },
   selectEmpty: {
     marginTop: theme.spacing(2)
@@ -53,48 +45,25 @@ const useStyles = makeStyles(theme => ({
   extendedIcon: {
     marginRight: theme.spacing(1)
   },
-  margin: {
-    margin: theme.spacing(1)
-  },
   container: {
     display: "flex",
     flexWrap: "wrap"
   },
-  form: {
-    // overflow:"auto",
-    background: "linear-gradient(to right,#EA8D8D, #A890FE)",
-    borderRadius: 5,
-    width: 432
-  },
-  grow: {
-    flexGrow: 1
-  },
 }));
 
 function DialogSelect(props) {
+  const {dialog,handleDialogClose} = props
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [pdt, setPdt] = React.useState("");
+  const [pdt, setPdt] = useState("");
   const { carts, delCart } = props;
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <div>
-      <Button onClick={handleClickOpen} variant="outlined">
-        Dialog
-      </Button>
-
       <Dialog
         disableBackdropClick
         disableEscapeKeyDown
-        open={open}
-        onClose={handleClose}
+        open={dialog}
+        onClose={handleDialogClose}
       >
         <DialogTitle>{pdt}</DialogTitle>
         <DialogContent>
@@ -125,10 +94,10 @@ function DialogSelect(props) {
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleDialogClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleDialogClose} color="primary">
             Ok
           </Button>
           <Button
@@ -148,8 +117,15 @@ function DialogSelect(props) {
 }
 
 export default function CartForm(props) {
-  const { carts, addCart, updCart, delCart,delCartByID,seleteFromCart } = props;
   const classes = useStyles();
+  const {
+    carts,
+    addCart,
+    updCart,
+    delCart,
+    delCartByID,
+    seleteFromCart
+  } = props;
   const queueRef = React.useRef([]);
   const [id, setId] = useState(1);
   const [proudct, setProudct] = useState("");
@@ -157,9 +133,17 @@ export default function CartForm(props) {
   const [unitCost, setUnitCost] = useState(100);
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(0);
-  const [messageInfo, setMessageInfo] = React.useState(undefined);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(0);
+  const [messageInfo, setMessageInfo] = useState(undefined);
+  const [dialog, setDialog] = useState(false);
+
+  const handleDialogOpen = () => {
+    setDialog(true);
+  };
+  const handleDialogClose = () => {
+    setDialog(false);
+  };
 
   const processQueue = () => {
     if (queueRef.current.length > 0) {
@@ -193,12 +177,12 @@ export default function CartForm(props) {
     setOpen(false);
   };
 
-  const handleDel=()=>{
-    delCartByID(id)
-  }
-  const handleSelect=()=>{
-    seleteFromCart(proudct)
-  }
+  const handleDel = () => {
+    delCartByID(id);
+  };
+  const handleSelect = () => {
+    seleteFromCart(proudct);
+  };
 
   const Alert = (
     <div>
@@ -237,172 +221,170 @@ export default function CartForm(props) {
   }, []);
 
   return (
-    <Grid container spacing={1}>
-      <Grid item xs={5} lg={9}>
-        <form
-          className={classes.form}
-          noValidate
-          autoComplete="off"
-          onSubmit={e => {
-            e.preventDefault();
-            // if (!input.value.trim()) {
-            //   return;
-            // }
-            if (!proudct && quantity && unitCost) {
-              return;
-            }
-            addCart(proudct, quantity, unitCost);
-            // input.value = "";
+    <Grid>
+      <form
+        noValidate
+        autoComplete="off"
+        onSubmit={e => {
+          e.preventDefault();
+          // if (!input.value.trim()) {
+          //   return;
+          // }
+          if (!proudct && quantity && unitCost) {
+            return;
+          }
+          addCart(proudct, quantity, unitCost);
+          // input.value = "";
+        }}
+      >
+        {/* <input ref={node => (input = node)} /> */}
+        <TextField
+          id="proudct"
+          label="proudct"
+          style={{ padding: "0px 8px" }}
+          placeholder="Placeholder"
+          helperText="名称!"
+          fullWidth
+          margin="normal"
+          InputLabelProps={{
+            shrink: true
           }}
-        >
-          {/* <input ref={node => (input = node)} /> */}
-          <TextField
-            id="proudct"
-            label="proudct"
-            style={{ padding: 5 }}
-            placeholder="Placeholder"
-            helperText="名称!"
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true
-            }}
-            variant="outlined"
+          variant="outlined"
+          value={proudct}
+          onChange={e => setProudct(String(e.target.value))}
+        />
+        <TextField
+          id="quantity"
+          className={classes.formControl}
+          label="quantity"
+          // style={{ padding: 5 }}
+          placeholder="Placeholder"
+          helperText="数量!"
+          // fullWidth
+          // margin="normal"
+          InputLabelProps={{
+            shrink: true
+          }}
+          variant="outlined"
+          value={quantity}
+          onChange={e => setQuantity(Number(e.target.value))}
+        />
+        <TextField
+          id="unitCost"
+          className={classes.formControl}
+          label="unitCost"
+          // style={{ padding: 5 }}
+          placeholder="Placeholder"
+          helperText="单价!"
+          // fullWidth
+          // margin="normal"
+          InputLabelProps={{
+            shrink: true
+          }}
+          variant="outlined"
+          value={unitCost}
+          onChange={e => setUnitCost(Number(e.target.value))}
+        />
+        <FormControl variant="outlined" className={classes.formControl}>
+          <InputLabel ref={inputLabel} id="pid">
+            ID
+          </InputLabel>
+          <Select
+            labelId="pid"
+            id="demo-simple-select-outlined"
+            value={id}
+            // displayEmpty
+            onChange={e => setId(Number(e.target.value))}
+            labelWidth={labelWidth}
+          >
+            {carts.length === 0 ? (
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+            ) : (
+              carts &&
+              carts.map(cart => (
+                <MenuItem key={cart.id} value={cart.id}>
+                  {cart.id}
+                </MenuItem>
+              ))
+            )}
+          </Select>
+        </FormControl>
+        <FormControl variant="outlined" className={classes.formControl}>
+          <InputLabel ref={inputLabel} id="demo-label">
+            product
+          </InputLabel>
+          <Select
+            labelId="demo-label"
+            id="demo-simple-select-outlined"
             value={proudct}
+            // displayEmpty
             onChange={e => setProudct(String(e.target.value))}
-          />
-          <TextField
-            id="quantity"
-            label="quantity"
-            style={{ padding: 5 }}
-            placeholder="Placeholder"
-            helperText="数量!"
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true
-            }}
-            variant="outlined"
-            value={quantity}
-            onChange={e => setQuantity(Number(e.target.value))}
-          />
-          <TextField
-            id="unitCost"
-            label="unitCost"
-            style={{ padding: 5 }}
-            placeholder="Placeholder"
-            helperText="单价!"
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true
-            }}
-            variant="outlined"
-            value={unitCost}
-            onChange={e => setUnitCost(Number(e.target.value))}
-          />
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel ref={inputLabel} id="pid">
-              ID
-            </InputLabel>
-            <Select
-              labelId="pid"
-              id="demo-simple-select-outlined"
-              value={id}
-              // displayEmpty
-              onChange={e => setId(Number(e.target.value))}
-              labelWidth={labelWidth}
-            >
-              {carts.length === 0 ? (
-                <MenuItem value="">
-                  <em>None</em>
+            labelWidth={labelWidth}
+          >
+            {carts.length === 0 ? (
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+            ) : (
+              carts &&
+              carts.map(cart => (
+                <MenuItem key={cart.product} value={cart.product}>
+                  {cart.product}
                 </MenuItem>
-              ) : (
-                carts &&
-                carts.map(cart => (
-                  <MenuItem key={cart.id} value={cart.id}>
-                    {cart.id}
-                  </MenuItem>
-                ))
-              )}
-            </Select>
-          </FormControl>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel ref={inputLabel} id="demo-label">
-              product
-            </InputLabel>
-            <Select
-              labelId="demo-label"
-              id="demo-simple-select-outlined"
-              value={proudct}
-              // displayEmpty
-              onChange={e => setProudct(String(e.target.value))}
-              labelWidth={labelWidth}
-            >
-              {carts.length === 0 ? (
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-              ) : (
-                carts &&
-                carts.map(cart => (
-                  <MenuItem key={cart.product} value={cart.product}>
-                    {cart.product}
-                  </MenuItem>
-                ))
-              )}
-            </Select>
-          </FormControl>
+              ))
+            )}
+          </Select>
+        </FormControl>
 
-          {/* <Box
+        {/* <Box
             display="flex"
             p={1}
             bgcolor="background.paper"
             justifyContent="center"
             alignItems="center"
           ></Box> */}
-          <BottomNavigation
-            value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue);
+
+        <BottomNavigation
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+          showLabels
+        >
+          <BottomNavigationAction
+            label="Add"
+            icon={<AddIcon />}
+            type="submit"
+            onClick={handleClick("新增一条记录！")}
+          />
+          <BottomNavigationAction
+            label="Update"
+            icon={<EditIcon />}
+            onClick={() => {
+              updCart(id, proudct, quantity, unitCost);
             }}
-            showLabels
-            className={classes.root}
-          >
-            <BottomNavigationAction
-              label="Add"
-              icon={<AddIcon />}
-              type="submit"
-              onClick={handleClick("新增一条记录！")}
-            />
-            <BottomNavigationAction
-              label="Update"
-              icon={<EditIcon />}
-              onClick={() => {
-                updCart(id, proudct, quantity, unitCost);
-              }}
-            />
-            <BottomNavigationAction
-              label="Select"
-              icon={<EditIcon />}
-              onClick={
-                handleSelect
-              }
-            />
-            <BottomNavigationAction
-              label="Delete"
-              icon={<RemoveIcon />}
-              onClick={handleDel}
-            />
-          </BottomNavigation>
-         
-        </form>
-        {Alert}
-        {/* <ConsecutiveSnackbars/> */}
-      </Grid>
-      <Grid item xs={4} lg={2}>
-        <DialogSelect carts={carts} delCart={delCart} />
-      </Grid>
+          />
+          <BottomNavigationAction
+            label="Select"
+            icon={<EditIcon />}
+            onClick={handleSelect}
+          />
+          <BottomNavigationAction
+            label="Delete"
+            icon={<RemoveIcon />}
+            onClick={handleDel}
+          />
+          <BottomNavigationAction
+            label="Dialog"
+            icon={<NoteOutlinedIcon />}
+            onClick={handleDialogOpen}
+          />
+        </BottomNavigation>
+      </form>
+      {Alert}
+      <DialogSelect carts={carts} delCart={delCart} dialog={dialog} handleDialogClose={handleDialogClose}/>
     </Grid>
   );
 }

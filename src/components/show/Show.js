@@ -1,5 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
+import FolderIcon from "@material-ui/icons/Folder";
+
 import { Switch, Route, Link, Redirect, useHistory } from "react-router-dom";
 import { loginIn, loginOut } from "../../actions/redux_actions";
 import Typography from "@material-ui/core/Typography";
@@ -19,18 +22,50 @@ import NestingPage from "./NestingPage";
 import Hiddens from "../widgets/Hiddens";
 import Iframe from "../widgets/Iframe";
 import NotFound from "../notfound/404";
-
+const useStyles = makeStyles(theme => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+      width: 136.8
+    }
+    // backgroundColor: theme.palette.primary.light
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 150
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2)
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1)
+  },
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  form: {
+    // overflow:"auto",
+    // background: "linear-gradient(to right,#EA8D8D, #A890FE)",
+    // borderRadius: 5
+  }
+}));
 function NavBar() {
   const [value, setValue] = React.useState(0);
 
   return (
+    <div>
     <BottomNavigation
       value={value}
       onChange={(event, newValue) => {
         setValue(newValue);
       }}
       showLabels
-      // className={classes.root}
     >
       <BottomNavigationAction
         label="public"
@@ -69,7 +104,7 @@ function NavBar() {
         to="/show/Iframe"
       />
     </BottomNavigation>
-  );
+ </div> );
 }
 function AuthButton(props) {
   let history = useHistory();

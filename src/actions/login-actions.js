@@ -51,9 +51,9 @@ export const loginIn = decoded => {
     payload: decoded
   };
 };
-export const loginOut = decoded => {
+export const loginOut = islogin => {
   return {
     type: SET_LOGIN_OUT,
-    payload: decoded
+    payload: islogin
   };
 };

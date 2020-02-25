@@ -141,7 +141,7 @@ class Reservation extends React.Component {
 
 export { NameForm, Reservation };
 
-class Applog extends React.Component<any, any> {
+class Applog extends React.Component {
   constructor(props) {
     super(props);
 

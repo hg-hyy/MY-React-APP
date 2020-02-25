@@ -2,24 +2,22 @@
 import React from "react";
 import PNotify from "pnotify/dist/es/PNotify";
 import { Form, Input, Select, Cascader, DatePicker } from "antd";
-import { Table, Switch, Radio, Divider, Button, message, Avatar} from "antd";
-import  get  from "../../api/get";
+import { Table, Switch, Radio, Divider, Button, message, Avatar } from "antd";
+import get from "../../api/get";
 import moment from "moment";
-import Mycomment from './comment'
+import Mycomment from "./comment";
 
 // eslint-disable-next-line
 import PNotifyButtons from "pnotify/dist/es/PNotifyButtons";
 // eslint-disable-next-line
 import PNotifyConfirm from "pnotify/dist/es/PNotifyConfirm";
 
-
 let url = "http://127.0.0.1:8000/blog/check_log";
 
 const { Option } = Select;
 
-
 // eslint-disable-next-line
-const tellMe = (key) => {
+const tellMe = key => {
   message.info(`Click on item ${key}`);
 };
 // eslint-disable-next-line
@@ -48,7 +46,12 @@ const columns = [
     key: "操作",
     render: record => (
       <span>
-        <Button type="link" onClick={()=>{tellMe(record.key)}}>
+        <Button
+          type="link"
+          onClick={() => {
+            tellMe(record.key);
+          }}
+        >
           查看{record.key}
         </Button>
         <Divider type="vertical" />
@@ -109,12 +112,12 @@ const footer = () => <Button>1111111</Button>;
 const scroll = { y: 240 };
 const pagination = { position: "bottom" };
 
-class Antform extends React.Component<any, any> {
+class Antform extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
       log_level: "info",
-      log_day: "2020-01-22",
+      log_day: (new Date().toLocaleDateString()),
       log_list: [],
       bordered: true,
       pagination,

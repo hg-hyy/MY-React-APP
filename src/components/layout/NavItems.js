@@ -61,8 +61,9 @@ images.map((image, index) => {
   });
 });
 
-function User() {
+function User(props) {
   const classes = useStyles();
+  const{loginOut}=props
   // const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -71,7 +72,9 @@ function User() {
   };
 
   const handleClose = () => {
+    loginOut(false)
     setAnchorEl(null);
+
   };
   function handleListKeyDown(event) {
     if (event.key === "Tab") {
@@ -538,7 +541,7 @@ export default function NavItems(props) {
       </div>
 
       <Notify {...props} />
-      <User />
+      <User {...props}/>
       <Tooltip title="toggleTheme" enterDelay={300}>
         <IconButton
           color="inherit"

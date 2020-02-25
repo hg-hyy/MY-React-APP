@@ -17,7 +17,6 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Grid from "@material-ui/core/Grid";
 import CartList from "../../containers/CartList";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import TextField from "@material-ui/core/TextField";
@@ -39,12 +38,11 @@ const useStyles = makeStyles(theme => ({
   },
   type: {
     overflow: "auto",
-    width:"100%"
+    width: "100%"
   }
 }));
 
 function MultilineTextFields() {
-  const classes = useStyles();
   const [value, setValue] = React.useState("Controlled");
 
   const handleChange = event => {
@@ -52,9 +50,9 @@ function MultilineTextFields() {
   };
 
   return (
-  <form noValidate autoComplete="off" >
+    <form noValidate autoComplete="off">
       <TextField
-      fullWidth
+        fullWidth
         id="outlined-multiline-static"
         label="Multiline"
         multiline
@@ -67,12 +65,12 @@ function MultilineTextFields() {
   );
 }
 
- function MaxHeightTextarea() {
+function MaxHeightTextarea() {
   const classes = useStyles();
 
   return (
     <TextareaAutosize
-    className={classes.type}
+      className={classes.type}
       rowsMax={10}
       aria-label="maximum height"
       placeholder="Maximum 4 rows"
@@ -132,7 +130,7 @@ function ListOfMes() {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography color="textSecondary">
-            The focus event of the nested action will propagate 
+            The focus event of the nested action will propagate
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -153,7 +151,7 @@ function ListOfMes() {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography color="textSecondary">
-            If you forget to put an aria-label on the nested action, 
+            If you forget to put an aria-label on the nested action,
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -164,7 +162,7 @@ function AlignItemsList() {
   const classes = useStyles();
 
   return (
-    <List >
+    <List>
       <ListItem alignItems="center">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src={images[0]} />
@@ -247,7 +245,7 @@ function TabPanel(props) {
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
-      {value === index && <Box p={1} >{children}</Box>}
+      {value === index && <Box p={1}>{children}</Box>}
     </Typography>
   );
 }
@@ -282,6 +280,7 @@ export default function VerticalTabs({ carts }) {
         <Tab label="CartsList" {...a11yProps(2)} />
         <Tab label="Textarea" {...a11yProps(3)} />
         <Tab label="Textarea" {...a11yProps(4)} />
+        <Tab label="Textarea" {...a11yProps(5)} />
       </Tabs>
       <TabPanel value={value} index={0}>
         <AlignItemsList />
@@ -296,6 +295,9 @@ export default function VerticalTabs({ carts }) {
         <MultilineTextFields />
       </TabPanel>
       <TabPanel value={value} index={4}>
+        <MaxHeightTextarea />
+      </TabPanel>
+      <TabPanel value={value} index={5}>
         <MaxHeightTextarea />
       </TabPanel>
     </div>

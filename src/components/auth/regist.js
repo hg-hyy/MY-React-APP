@@ -80,7 +80,6 @@ function Regist(props) {
     if (isAuthenticated) {
       history.replace(from);
     }
-    console.log(isAuthenticated);
   },[isAuthenticated,from,history]);
 
   return (

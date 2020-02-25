@@ -1,24 +1,12 @@
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
-import LibraryBooks from "@material-ui/icons/LibraryBooks";
-import BubbleChart from "@material-ui/icons/BubbleChart";
-import LocationOn from "@material-ui/icons/LocationOn";
-import Notifications from "@material-ui/icons/Notifications";
-import Unarchive from "@material-ui/icons/Unarchive";
-import Language from "@material-ui/icons/Language";
-import MenuIcon from "@material-ui/icons/Menu";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import IconButton from "@material-ui/core/IconButton";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import PersonIcon from "@material-ui/icons/Person";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ChatIcon from "@material-ui/icons/Chat";
 import EditIcon from "@material-ui/icons/Edit";
 import AppsIcon from "@material-ui/icons/Apps";
+import HomeIcon from "@material-ui/icons/Home";
+import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 
 import ToDo from "../todo/ToDo";
 import Cart from "../cart/Cart";
@@ -34,7 +22,7 @@ const AppRoutes = [
   {
     path: "/todo",
     name: "todo",
-    icon: Dashboard,
+    icon: AppsIcon,
     component: ToDo,
     layout: "/admin",
     auth: true
@@ -42,7 +30,7 @@ const AppRoutes = [
   {
     path: "/cart",
     name: "cart",
-    icon: Person,
+    icon: Dashboard,
     component: Cart,
     layout: "/admin",
     auth: true
@@ -50,22 +38,23 @@ const AppRoutes = [
   {
     path: "/blog",
     name: "blog",
-    icon: MenuIcon,
+    icon: EditIcon,
     component: Blog,
     layout: "/admin",
     auth: true
   },
   {
-    path: "/home",
-    name: "home",
-    icon: BubbleChart,
-    component: Home,
+    path: "/profile",
+    name: "profile",
+    icon: FavoriteIcon,
+    component: Profile,
     layout: "/admin",
+    auth: true,
   },
   {
     path: "/show",
     name: "show",
-    icon: Notifications,
+    icon: ChatIcon,
     component: Show,
     layout: "/admin",
     auth: true
@@ -73,7 +62,7 @@ const AppRoutes = [
   {
     path: "/photo",
     name: "photo",
-    icon: Language,
+    icon: PhotoCameraIcon,
     component: Photo,
     layout: "/admin",
     auth: true
@@ -81,26 +70,25 @@ const AppRoutes = [
   {
     path: "/login",
     name: "login",
-    icon: LibraryBooks,
+    icon: LockOpenIcon,
     component: Login,
-    layout: "/admin",
+    layout: "/admin"
   },
   {
     path: "/regist",
     name: "regist",
-    icon: LocationOn,
+    icon: Person,
     component: Regist,
-    layout: "/admin",
+    layout: "/admin"
   },
   {
     path: "/",
-    name: "profile",
-    icon: Unarchive,
-    component: Profile,
+    name: "home",
+    icon: HomeIcon,
+    component: Home,
     layout: "/admin",
-    auth: true,
     exact: true
-  },
+  }
 ];
 
 export default AppRoutes;

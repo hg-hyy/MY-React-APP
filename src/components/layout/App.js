@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import jwt_decode from "jwt-decode";
 import Navbar from "./Navbar";
@@ -9,8 +10,10 @@ import AppRoutes from "../layout/routes";
 import logo from "../../images/CL/CL1.jpg";
 import Routers from "./routes";
 import changeTheme from "../../actions/theme-actions";
+import { loginOut } from "../../actions/login-actions";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+
 // eslint-disable-next-line
 import loadScript from "../../assets/utils/loadScript";
 let dependenciesLoaded = false;
@@ -31,44 +34,56 @@ function loadDependencies() {
 //   return <Link href="/getting-started/installation" naked prefetch ref={ref} {...props} />;
 // });
 
-function checkToken() {
-  try {
-    const decoded = jwt_decode(localStorage.jwToken);
-    const currentTime = Date.now() / 1000; //由毫秒转成秒
-    console.log(decoded.exp - currentTime);
-    // 判断当前时间是否大于token中的exp时间;如果大于是为过期
-    if (decoded.exp < currentTime) {
-      localStorage.clear();
-      window.location.href("/regist");
-      console.log("已经退出登录！");
-    }
-  } catch (e) {
-    return false;
-  }
-}
-
-
 function App(props) {
-  React.useEffect(() => {
-    if (
-      window.location.hash !== "" &&
-      window.location.hash !== "#main=content"
-    ) {
-      window.location.replace(
-        `https://v0.material-ui.com/${window.location.hash}`
-      );
+  const { loginOut } = props;
+  function checkToken() {
+    try {
+      const decoded = jwt_decode(localStorage.jwToken);
+      const currentTime = Date.now() / 1000; //由毫秒转成秒
+      console.log(decoded.exp - currentTime);
+      // 判断当前时间是否大于token中的exp时间;如果大于是为过期
+      if (decoded.exp < currentTime) {
+        localStorage.clear();
+        loginOut(false);
+        // window.location.href="/login";
+        // history.push("/login")
+        console.log("已经退出登录！");
+      }
+    } catch (e) {
+      return false;
     }
+  }
+  // React.useEffect(() => {
+  //   if (
+  //     window.location.hash !== "" &&
+  //     window.location.hash !== "#main=content"
+  //   ) {
+  //     window.location.replace(
+  //       `https://v0.material-ui.com/${window.location.hash}`
+  //     );
+  //   }
 
-    loadDependencies();
-  }, []);
-  
-  const [open, setOpen] = useState(true);
+  //   loadDependencies();
+  // }, []);
+  const history = useHistory();
+  // React.useEffect(() => {
+  //   checkToken();
+
+  //   // const timer = setInterval(checkToken, 1000);
+  //   // return () => {
+  //   //   clearInterval(timer);
+  //   // };
+  //   console.log(history)
+  // }, [history, loginOut]);
+
+  const [open, setOpen] = useState(false);
   const handleDrawerToggle = () => {
     open ? setOpen(false) : setOpen(true);
   };
 
   const cl = useSelector(state => state.themeReducer.color);
-  console.log(cl)
+  console.log(cl);
+  checkToken()
   const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${cl})`);
 
   const theme = React.useMemo(
@@ -109,12 +124,11 @@ function App(props) {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  isAuthenticated: state.loginReducer.isAuthenticated,
-  data: state.reduxReducer.data,
   color: state.themeReducer.color,
   img: state.themeReducer.img
 });
 const mapDispatchToProps = dispatch => ({
-  changeTheme: theme => dispatch(changeTheme(theme))
+  changeTheme: theme => dispatch(changeTheme(theme)),
+  loginOut: islogin => dispatch(loginOut(islogin))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(App);

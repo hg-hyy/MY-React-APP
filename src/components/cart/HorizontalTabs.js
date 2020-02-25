@@ -15,7 +15,6 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
-import img1 from "../../images/chanel/1.jpg";
 import img2 from "../../images/chanel/2.jpg";
 import img3 from "../../images/chanel/3.jpg";
 import img4 from "../../images/chanel/4.jpg";

@@ -54,7 +54,7 @@
 }
 
 .ct-label {
-  fill: rgba(0, 0, 0, 0.4);
+  fill: rgba(0, 0, 255, 0.4);
   line-height: 1;
 }
 html * {

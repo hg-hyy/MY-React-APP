@@ -70,24 +70,30 @@ function Login(props) {
   let history = useHistory();
   let location = useLocation();
 
-  let { from } = location.state || { from: { pathname: "/home" } };
+  let { from } = location.state || { from: { pathname: "/" } };
 
   let newUser = {
     Username: username,
     Password: password
   };
 
-  // eslint-disable-next-line
   function handleSubmit(event) {
+    if (localStorage.jwToken) {
+      console.log("请不要重复点击登录！");
+      // history.replace(from);
+      event.preventDefault();
+      return false;
+    }
     login(newUser);
     event.preventDefault();
   }
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (localStorage.jwToken) {
       history.replace(from);
     }
-  });
+  }, [from, history,isAuthenticated]);
+
 
   return (
     <Container maxWidth="xl">

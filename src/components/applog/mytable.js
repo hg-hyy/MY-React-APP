@@ -16,7 +16,7 @@ let url = "http://127.0.0.1:8000/blog/show_log";
 
 let params = {
   log_level: "info",
-  log_name: "all-2020-01-19.log"
+  log_name: "info-2020-02-25.log"
 };
 
 class MyTable extends React.Component {
@@ -36,7 +36,7 @@ class MyTable extends React.Component {
   componentDidMount() {
     get(url, params).then(res =>res.json()).then(
       result => {
-        // console.log(result.items);
+        console.log(result);
         this.setState({
           isLoaded: true,
           items: result.items,
@@ -57,7 +57,7 @@ class MyTable extends React.Component {
   }
 
   render() {
-    const { items, log_level, log_text, isLoaded, error } = this.state;
+    const {log_level, log_text, isLoaded, error } = this.state;
     if (error) {
       return (<div> Error: {error.message} </div>);
     } else if (!isLoaded) {
@@ -74,12 +74,12 @@ class MyTable extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {items &&
-              items.map(item => (
+            {log_text &&
+              log_text.map((item,index) => (
                 <tr key={item.name}>
-                  <th scope="row"> {item.id} </th>
+                  <th scope="row"> {index+1} </th>
                   <td> {log_level} </td>
-                  <td> {log_text} </td>
+                  <td> {item} </td>
                   <td> 查看 </td>
                 </tr>
               ))}

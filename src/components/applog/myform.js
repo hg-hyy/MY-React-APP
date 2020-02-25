@@ -24,7 +24,7 @@ class Myform extends React.Component {
     super(props);
     this.state = {
       log_level: "info",
-      log_day: "2020-01-19",
+      log_day: (new Date().toLocaleDateString()),
       log_list: [],
     };
 
@@ -111,9 +111,9 @@ class Myform extends React.Component {
             <DatePicker value={moment(this.state.log_day)}
               onChange={this.onChange} />
             <Input
+              id="log_day"
               type="date"
               name="log_day"
-              // id="log_day"
               value={this.state.log_day}
               onChange={this.handleInputChange}
             />

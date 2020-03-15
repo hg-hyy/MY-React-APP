@@ -17,13 +17,13 @@ export default function Home() {
     <Container maxWidth="xl">
       <NavBar />
       <Switch>
-        <Route path={`${path}/price`}>
+        <Route exact path={`${path}/price`}>
           <Price />
         </Route>
-        <Route path={`${path}/album`}>
+        <Route exact path={`${path}/album`}>
           <Album />
         </Route>
-        <Route path={`${path}/checkout`}>
+        <Route  exact path={`${path}/checkout`}>
           <Checkout />
         </Route>
         <Route exact path={path}>

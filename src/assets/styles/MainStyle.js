@@ -1,4 +1,5 @@
 const drawerWidth = 240;
+const drawerWidth1 = 73;
 const MainStyle = theme => ({
   toolbar: {
     display: "flex",
@@ -24,20 +25,18 @@ const MainStyle = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: theme.spacing(9) + 1,
+    marginLeft: drawerWidth1,
     overflowX: "hidden",
-    width: "100%" - theme.spacing(9) + 1,
+    // width: `calc(100% - ${drawerWidth1}px)`,
     [theme.breakpoints.down("sm")]: {
-      width: "100%" - theme.spacing(9) + 1
-    }
+      width: "100%",
+      marginLeft: 0
+    },
   },
   mainPanel: {
     position: "relative",
     height: 850,
     maxHeight: "100%"
-    // [theme.breakpoints.down("md")]: {
-    //   width: `calc(100% - ${drawerWidth}px)`
-    // }
   }
 });
 

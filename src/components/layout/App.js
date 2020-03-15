@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector, connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import jwt_decode from "jwt-decode";
 import Navbar from "./Navbar";
@@ -53,19 +52,18 @@ function App(props) {
       return false;
     }
   }
-  // React.useEffect(() => {
-  //   if (
-  //     window.location.hash !== "" &&
-  //     window.location.hash !== "#main=content"
-  //   ) {
-  //     window.location.replace(
-  //       `https://v0.material-ui.com/${window.location.hash}`
-  //     );
-  //   }
+  React.useEffect(() => {
+    if (
+      window.location.hash !== "" &&
+      window.location.hash !== "#main=content"
+    ) {
+      window.location.replace(
+        `https://v0.material-ui.com/${window.location.hash}`
+      );
+    }
 
-  //   loadDependencies();
-  // }, []);
-  const history = useHistory();
+    loadDependencies();
+  }, []);
   // React.useEffect(() => {
   //   checkToken();
 
@@ -82,8 +80,7 @@ function App(props) {
   };
 
   const cl = useSelector(state => state.themeReducer.color);
-  console.log(cl);
-  checkToken()
+  checkToken();
   const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${cl})`);
 
   const theme = React.useMemo(

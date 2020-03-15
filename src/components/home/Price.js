@@ -80,9 +80,6 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: theme.spacing(6)
     }
   },
-  aaa: {
-    flexDirection: "column"
-  }
 }));
 
 const tiers = [

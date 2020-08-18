@@ -1,7 +1,7 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { GET_ERRORS, SET_LOGIN_IN, SET_LOGIN_OUT } from "./types";
-let url = "http://127.0.0.1:8000/blog/signIn";
+let url = "http://127.0.0.1:5000/signin";
 
 const setAuthToken = token => {
   if (token) {

@@ -63,7 +63,7 @@ export default function LoginPage(props) {
   const { isAuthenticated, signin } = props;
   let history = useHistory();
   let location = useLocation();
-  let { from } = location.state || { from: { pathname: "/" } };
+  let { from } = location.state || { from: { pathname: "/show" } };
   // eslint-disable-next-line
   const [form, setForm] = useState();
   const [email, setEmail] = useState("");

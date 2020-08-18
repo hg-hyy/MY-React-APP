@@ -8,23 +8,18 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import clsx from "clsx";
-// eslint-disable-next-line
 import Hidden from "@material-ui/core/Hidden";
-// eslint-disable-next-line
 import Tooltip from "@material-ui/core/Tooltip";
-// eslint-disable-next-line
 import Profile from "./Profile";
-// import AdminNavbarLinks from "./AdminNavbarLinks";
 import Icon from "@material-ui/core/Icon";
 import styles from "../../assets/styles/sidebarStyle";
-import { Typography, Divider } from "@material-ui/core";
+import { Divider } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 
 function Sidebar(props) {
   const classes = useStyles();
-  // eslint-disable-next-line
-  const { color, logo, img, logoText, AppRoutes,open, handleDrawerToggle } = props;
+  const { color, img, AppRoutes, open } = props;
 
   function activeRoute(routeName) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
@@ -56,7 +51,12 @@ function Sidebar(props) {
               activeClassName="active"
               key={key}
             >
-              <Tooltip title={prop.name} placement="right" key={prop.name}  enterDelay={300}>
+              <Tooltip
+                title={prop.name}
+                placement="right"
+                key={prop.name}
+                enterDelay={300}
+              >
                 <ListItem button className={classes.itemLink + listItemClasses}>
                   {typeof prop.icon === "string" ? (
                     <Icon
@@ -84,56 +84,77 @@ function Sidebar(props) {
         })}
     </List>
   );
-  // eslint-disable-next-line
-  var brand = (
-    <div className={classes.logo}>
-      <a
-        href="/"
-        className={classes.logoLink}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div className={classes.logoImage}>
-          <img src={logo} alt="logo" className={classes.img} />
-        </div>
-        <Typography variant="h6">{logoText}</Typography>
-      </a>
-    </div>
-  );
-
   return (
-    <Drawer
-      variant="permanent"
-      ModalProps={{
-        keepMounted: true // Better open performance on mobile.
-      }}
-      className={clsx(classes.drawer, {
-        [classes.drawerOpen]: open,
-        [classes.drawerClose]: !open
-      })}
-      classes={{
-        paper: clsx({
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open
-        })
-      }}
-    >
-      <Profile  {...props}/>
-      <div
-        className={clsx(classes.sidebarWrapper, {
-          [classes.drawerClose]: !open
-        })}
-      >
-        {links}
-      </div>
-      {img !== undefined ? (
-        <div
-          className={classes.background}
-          style={{ backgroundImage: "url(" + img + ")" }}
-          // style={{ backgroundImage: 'url("https://source.unsplash.com/random")' }}
-        />
-      ) : null}
-    </Drawer>
+    <div>
+      <Hidden mdUp>
+        <Drawer
+          variant="temporary"
+          ModalProps={{
+            keepMounted: true // Better open performance on mobile.
+          }}
+          className={clsx(classes.drawer, {
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open
+          })}
+          classes={{
+            paper: clsx({
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open
+            })
+          }}
+        >
+          <Profile {...props} />
+          <div
+            className={clsx(classes.sidebarWrapper, {
+              [classes.drawerClose]: !open
+            })}
+          >
+            {links}
+          </div>
+          {img !== undefined ? (
+            <div
+              className={classes.background}
+              style={{ backgroundImage: "url(" + img + ")" }}
+              // style={{ backgroundImage: 'url("https://source.unsplash.com/random")' }}
+            />
+          ) : null}
+        </Drawer>
+      </Hidden>
+      <Hidden smDown>
+        <Drawer
+          variant="permanent"
+          ModalProps={{
+            keepMounted: true // Better open performance on mobile.
+          }}
+          className={clsx(classes.drawer, {
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open
+          })}
+          classes={{
+            paper: clsx({
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open
+            })
+          }}
+        >
+          <Profile {...props} />
+          <div
+            className={clsx(classes.sidebarWrapper, {
+              [classes.drawerClose]: !open
+            })}
+          >
+            {links}
+          </div>
+          {img !== undefined ? (
+            <div
+              className={classes.background}
+              style={{ backgroundImage: "url(" + img + ")" }}
+              // style={{ backgroundImage: 'url("https://source.unsplash.com/random")' }}
+            />
+          ) : null}
+        </Drawer>
+      </Hidden>
+    </div>
   );
 }
 

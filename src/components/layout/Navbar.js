@@ -15,7 +15,7 @@ function Navbar(props) {
   const { open } = props;
   return (
     <AppBar
-      position="fixed"
+      position="static"
       className={clsx(classes.appBar, {
         [classes.appBarShift]: open,
       })}

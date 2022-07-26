@@ -1,83 +1,67 @@
 import React from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { makeStyles } from "@mui/styles";
 import PropTypes from "prop-types";
-import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import clsx from "clsx";
-import Hidden from "@mui/material/Hidden";
 import Tooltip from "@mui/material/Tooltip";
 import Profile from "./Profile";
-import Icon from "@mui/material/Icon";
-import styles from "../../assets/styles/sidebarStyle";
 import { Divider } from "@mui/material";
-const useStyles = makeStyles(styles);
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
 function Sidebar(props) {
-  const classes = useStyles();
-  const { color, img, AppRoutes, open } = props;
+  const { AppRoutes, open } = props;
 
   function activeRoute(routeName) {
-    return window.location.href.indexOf(routeName) > -1 ? true : false;
+    return window.location.href.includes(routeName);
   }
 
-  var links = (
-    <List className={classes.list}>
+  const links = (
+    <List>
       {AppRoutes &&
-        AppRoutes.map((prop, key) => {
-          var activePro = " ";
-          var listItemClasses;
-          if (prop.path === "/") {
-            activePro = classes.activePro + " ";
-            listItemClasses = clsx({
-              [" " + classes[color]]: true,
-            });
-          } else {
-            listItemClasses = clsx({
-              [" " + classes[color]]: activeRoute(prop.path),
-            });
-          }
-          const whiteFontClasses = clsx({
-            [" " + classes.whiteFont]: activeRoute(prop.path),
-          });
+        AppRoutes.map((item, key) => {
           return (
-            <NavLink
-              to={prop.path}
-              className={activePro + classes.item}
-              activeClassName="active"
-              key={key}
-            >
+            <NavLink to={item.path} activeClassName="active" key={key}>
               <Tooltip
-                title={prop.name}
+                title={item.name}
                 placement="right"
-                key={prop.name}
+                key={item.name}
                 enterDelay={300}
               >
-                <ListItem button className={classes.itemLink + listItemClasses}>
-                  {typeof prop.icon === "string" ? (
-                    <Icon
-                      className={clsx(classes.itemIcon, whiteFontClasses)}
-                      fontSize="large"
-                    >
-                      {prop.icon}
-                    </Icon>
-                  ) : (
-                    <prop.icon
-                      className={clsx(classes.itemIcon, whiteFontClasses)}
-                    />
-                  )}
+                <ListItem
+                  key={item.name}
+                  disablePadding
+                  sx={{ display: "block" }}
+                >
+                  <ListItemButton
+                    sx={{
+                      minHeight: 48,
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                    }}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        justifyContent: "center",
+                      }}
+                      children={item.icon}
+                    ></ListItemIcon>
 
-                  <ListItemText
-                    primary={prop.name}
-                    className={clsx(classes.itemText, whiteFontClasses)}
-                    disableTypography={true}
-                  />
-                  <Divider />
+                    <ListItemText
+                      primary={item.name}
+                      sx={{
+                        opacity: open ? 1 : 0,
+                        // bgcolor: "primary.main",
+                      }}
+                    />
+                  </ListItemButton>
                 </ListItem>
               </Tooltip>
+              <Divider />
             </NavLink>
           );
         })}
@@ -85,74 +69,8 @@ function Sidebar(props) {
   );
   return (
     <div>
-      <Hidden mdUp>
-        <Drawer
-          variant="temporary"
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          className={clsx(classes.drawer, {
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          })}
-          classes={{
-            paper: clsx({
-              [classes.drawerOpen]: open,
-              [classes.drawerClose]: !open,
-            }),
-          }}
-        >
-          <Profile {...props} />
-          <div
-            className={clsx(classes.sidebarWrapper, {
-              [classes.drawerClose]: !open,
-            })}
-          >
-            {links}
-          </div>
-          {img !== undefined ? (
-            <div
-              className={classes.background}
-              style={{ backgroundImage: "url(" + img + ")" }}
-              // style={{ backgroundImage: 'url("https://source.unsplash.com/random")' }}
-            />
-          ) : null}
-        </Drawer>
-      </Hidden>
-      <Hidden smDown>
-        <Drawer
-          variant="permanent"
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          className={clsx(classes.drawer, {
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          })}
-          classes={{
-            paper: clsx({
-              [classes.drawerOpen]: open,
-              [classes.drawerClose]: !open,
-            }),
-          }}
-        >
-          <Profile {...props} />
-          <div
-            className={clsx(classes.sidebarWrapper, {
-              [classes.drawerClose]: !open,
-            })}
-          >
-            {links}
-          </div>
-          {img !== undefined ? (
-            <div
-              className={classes.background}
-              style={{ backgroundImage: "url(" + img + ")" }}
-              // style={{ backgroundImage: 'url("https://source.unsplash.com/random")' }}
-            />
-          ) : null}
-        </Drawer>
-      </Hidden>
+      <Profile {...props} />
+      {links}
     </div>
   );
 }

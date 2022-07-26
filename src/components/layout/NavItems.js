@@ -41,13 +41,15 @@ import CommentIcon from "@mui/icons-material/Comment";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-
+import Box from "@mui/material/Box";
+import { styled, alpha } from "@mui/material/styles";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Tooltip from "@mui/material/Tooltip";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(styles);
 const options = ["None", "purple", "blue", "green", "orange", "red"];
@@ -55,13 +57,52 @@ const names = ["harlen", "moham", "sarah", "visual", "wesley", "zuhri"];
 const r = require.context("../../images/theme", false, /^\.\/.*\.jpg$/);
 const images = r.keys().map(r);
 const data = [];
+
 images.map((image, index) => {
   return data.push({
     imgs: image,
     theme: names[index],
   });
 });
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(3),
+    width: "auto",
+  },
+}));
 
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+}));
 function User(props) {
   const classes = useStyles();
   const { loginOut } = props;
@@ -229,12 +270,15 @@ function Notify(props) {
 }
 
 function Account(props) {
+  const { isAuthenticated } = useSelector(
+    (state) => state.loginReducer.isAuthenticated
+  );
+  const { user } = useSelector((state) => state.reduxReducer.data);
   const classes = useStyles();
-  const { data } = props;
   return (
     <List className={classes.account}>
       <ListItem style={{ padding: 0, margin: 0 }}>
-        {data.email ? (
+        {user.email ? (
           <ListItemAvatar>
             <Avatar alt="Remy Sharp" src={img} />
           </ListItemAvatar>
@@ -242,7 +286,7 @@ function Account(props) {
 
         <ListItemText
           className={classes.account}
-          primary={data.email ? data.email : "未登录"}
+          primary={user.email ? user.email : "未登录"}
           secondary={
             <React.Fragment>
               <Typography
@@ -251,7 +295,7 @@ function Account(props) {
                 className={classes.inline}
                 color="textPrimary"
               >
-                {data.email ? "Administrator" : ""}
+                {user.email ? "Administrator" : ""}
               </Typography>
             </React.Fragment>
           }
@@ -293,7 +337,7 @@ function Chips(props) {
   };
 
   return (
-    <div>
+    <Box sx={{ display: "flex" }}>
       <Chip
         variant="outlined"
         deleteIcon={<DoneIcon />}
@@ -320,7 +364,7 @@ function Chips(props) {
         onClose={handleClose}
         value={value}
       />
-    </div>
+    </Box>
   );
 }
 function Model(props) {
@@ -499,8 +543,7 @@ function Pop(props) {
 }
 
 export default function NavItems(props) {
-  const classes = useStyles();
-  const { open, handleDrawerToggle, changeTheme } = props;
+  const { changeTheme } = props;
   const theme = useTheme();
   const handleTogglePaletteType = () => {
     const paletteType = theme.palette.mode === "light" ? "dark" : "light";
@@ -508,36 +551,22 @@ export default function NavItems(props) {
     changeTheme(paletteType);
   };
   return (
-    <Grid container direction="row" alignItems="center" justify="space-between">
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        onClick={handleDrawerToggle}
-        edge="start"
-        className={clsx(classes.menuButton, {
-          [classes.hide]: open,
-        })}
-      >
-        {open ? <Remove /> : <MenuIcon />}
-        {/* <MenuIcon /> */}
-      </IconButton>
-      <Typography variant="h6" noWrap className={classes.title}>
-        My React APP
-      </Typography>
-
-      <div className={classes.search}>
-        <div className={classes.searchIcon}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyItems: "center",
+        alignItems: "center",
+      }}
+    >
+      <Search>
+        <SearchIconWrapper>
           <SearchIcon />
-        </div>
-        <InputBase
+        </SearchIconWrapper>
+        <StyledInputBase
           placeholder="Search…"
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput,
-          }}
           inputProps={{ "aria-label": "search" }}
         />
-      </div>
+      </Search>
 
       <Notify {...props} />
       <User {...props} />
@@ -556,10 +585,10 @@ export default function NavItems(props) {
           )}
         </IconButton>
       </Tooltip>
-      <Account {...props} />
+      {/* <Account {...props} /> */}
       <Chips img={img} {...props} />
       <Divider orientation="vertical" flexItem />
       <Right />
-    </Grid>
+    </Box>
   );
 }

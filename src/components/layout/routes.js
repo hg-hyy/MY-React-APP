@@ -22,7 +22,7 @@ const AppRoutes = [
   {
     path: "/todo",
     name: "todo",
-    icon: AppsIcon,
+    icon: <AppsIcon />,
     component: ToDo,
     layout: "/admin",
     auth: false,
@@ -30,7 +30,7 @@ const AppRoutes = [
   {
     path: "/cart",
     name: "cart",
-    icon: Dashboard,
+    icon: <Dashboard />,
     component: Cart,
     layout: "/admin",
     auth: false,
@@ -38,7 +38,9 @@ const AppRoutes = [
   {
     path: "/blog",
     name: "blog",
-    icon: EditIcon,
+
+    icon: <EditIcon />,
+
     component: Blog,
     layout: "/admin",
     auth: false,
@@ -46,7 +48,9 @@ const AppRoutes = [
   {
     path: "/profile",
     name: "profile",
-    icon: FavoriteIcon,
+
+    icon: <FavoriteIcon />,
+
     component: Profile,
     layout: "/admin",
     auth: false,
@@ -54,7 +58,8 @@ const AppRoutes = [
   {
     path: "/show",
     name: "show",
-    icon: ChatIcon,
+    icon: <ChatIcon />,
+
     component: Show,
     layout: "/admin",
     auth: false,
@@ -62,7 +67,8 @@ const AppRoutes = [
   {
     path: "/photo",
     name: "photo",
-    icon: PhotoCameraIcon,
+    icon: <PhotoCameraIcon />,
+
     component: Photo,
     layout: "/admin",
     auth: false,
@@ -70,21 +76,24 @@ const AppRoutes = [
   {
     path: "/login",
     name: "login",
-    icon: LockOpenIcon,
+    icon: <LockOpenIcon />,
+
     component: Login,
     layout: "/admin",
   },
   {
     path: "/regist",
     name: "regist",
-    icon: Person,
+    icon: <Person />,
+
     component: Regist,
     layout: "/admin",
   },
   {
     path: "/",
     name: "home",
-    icon: HomeIcon,
+    icon: <HomeIcon />,
+
     component: Home,
     layout: "/admin",
     exact: true,

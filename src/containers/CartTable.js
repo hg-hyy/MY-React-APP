@@ -1,32 +1,32 @@
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TablePagination from "@material-ui/core/TablePagination";
-import FirstPageIcon from "@material-ui/icons/FirstPage";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import LastPageIcon from "@material-ui/icons/LastPage";
-import IconButton from "@material-ui/core/IconButton";
+import { makeStyles, useTheme } from "@mui/styles";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TablePagination from "@mui/material/TablePagination";
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import LastPageIcon from "@mui/icons-material/LastPage";
+import IconButton from "@mui/material/IconButton";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexShrink: 0,
     marginLeft: theme.spacing(2.5),
     height: "100%",
   },
   table: {
-    minWidth: 500
+    minWidth: 500,
   },
   head: {
     backgroundColor: theme.palette.common.white,
-    color: theme.palette.common.white
-  }
+    color: theme.palette.common.white,
+  },
 }));
 
 function TablePaginationActions(props) {
@@ -34,19 +34,19 @@ function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onChangePage } = props;
 
-  const handleFirstPageButtonClick = event => {
+  const handleFirstPageButtonClick = (event) => {
     onChangePage(event, 0);
   };
 
-  const handleBackButtonClick = event => {
+  const handleBackButtonClick = (event) => {
     onChangePage(event, page - 1);
   };
 
-  const handleNextButtonClick = event => {
+  const handleNextButtonClick = (event) => {
     onChangePage(event, page + 1);
   };
 
-  const handleLastPageButtonClick = event => {
+  const handleLastPageButtonClick = (event) => {
     onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
 
@@ -93,7 +93,7 @@ function TablePaginationActions(props) {
 }
 
 export default function CartTable(props) {
-  const {carts} = props
+  const { carts } = props;
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -105,7 +105,7 @@ export default function CartTable(props) {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = event => {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -125,14 +125,12 @@ export default function CartTable(props) {
           {(rowsPerPage > 0
             ? carts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : carts
-          ).map(row => (
+          ).map((row) => (
             <TableRow key={row.id}>
               <TableCell component="th" scope="row">
                 {row.id}
               </TableCell>
-              <TableCell>
-                {row.product}
-              </TableCell>
+              <TableCell>{row.product}</TableCell>
               <TableCell align="right">{row.quantity}</TableCell>
               <TableCell align="right">{row.unitCost}</TableCell>
             </TableRow>
@@ -155,5 +153,6 @@ export default function CartTable(props) {
         onChangeRowsPerPage={handleChangeRowsPerPage}
         ActionsComponent={TablePaginationActions}
       />
-    </TableContainer>)
+    </TableContainer>
+  );
 }

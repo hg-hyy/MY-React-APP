@@ -1,45 +1,46 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
+import Container from "@mui/material/Container";
 import { Card, Col, Row } from "antd";
-import { makeStyles } from "@material-ui/core/styles";
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
-import IconButton from "@material-ui/core/IconButton";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
+import { makeStyles } from "@mui/styles";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+
+import IconButton from "@mui/material/IconButton";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Facebook from "./Facebook";
 
 const r = require.context("../../images", false, /^\.\/.*\.jpg$/);
 const images = r.keys().map(r);
 
 const p = { width: 30, height: 20, weight: 60 };
-// eslint-disable-next-line 
-const pArr = Object.keys(p).map(key => ({
+// eslint-disable-next-line
+const pArr = Object.keys(p).map((key) => ({
   key,
-  value: p[key]
+  value: p[key],
 }));
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     // display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around",
     overflow: "hidden",
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
-  gridList: {
+  ImageList: {
     width: 500,
     height: 400,
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: "translateZ(0)"
+    transform: "translateZ(0)",
   },
   titleBar: {
     background:
       "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
-      "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)"
+      "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
   },
   icon: {
-    color: "white"
-  }
+    color: "white",
+  },
 }));
 
 const tileData = [];
@@ -48,7 +49,7 @@ images.map((image, index) => {
     img: image,
     title: index + 1,
     author: "author1",
-    featured: true
+    featured: true,
   });
 });
 function Home() {
@@ -72,35 +73,35 @@ function Home() {
         </Col>
         <Col span={8}>
           {/* <div className={classes.root}> */}
-            <GridList cellHeight={200} spacing={1} className={classes.gridList}>
-              {tileData.map(tile => (
-                <GridListTile
-                  key={tile.title}
-                  cols={tile.featured ? 2 : 1}
-                  rows={tile.featured ? 2 : 1}
-                >
-                  <img src={tile.img} alt={tile.title} />
-                  <GridListTileBar
-                    title={tile.title}
-                    titlePosition="top"
-                    actionIcon={
-                      <IconButton
-                        aria-label={`star ${tile.title}`}
-                        className={classes.icon}
-                      >
-                        <StarBorderIcon />
-                      </IconButton>
-                    }
-                    actionPosition="left"
-                    className={classes.titleBar}
-                  />
-                </GridListTile>
-              ))}
-            </GridList>
+          <ImageList cellHeight={200} spacing={1} className={classes.ImageList}>
+            {tileData.map((tile) => (
+              <ImageListItem
+                key={tile.title}
+                cols={tile.featured ? 2 : 1}
+                rows={tile.featured ? 2 : 1}
+              >
+                <img src={tile.img} alt={tile.title} />
+                <ImageListItemBar
+                  title={tile.title}
+                  titlePosition="top"
+                  actionIcon={
+                    <IconButton
+                      aria-label={`star ${tile.title}`}
+                      className={classes.icon}
+                    >
+                      <StarBorderIcon />
+                    </IconButton>
+                  }
+                  actionPosition="left"
+                  className={classes.titleBar}
+                />
+              </ImageListItem>
+            ))}
+          </ImageList>
           {/* </div> */}
         </Col>
         <Col span={8}>
-        <Facebook/>
+          <Facebook />
         </Col>
       </Row>
     </Container>

@@ -3,47 +3,47 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import Loop from "./viserchart";
 import Loop1 from "./bizchart";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@mui/styles";
+import Grid from "@mui/material/Grid";
 
 // 全局设置
 Highcharts.setOptions({
   global: {
-    useUTC: false
-  }
+    useUTC: false,
+  },
 });
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 }));
 // 完整图表
 const options1 = {
   title: {
-    text: "HighChart"
+    text: "HighChart",
   },
   subtitle: {
-    text: "When resizing the window or the frame, the chart should resize"
+    text: "When resizing the window or the frame, the chart should resize",
   },
   lang: {
-    numericSymbols: [" thousands", " millions"]
+    numericSymbols: [" thousands", " millions"],
   },
   data: {
-    table: "datatable"
+    table: "datatable",
   },
   chart: {
     backgroundColor: {
       linearGradient: [0, 0, 500, 500],
       stops: [
         [0, "rgb(255, 255, 255)"],
-        [1, "rgb(200, 200, 255)"]
-      ]
+        [1, "rgb(200, 200, 255)"],
+      ],
     },
     type: "line",
     // type: "column",
     // type: "pie",
-    marginTop: 150
+    marginTop: 150,
   },
   colors: [
     "#7cb5ec",
@@ -55,7 +55,7 @@ const options1 = {
     "#e4d354",
     "#2b908f",
     "#f45b5b",
-    "#91e8e1"
+    "#91e8e1",
   ],
   xAxis: {
     categories: [
@@ -70,26 +70,26 @@ const options1 = {
       "Sep",
       "Oct",
       "Nov",
-      "Dec"
+      "Dec",
     ],
     crosshair: {
       width: 3,
-      color: "green"
+      color: "green",
     },
     lineColor: "#FF0000",
-    lineWidth: 1
+    lineWidth: 1,
   },
   credits: {
     text: "hyy.cn",
     href: "http://www.hyy.cn",
     position: {
       align: "right",
-      x: 10
-    }
+      x: 10,
+    },
   },
   yAxis: {
     title: {
-      text: "Units"
+      text: "Units",
     },
     alternateGridColor: "#FDFFD5",
     gridLineColor: "#197F07",
@@ -98,7 +98,7 @@ const options1 = {
     ceiling: 300,
     crosshair: { width: 3, color: "green" },
     lineColor: "#FF0000",
-    lineWidth: 1
+    lineWidth: 1,
   },
   legend: {
     layout: "vertical",
@@ -107,22 +107,22 @@ const options1 = {
     align: "left",
     x: 100,
     verticalAlign: "top",
-    y: 70
+    y: 70,
   },
   tooltip: {
-    formatter: function() {
+    formatter: function () {
       return "<b>" + this.series.name + "</b><br/>" + this.x + ": " + this.y;
     },
-    valueSuffix: "%"
+    valueSuffix: "%",
   },
   plotOptions: {
     series: {
-      allowPointSelect: true
+      allowPointSelect: true,
     },
     pie: {
       shadow: false,
-      center: ["50%", "50%"]
-    }
+      center: ["50%", "50%"],
+    },
   },
   // series: [
   //   {
@@ -148,28 +148,28 @@ const options1 = {
     {
       size: "80%",
       innerSize: "60%",
-      data: [1, 2, 4, 5, 6, 7, 8]
+      data: [1, 2, 4, 5, 6, 7, 8],
     },
     {
       size: "60%",
-      data: [2, 3, 45, 6, 7, 8, 9, 0, 7]
-    }
+      data: [2, 3, 45, 6, 7, 8, 9, 0, 7],
+    },
   ],
   exporting: {
     chartOptions: {
       plotOptions: {
         series: {
           dataLabels: {
-            enabled: true
-          }
-        }
-      }
+            enabled: true,
+          },
+        },
+      },
     },
     buttons: {
       contextbutton: {
-        enabled: true
-      }
-    }
+        enabled: true,
+      },
+    },
   },
   navigation: {
     buttonOptions: {
@@ -178,32 +178,32 @@ const options1 = {
       symbolSize: 24,
       symbolX: 23,
       symbolY: 21,
-      symbolStrokeWidth: 2
-    }
+      symbolStrokeWidth: 2,
+    },
   },
   loading: {
     hideDuration: 1000,
-    showDuration: 1000
+    showDuration: 1000,
   },
   responsive: {
     rules: [
       {
         condition: {
-          maxWidth: 400
+          maxWidth: 400,
         },
         chartOptions: {
           series: [
             {
               id: "versions",
               dataLabels: {
-                enabled: false
-              }
-            }
-          ]
-        }
-      }
-    ]
-  }
+                enabled: false,
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
 };
 
 function activeLastPointToolip(chart) {
@@ -216,34 +216,34 @@ const options3 = {
     type: "spline",
     marginRight: 10,
     events: {
-      load: function() {
+      load: function () {
         let series = this.series[0],
           chart = this;
         alert(series);
         activeLastPointToolip(chart);
-        setInterval(function() {
+        setInterval(function () {
           let x = new Date().getTime(), // 当前时间
             y = Math.random(); // 随机值
           series.addPoint([x, y], true, true);
           activeLastPointToolip(chart);
         }, 5000);
-      }
-    }
+      },
+    },
   },
   title: {
-    text: "动态模拟实时数据"
+    text: "动态模拟实时数据",
   },
   xAxis: {
     type: "datetime",
-    tickPixelInterval: 150
+    tickPixelInterval: 150,
   },
   yAxis: {
     title: {
-      text: null
-    }
+      text: null,
+    },
   },
   tooltip: {
-    formatter: function() {
+    formatter: function () {
       return (
         "<b>" +
         this.series.name +
@@ -252,10 +252,10 @@ const options3 = {
         "<br/>" +
         Highcharts.numberFormat(this.y, 2)
       );
-    }
+    },
   },
   legend: {
-    enabled: false
+    enabled: false,
   },
   series: [
     {
@@ -267,13 +267,13 @@ const options3 = {
         for (let i = -19; i <= 0; i += 1) {
           data.push({
             x: time + i * 1000,
-            y: Math.random()
+            y: Math.random(),
           });
         }
         return data;
-      })()
-    }
-  ]
+      })(),
+    },
+  ],
 };
 
 function Mychart() {
@@ -281,7 +281,7 @@ function Mychart() {
   const [option, setOptions] = useState({});
   useEffect(() => {
     setOptions(options3);
-  },[]);
+  }, []);
   return (
     <div>
       <HighchartsReact highcharts={Highcharts} options={options1} />

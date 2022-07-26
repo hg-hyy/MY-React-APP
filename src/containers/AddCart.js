@@ -1,8 +1,8 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
 import Deposits from "../components/cart/Deposits";
 import VerticalTabs from "../components/cart/VerticalTabs";
@@ -10,39 +10,33 @@ import HorizontalTabs from "../components/cart/HorizontalTabs";
 import CartTable from "./CartTable";
 import CartForm from "./CartForm";
 import Donut from "../components/cart/Donut";
-import { Container } from "@material-ui/core";
+import { Container } from "@mui/material";
 import Line from "../components/chart/Line";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     // padding: theme.spacing(2),
     display: "flex",
     overflow: "auto",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   fixedHeight: {
-    height: 546
+    height: 546,
   },
   fixedHeight1: {
-    height: 268
+    height: 268,
   },
   fixedHeight2: {
-    height: 374
-  }
+    height: 374,
+  },
 }));
 export default function AddToCart(props) {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const fixedHeightPaper1 = clsx(classes.paper, classes.fixedHeight1);
   const fixedHeightPaper2 = clsx(classes.paper, classes.fixedHeight2);
-  const {
-    carts,
-    addCart,
-    updCart,
-    delCart,
-    delCartByID,
-    seleteFromCart
-  } = props;
+  const { carts, addCart, updCart, delCart, delCartByID, seleteFromCart } =
+    props;
   return (
     <Container maxWidth="xl">
       <Grid container spacing={2}>

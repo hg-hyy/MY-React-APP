@@ -1,12 +1,12 @@
-import Dashboard from "@material-ui/icons/Dashboard";
-import Person from "@material-ui/icons/Person";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ChatIcon from "@material-ui/icons/Chat";
-import EditIcon from "@material-ui/icons/Edit";
-import AppsIcon from "@material-ui/icons/Apps";
-import HomeIcon from "@material-ui/icons/Home";
-import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
+import Dashboard from "@mui/icons-material/Dashboard";
+import Person from "@mui/icons-material/Person";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ChatIcon from "@mui/icons-material/Chat";
+import EditIcon from "@mui/icons-material/Edit";
+import AppsIcon from "@mui/icons-material/Apps";
+import HomeIcon from "@mui/icons-material/Home";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
 import ToDo from "../todo/ToDo";
 import Cart from "../cart/Cart";
@@ -25,7 +25,7 @@ const AppRoutes = [
     icon: AppsIcon,
     component: ToDo,
     layout: "/admin",
-    auth: true
+    auth: false,
   },
   {
     path: "/cart",
@@ -33,7 +33,7 @@ const AppRoutes = [
     icon: Dashboard,
     component: Cart,
     layout: "/admin",
-    auth: true
+    auth: false,
   },
   {
     path: "/blog",
@@ -41,7 +41,7 @@ const AppRoutes = [
     icon: EditIcon,
     component: Blog,
     layout: "/admin",
-    auth: true
+    auth: false,
   },
   {
     path: "/profile",
@@ -49,7 +49,7 @@ const AppRoutes = [
     icon: FavoriteIcon,
     component: Profile,
     layout: "/admin",
-    auth: true,
+    auth: false,
   },
   {
     path: "/show",
@@ -57,7 +57,7 @@ const AppRoutes = [
     icon: ChatIcon,
     component: Show,
     layout: "/admin",
-    auth: true
+    auth: false,
   },
   {
     path: "/photo",
@@ -65,21 +65,21 @@ const AppRoutes = [
     icon: PhotoCameraIcon,
     component: Photo,
     layout: "/admin",
-    auth: true
+    auth: false,
   },
   {
     path: "/login",
     name: "login",
     icon: LockOpenIcon,
     component: Login,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/regist",
     name: "regist",
     icon: Person,
     component: Regist,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/",
@@ -87,8 +87,8 @@ const AppRoutes = [
     icon: HomeIcon,
     component: Home,
     layout: "/admin",
-    exact: true
-  }
+    exact: true,
+  },
 ];
 
 export default AppRoutes;

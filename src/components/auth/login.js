@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { makeStyles } from "@mui/styles";
+import Container from "@mui/material/Container";
 import { login } from "../../actions/login-actions";
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(3),
-    height: 800
+    height: 800,
   },
   image: {
     backgroundImage: `url(${require("../../images/yang.jpg")})`,
@@ -26,33 +26,33 @@ const useStyles = makeStyles(theme => ({
         ? theme.palette.grey[900]
         : theme.palette.grey[50],
     backgroundSize: "cover",
-    backgroundPosition: "center"
+    backgroundPosition: "center",
   },
   paper: {
     margin: theme.spacing(8, 4),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   fixedHeight: {
-    height: 850
+    height: 850,
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
 // 判断登录的值是否为空值
 // eslint-disable-next-line
-const isEmpty = value => {
+const isEmpty = (value) => {
   return (
     value === undefined ||
     value === null ||
@@ -74,7 +74,7 @@ function Login(props) {
 
   let newUser = {
     Username: username,
-    Password: password
+    Password: password,
   };
 
   function handleSubmit(event) {
@@ -92,8 +92,7 @@ function Login(props) {
     if (localStorage.jwToken) {
       history.replace(from);
     }
-  }, [from, history,isAuthenticated]);
-
+  }, [from, history, isAuthenticated]);
 
   return (
     <Container maxWidth="xl">
@@ -126,7 +125,7 @@ function Login(props) {
                 autoComplete="username"
                 autoFocus
                 value={username}
-                onChange={e => setUsername(String(e.target.value))}
+                onChange={(e) => setUsername(String(e.target.value))}
               />
               <TextField
                 variant="outlined"
@@ -139,13 +138,13 @@ function Login(props) {
                 id="password"
                 autoComplete="current-password"
                 value={password}
-                onChange={e => setPassword(String(e.target.value))}
+                onChange={(e) => setPassword(String(e.target.value))}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
-              {errors.map(error =>
+              {errors.map((error) =>
                 error.code ? (
                   <Typography component="p" variant="h6" key={error.msg}>
                     {error.msg}
@@ -190,13 +189,13 @@ function Login(props) {
   );
 }
 
-const mapDispatchToProps = dispatch => ({
-  login: userData => dispatch(login(userData))
+const mapDispatchToProps = (dispatch) => ({
+  login: (userData) => dispatch(login(userData)),
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   errors: state.loginReducer.errors,
-  isAuthenticated: state.loginReducer.isAuthenticated
+  isAuthenticated: state.loginReducer.isAuthenticated,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

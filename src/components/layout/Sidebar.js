@@ -1,20 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import PropTypes from "prop-types";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 import clsx from "clsx";
-import Hidden from "@material-ui/core/Hidden";
-import Tooltip from "@material-ui/core/Tooltip";
+import Hidden from "@mui/material/Hidden";
+import Tooltip from "@mui/material/Tooltip";
 import Profile from "./Profile";
-import Icon from "@material-ui/core/Icon";
+import Icon from "@mui/material/Icon";
 import styles from "../../assets/styles/sidebarStyle";
-import { Divider } from "@material-ui/core";
-
+import { Divider } from "@mui/material";
 const useStyles = makeStyles(styles);
 
 function Sidebar(props) {
@@ -34,15 +33,15 @@ function Sidebar(props) {
           if (prop.path === "/") {
             activePro = classes.activePro + " ";
             listItemClasses = clsx({
-              [" " + classes[color]]: true
+              [" " + classes[color]]: true,
             });
           } else {
             listItemClasses = clsx({
-              [" " + classes[color]]: activeRoute(prop.path)
+              [" " + classes[color]]: activeRoute(prop.path),
             });
           }
           const whiteFontClasses = clsx({
-            [" " + classes.whiteFont]: activeRoute(prop.path)
+            [" " + classes.whiteFont]: activeRoute(prop.path),
           });
           return (
             <NavLink
@@ -90,23 +89,23 @@ function Sidebar(props) {
         <Drawer
           variant="temporary"
           ModalProps={{
-            keepMounted: true // Better open performance on mobile.
+            keepMounted: true, // Better open performance on mobile.
           }}
           className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open
+            [classes.drawerClose]: !open,
           })}
           classes={{
             paper: clsx({
               [classes.drawerOpen]: open,
-              [classes.drawerClose]: !open
-            })
+              [classes.drawerClose]: !open,
+            }),
           }}
         >
           <Profile {...props} />
           <div
             className={clsx(classes.sidebarWrapper, {
-              [classes.drawerClose]: !open
+              [classes.drawerClose]: !open,
             })}
           >
             {links}
@@ -124,23 +123,23 @@ function Sidebar(props) {
         <Drawer
           variant="permanent"
           ModalProps={{
-            keepMounted: true // Better open performance on mobile.
+            keepMounted: true, // Better open performance on mobile.
           }}
           className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open
+            [classes.drawerClose]: !open,
           })}
           classes={{
             paper: clsx({
               [classes.drawerOpen]: open,
-              [classes.drawerClose]: !open
-            })
+              [classes.drawerClose]: !open,
+            }),
           }}
         >
           <Profile {...props} />
           <div
             className={clsx(classes.sidebarWrapper, {
-              [classes.drawerClose]: !open
+              [classes.drawerClose]: !open,
             })}
           >
             {links}
@@ -166,12 +165,12 @@ Sidebar.propTypes = {
   image: PropTypes.string,
   logoText: PropTypes.string,
   routes: PropTypes.arrayOf(PropTypes.object),
-  open: PropTypes.bool
+  open: PropTypes.bool,
 };
 
 const mapStateToProps = (state, ownProps) => ({
   isAuthenticated: state.loginReducer.isAuthenticated,
-  data: state.reduxReducer.data
+  data: state.reduxReducer.data,
 });
 
 export default connect(mapStateToProps)(Sidebar);

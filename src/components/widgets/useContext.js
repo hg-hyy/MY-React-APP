@@ -1,19 +1,19 @@
-import React,{useContext} from "react"
-import { createMuiTheme } from '@material-ui/core/styles';
+import React, { useContext } from "react";
+import { createTheme } from "@mui/material/styles";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       // light: will be calculated from palette.primary.main,
-      main: '#ff4400',
+      main: "#ff4400",
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
-      light: '#0066ff',
-      main: '#0044ff',
+      light: "#0066ff",
+      main: "#0044ff",
       // dark: will be calculated from palette.secondary.main,
-      contrastText: '#ffcc00',
+      contrastText: "#ffcc00",
     },
     // Used by `getContrastText()` to maximize the contrast between
     // the background and the text.
@@ -25,42 +25,42 @@ const theme = createMuiTheme({
   },
 });
 const themes = {
-    light: {
-      foreground: theme.palette.primary,
-      background: theme.palette.secondary
-    },
-    dark: {
-      foreground: "#ffffff",
-      background: "#222222"
-    }
-  };
-  
-  const ThemeContext = React.createContext(themes.light);
-  
-  function App() {
-    return (
-      <ThemeContext.Provider value={themes.light}>
-        <Toolbar />
-      </ThemeContext.Provider>
-    );
-  }
-  
-  function Toolbar(props) {
-    return (
-      <div>
-        <ThemedButton />
-      </div>
-    );
-  }
-  
-  function ThemedButton() {
-    const theme = useContext(ThemeContext);
-  
-    return (
-      <button style={{ background: theme.background, color: theme.foreground }}>
-        I am styled by theme context!
-      </button>
-    );
-  }
+  light: {
+    foreground: theme.palette.primary,
+    background: theme.palette.secondary,
+  },
+  dark: {
+    foreground: "#ffffff",
+    background: "#222222",
+  },
+};
 
-  export default App
+const ThemeContext = React.createContext(themes.light);
+
+function App() {
+  return (
+    <ThemeContext.Provider value={themes.light}>
+      <Toolbar />
+    </ThemeContext.Provider>
+  );
+}
+
+function Toolbar(props) {
+  return (
+    <div>
+      <ThemedButton />
+    </div>
+  );
+}
+
+function ThemedButton() {
+  const theme = useContext(ThemeContext);
+
+  return (
+    <button style={{ background: theme.background, color: theme.foreground }}>
+      I am styled by theme context!
+    </button>
+  );
+}
+
+export default App;

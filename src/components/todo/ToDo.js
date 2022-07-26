@@ -1,20 +1,20 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
 import AddTodo from "../../containers/AddTodo";
 import VisibleTodoList from "../../containers/VisibleTodoList";
 import UndoRedo from "../../containers/UndoRedo";
 import FilterLink from "../../containers/FilterLink";
 import { VisibilityFilters } from "../../actions/todo-actions";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControl from "@material-ui/core/FormControl";
-import SearchIcon from "@material-ui/icons/Search";
-const useStyles = makeStyles(theme => ({
+import { makeStyles } from "@mui/styles";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import SearchIcon from "@mui/icons-material/Search";
+const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
     position: "relative",
     backgroundColor: theme.palette.grey[800],
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
     height: 600,
-    display: "flex"
+    display: "flex",
   },
   overlay: {
     position: "absolute",
@@ -33,20 +33,20 @@ const useStyles = makeStyles(theme => ({
     bottom: 0,
     right: 0,
     left: 0,
-    backgroundColor: "rgba(0,0,0,.3)"
+    backgroundColor: "rgba(0,0,0,.3)",
   },
   mainFeaturedPostContent: {
     position: "relative",
     padding: theme.spacing(3),
     [theme.breakpoints.up("md")]: {
       padding: theme.spacing(6),
-      paddingRight: 0
-    }
+      paddingRight: 0,
+    },
   },
   margin: {
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
-  input: { backgroundColor: "white" }
+  input: { backgroundColor: "white" },
 }));
 
 const post = {
@@ -55,7 +55,7 @@ const post = {
   image: require("../../images/olen.jpg"),
   cor: "Powered by creators everywhere.",
   imgText: "Powered by creators everywhere.",
-  linkText: "Trending:Flower, Wallpapers, Backgrounds, Happy, Love."
+  linkText: "Trending:Flower, Wallpapers, Backgrounds, Happy, Love.",
 };
 
 function MainFeaturedPost(props) {
@@ -65,10 +65,10 @@ function MainFeaturedPost(props) {
     password: "",
     weight: "",
     weightRange: "",
-    showPassword: false
+    showPassword: false,
   });
   // const { post } = props;
-  const handleChange = prop => event => {
+  const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
   return (
@@ -97,29 +97,29 @@ function MainFeaturedPost(props) {
               {post.cor}
             </Typography>
 
-              <FormControl
-                fullWidth
-                className={classes.margin}
-                variant="outlined"
-              >
-                <OutlinedInput
-                  className={classes.input}
-                  placeholder="Search free high-resolution photos"
-                  id="outlined-adornment-weight"
-                  value={values.weight}
-                  onChange={handleChange("weight")}
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <SearchIcon fontSize="large" />
-                    </InputAdornment>
-                  }
-                  aria-describedby="outlined-weight-helper-text"
-                  inputProps={{
-                    "aria-label": "weight"
-                  }}
-                  labelWidth={0}
-                />
-              </FormControl>
+            <FormControl
+              fullWidth
+              className={classes.margin}
+              variant="outlined"
+            >
+              <OutlinedInput
+                className={classes.input}
+                placeholder="Search free high-resolution photos"
+                id="outlined-adornment-weight"
+                value={values.weight}
+                onChange={handleChange("weight")}
+                startAdornment={
+                  <InputAdornment position="start">
+                    <SearchIcon fontSize="large" />
+                  </InputAdornment>
+                }
+                aria-describedby="outlined-weight-helper-text"
+                inputProps={{
+                  "aria-label": "weight",
+                }}
+                // labelWidth={0}
+              />
+            </FormControl>
 
             <Typography variant="body2" color="inherit" paragraph>
               {post.linkText}
@@ -132,7 +132,7 @@ function MainFeaturedPost(props) {
 }
 
 MainFeaturedPost.propTypes = {
-  post: PropTypes.object
+  post: PropTypes.object,
 };
 
 function ToDo() {

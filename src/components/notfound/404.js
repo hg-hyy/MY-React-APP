@@ -1,30 +1,30 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import SnackbarContent from "@material-ui/core/SnackbarContent";
-import { Container } from "@material-ui/core";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import Alert from "@material-ui/lab/Alert";
-import Pagination from "@material-ui/lab/Pagination";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { makeStyles } from "@mui/styles";
+import SnackbarContent from "@mui/material/SnackbarContent";
+import { Container } from "@mui/material";
+import LinearProgress from "@mui/material/LinearProgress";
+import Alert from "@mui/lab/Alert";
+import Pagination from "@mui/lab/Pagination";
 
 function PaginationRounded() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root} style={{paddingTop:50}}>
+    <div className={classes.root} style={{ paddingTop: 50 }}>
       <Pagination count={10} variant="outlined" shape="rounded" />
     </div>
   );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     "& > * + *": {
-      marginTop: theme.spacing(2)
-    }
-  }
+      marginTop: theme.spacing(2),
+    },
+  },
 }));
 
 function SimpleAlerts() {
@@ -58,7 +58,7 @@ const MSG = [
   "AAAAAAAAA",
   "BBBBBBBBB",
   "I love snacks,but the page is NOT FOUND !!!!!!",
-  "I love candy. I love cookies. I love cupcakes.I love cheesecake. I love chocolate."
+  "I love candy. I love cookies. I love cupcakes.I love cheesecake. I love chocolate.",
 ];
 
 function LinearBuffer() {
@@ -150,11 +150,11 @@ export default function NotFound() {
       <LinearBuffer />
       <SimpleAlerts />
       <div className={classes.root} style={{ marginTop: 50 }}>
-        {MSG.map(msg => (
+        {MSG.map((msg) => (
           <SnackbarContent message={msg} action={action} key={msg} />
         ))}
       </div>
-      <PaginationRounded/>
+      <PaginationRounded />
     </Container>
   );
 }

@@ -1,76 +1,75 @@
 /* jshint esversion: 6 */
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@mui/styles";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Paper from "@mui/material/Paper";
 import Draggable from "react-draggable";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import Switch from "@material-ui/core/Switch";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Switch from "@mui/material/Switch";
 import axios from "axios";
-import DeleteIcon from "@material-ui/icons/Delete";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import KeyboardVoiceIcon from "@material-ui/icons/KeyboardVoice";
-import SaveIcon from "@material-ui/icons/Save";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Collapse from "@material-ui/core/Collapse";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
+import SaveIcon from "@mui/icons-material/Save";
+import Autocomplete from "@mui/lab/Autocomplete";
+import FormHelperText from "@mui/material/FormHelperText";
+import ListSubheader from "@mui/material/ListSubheader";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Collapse from "@mui/material/Collapse";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import DraftsIcon from "@mui/icons-material/Drafts";
+import SendIcon from "@mui/icons-material/Send";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import StarBorder from "@mui/icons-material/StarBorder";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import { lighten } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import TableSortLabel from "@material-ui/core/TableSortLabel";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Checkbox from "@material-ui/core/Checkbox";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import FilterListIcon from "@material-ui/icons/FilterList";
-import Avatar from "@material-ui/core/Avatar";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
-import DateFnsUtils from "@date-io/date-fns";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker
-} from "@material-ui/pickers";
+import { lighten } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Checkbox from "@mui/material/Checkbox";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import Avatar from "@mui/material/Avatar";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import { red } from "@mui/material/colors";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+
+import DatePicker from "@mui/lab/DatePicker";
+import TimePicker from "@mui/lab/TimePicker";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 import { notification } from "antd";
 
@@ -81,7 +80,7 @@ const openNotification = () => {
       "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
     onClick: () => {
       console.log("Notification Clicked!");
-    }
+    },
   });
 };
 
@@ -89,19 +88,18 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-
 function log_version() {
   axios
     .get("http://127.0.0.1:8000/blog/blog_version")
-    .then(function(response) {
+    .then(function (response) {
       // handle success
       console.log(response.data.msg);
     })
-    .catch(function(error) {
+    .catch(function (error) {
       // handle error
       console.log(error);
     })
-    .then(function() {
+    .then(function () {
       // always executed
     });
 }
@@ -112,16 +110,16 @@ function get1() {
     .get("http://127.0.0.1:8000/blog/check_log", {
       params: {
         log_level: "all",
-        log_day: "2020-01-26"
-      }
+        log_day: "2020-01-26",
+      },
     })
-    .then(function(response) {
+    .then(function (response) {
       console.log(response.data.log_level);
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log(error);
     })
-    .then(function() {
+    .then(function () {
       // always executed
     });
 }
@@ -141,94 +139,94 @@ function post1() {
   axios
     .post("http://127.0.0.1:8000/blog/check_log", {
       firstName: "Fred",
-      lastName: "Flintstone"
+      lastName: "Flintstone",
     })
-    .then(function(response) {
+    .then(function (response) {
       console.log(response);
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log(error);
     });
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   form: {
     display: "flex",
     flexDirection: "column",
     margin: "auto",
-    width: "fit-content"
+    width: "fit-content",
   },
   formControl: {
     marginTop: theme.spacing(2),
-    minWidth: 120
+    minWidth: 120,
   },
   formControlLabel: {
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   card: {
-    maxWidth: 345
+    maxWidth: 345,
   },
   media: {
     height: 0,
-    paddingTop: "56.25%" // 16:9
+    paddingTop: "56.25%", // 16:9
   },
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    })
+      duration: theme.transitions.duration.shortest,
+    }),
   },
   expandOpen: {
-    transform: "rotate(180deg)"
+    transform: "rotate(180deg)",
   },
   avatar: {
-    backgroundColor: red[500]
+    backgroundColor: red[500],
   },
   head: {
     backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white
+    color: theme.palette.common.white,
   },
   option: {
     fontSize: 15,
     "& > span": {
       marginRight: 10,
-      fontSize: 18
-    }
+      fontSize: 18,
+    },
   },
   button: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
   },
   selectEmpty: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
   root: {
     width: "100%",
     maxWidth: 1600,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   root2: {
     flexGrow: 1,
     width: "100%",
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   root3: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   paper3: {
     padding: theme.spacing(2),
     textAlign: "center",
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
   nested: {
-    paddingLeft: theme.spacing(4)
+    paddingLeft: theme.spacing(4),
   },
   paper: {
     width: "100%",
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   table: {
-    minWidth: 750
+    minWidth: 750,
   },
   visuallyHidden: {
     border: 0,
@@ -239,16 +237,16 @@ const useStyles = makeStyles(theme => ({
     padding: 0,
     position: "absolute",
     top: 20,
-    width: 1
+    width: 1,
   },
   list: {
     width: "100%",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   inline: {
-    display: "inline"
-  }
+    display: "inline",
+  },
 }));
 
 function IconLabelButtons() {
@@ -309,7 +307,7 @@ function countryToFlag(isoCode) {
   return typeof String.fromCodePoint !== "undefined"
     ? isoCode
         .toUpperCase()
-        .replace(/./g, char =>
+        .replace(/./g, (char) =>
           String.fromCodePoint(char.charCodeAt(0) + 127397)
         )
     : isoCode;
@@ -324,17 +322,17 @@ function CountrySelect() {
       style={{ width: 300 }}
       options={countries}
       classes={{
-        option: classes.option
+        option: classes.option,
       }}
       autoHighlight
-      getOptionLabel={option => option.label}
-      renderOption={option => (
+      getOptionLabel={(option) => option.label}
+      renderOption={(option) => (
         <React.Fragment>
           <span>{countryToFlag(option.code)}</span>
           {option.label} ({option.code}) +{option.phone}
         </React.Fragment>
       )}
-      renderInput={params => (
+      renderInput={(params) => (
         <TextField
           {...params}
           label="Choose a country"
@@ -342,7 +340,7 @@ function CountrySelect() {
           fullWidth
           inputProps={{
             ...params.inputProps,
-            autoComplete: "new-password" // disable autocomplete and autofill
+            autoComplete: "new-password", // disable autocomplete and autofill
           }}
         />
       )}
@@ -442,7 +440,7 @@ const countries = [
   {
     code: "GS",
     label: "South Georgia and the South Sandwich Islands",
-    phone: "500"
+    phone: "500",
   },
   { code: "GT", label: "Guatemala", phone: "502" },
   { code: "GU", label: "Guam", phone: "1-671" },
@@ -500,7 +498,7 @@ const countries = [
   {
     code: "MK",
     label: "Macedonia, the Former Yugoslav Republic of",
-    phone: "389"
+    phone: "389",
   },
   { code: "ML", label: "Mali", phone: "223" },
   { code: "MM", label: "Myanmar", phone: "95" },
@@ -606,7 +604,7 @@ const countries = [
   { code: "YT", label: "Mayotte", phone: "262" },
   { code: "ZA", label: "South Africa", phone: "27" },
   { code: "ZM", label: "Zambia", phone: "260" },
-  { code: "ZW", label: "Zimbabwe", phone: "263" }
+  { code: "ZW", label: "Zimbabwe", phone: "263" },
 ];
 
 function SimpleSelect() {
@@ -619,7 +617,7 @@ function SimpleSelect() {
     setLabelWidth(inputLabel.current.offsetWidth);
   }, []);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setAge(event.target.value);
   };
 
@@ -712,7 +710,7 @@ const rows = [
   createData("Lollipop", 392, 0.2, 98, 0.0),
   createData("Marshmallow", 318, 0, 81, 2.0),
   createData("Nougat", 360, 19.0, 9, 37.0),
-  createData("Oreo", 437, 18.0, 63, 4.0)
+  createData("Oreo", 437, 18.0, 63, 4.0),
 ];
 
 function desc(a, b, orderBy) {
@@ -732,7 +730,7 @@ function stableSort(array, cmp) {
     if (order !== 0) return order;
     return a[1] - b[1];
   });
-  return stabilizedThis.map(el => el[0]);
+  return stabilizedThis.map((el) => el[0]);
 }
 
 function getSorting(order, orderBy) {
@@ -746,12 +744,12 @@ const headCells = [
     id: "name",
     numeric: false,
     disablePadding: true,
-    label: "Dessert (100g serving)"
+    label: "Dessert (100g serving)",
   },
   { id: "calories", numeric: true, disablePadding: false, label: "Calories" },
   { id: "fat", numeric: true, disablePadding: false, label: "Fat (g)" },
   { id: "carbs", numeric: true, disablePadding: false, label: "Carbs (g)" },
-  { id: "protein", numeric: true, disablePadding: false, label: "Protein (g)" }
+  { id: "protein", numeric: true, disablePadding: false, label: "Protein (g)" },
 ];
 
 function EnhancedTableHead(props) {
@@ -762,9 +760,9 @@ function EnhancedTableHead(props) {
     orderBy,
     numSelected,
     rowCount,
-    onRequestSort
+    onRequestSort,
   } = props;
-  const createSortHandler = property => event => {
+  const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
 
@@ -779,7 +777,7 @@ function EnhancedTableHead(props) {
             inputProps={{ "aria-label": "select all desserts" }}
           />
         </TableCell>
-        {headCells.map(headCell => (
+        {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
@@ -812,37 +810,37 @@ EnhancedTableHead.propTypes = {
   onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired
+  rowCount: PropTypes.number.isRequired,
 };
 
-const useToolbarStyles = makeStyles(theme => ({
+const useToolbarStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1)
+    paddingRight: theme.spacing(1),
   },
   highlight:
     theme.palette.type === "light"
       ? {
           color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85)
+          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
         }
       : {
           color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark
+          backgroundColor: theme.palette.secondary.dark,
         },
   title: {
-    flex: "1 1 100%"
-  }
+    flex: "1 1 100%",
+  },
 }));
 
-const EnhancedTableToolbar = props => {
+const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
   return (
     <Toolbar
       className={clsx(classes.root, {
-        [classes.highlight]: numSelected > 0
+        [classes.highlight]: numSelected > 0,
       })}
     >
       {numSelected > 0 ? (
@@ -877,7 +875,7 @@ const EnhancedTableToolbar = props => {
 };
 
 EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired
+  numSelected: PropTypes.number.isRequired,
 };
 
 function EnhancedTable() {
@@ -895,9 +893,9 @@ function EnhancedTable() {
     setOrderBy(property);
   };
 
-  const handleSelectAllClick = event => {
+  const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map(n => n.name);
+      const newSelecteds = rows.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -928,16 +926,16 @@ function EnhancedTable() {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = event => {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
-  const handleChangeDense = event => {
+  const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
 
-  const isSelected = name => selected.indexOf(name) !== -1;
+  const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -972,7 +970,7 @@ function EnhancedTable() {
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -1071,7 +1069,7 @@ function RecipeReviewCard() {
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded
+            [classes.expandOpen]: expanded,
           })}
           onClick={handleExpandClick}
           aria-expanded={expanded}
@@ -1120,9 +1118,8 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
 };
-
 
 function MaterialUIPickers() {
   // The first commit of Material-UI
@@ -1130,14 +1127,14 @@ function MaterialUIPickers() {
     new Date("2014-08-18T21:11:54")
   );
 
-  const handleDateChange = date => {
+  const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Grid container justify="space-around">
-        <KeyboardDatePicker
+        <DatePicker
           disableToolbar
           variant="inline"
           format="MM/dd/yyyy"
@@ -1147,10 +1144,10 @@ function MaterialUIPickers() {
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{
-            "aria-label": "change date"
+            "aria-label": "change date",
           }}
         />
-        <KeyboardDatePicker
+        <DatePicker
           margin="normal"
           id="date-picker-dialog"
           label="Date picker dialog"
@@ -1158,24 +1155,23 @@ function MaterialUIPickers() {
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{
-            "aria-label": "change date"
+            "aria-label": "change date",
           }}
         />
-        <KeyboardTimePicker
+        <TimePicker
           margin="normal"
           id="time-picker"
           label="Time picker"
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{
-            "aria-label": "change time"
+            "aria-label": "change time",
           }}
         />
       </Grid>
-    </MuiPickersUtilsProvider>
+    </LocalizationProvider>
   );
 }
-
 
 function PaperComponent(props) {
   return (
@@ -1201,11 +1197,11 @@ function FormDialog() {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleMaxWidthChange = event => {
+  const handleMaxWidthChange = (event) => {
     setMaxWidth(event.target.value);
   };
 
-  const handleFullWidthChange = event => {
+  const handleFullWidthChange = (event) => {
     setFullWidth(event.target.checked);
   };
   return (
@@ -1238,7 +1234,7 @@ function FormDialog() {
                 onChange={handleMaxWidthChange}
                 inputProps={{
                   name: "max-width",
-                  id: "max-width"
+                  id: "max-width",
                 }}
               >
                 <MenuItem value={false}>false</MenuItem>
@@ -1287,13 +1283,13 @@ function Show() {
   return (
     <div>
       <FormDialog />
-        <IconLabelButtons />
-        <CountrySelect />
-        <MaterialUIPickers />
-        <SimpleSelect />
-        <NestedList />
-        <EnhancedTable />
-        <RecipeReviewCard />
+      <IconLabelButtons />
+      <CountrySelect />
+      <MaterialUIPickers />
+      <SimpleSelect />
+      <NestedList />
+      <EnhancedTable />
+      <RecipeReviewCard />
     </div>
   );
 }

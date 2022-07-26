@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useSelector, connect } from "react-redux";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch, connect } from "react-redux";
+import CssBaseline from "@mui/material/CssBaseline";
 import jwt_decode from "jwt-decode";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
@@ -10,9 +10,8 @@ import logo from "../../images/CL/CL1.jpg";
 import Routers from "./routes";
 import changeTheme from "../../actions/theme-actions";
 import { loginOut } from "../../actions/login-actions";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 // eslint-disable-next-line
 import loadScript from "../../assets/utils/loadScript";
 let dependenciesLoaded = false;
@@ -34,7 +33,9 @@ function loadDependencies() {
 // });
 
 function App(props) {
-  const { loginOut } = props;
+  // const { loginOut } = props;
+  const dispatch = useDispatch();
+
   function checkToken() {
     try {
       const decoded = jwt_decode(localStorage.jwToken);
@@ -43,7 +44,8 @@ function App(props) {
       // 判断当前时间是否大于token中的exp时间;如果大于是为过期
       if (decoded.exp < currentTime) {
         localStorage.clear();
-        loginOut(false);
+        dispatch(loginOut(false));
+        // loginOut(false);
         // window.location.href="/login";
         // history.push("/login")
         console.log("已经退出登录！");
@@ -52,7 +54,7 @@ function App(props) {
       return false;
     }
   }
-  React.useEffect(() => {
+  useEffect(() => {
     if (
       window.location.hash !== "" &&
       window.location.hash !== "#main=content"
@@ -64,31 +66,23 @@ function App(props) {
 
     loadDependencies();
   }, []);
-  // React.useEffect(() => {
-  //   checkToken();
-
-  //   // const timer = setInterval(checkToken, 1000);
-  //   // return () => {
-  //   //   clearInterval(timer);
-  //   // };
-  //   console.log(history)
-  // }, [history, loginOut]);
 
   const [open, setOpen] = useState(false);
   const handleDrawerToggle = () => {
     open ? setOpen(false) : setOpen(true);
   };
 
-  const cl = useSelector(state => state.themeReducer.color);
+  const cl = useSelector((state) => state.themeReducer.color);
+  const img = useSelector((state) => state.themeReducer.img);
   checkToken();
   const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${cl})`);
 
   const theme = React.useMemo(
     () =>
-      createMuiTheme({
+      createTheme({
         palette: {
-          type: prefersDarkMode ? "dark" : "light"
-        }
+          mode: prefersDarkMode ? "dark" : "light",
+        },
       }),
     [prefersDarkMode]
   );
@@ -96,36 +90,38 @@ function App(props) {
   return (
     <ThemeProvider theme={theme}>
       <div id="div">
-        <CssBaseline />
+        {/* <CssBaseline /> */}
         <Sidebar
           open={open}
           handleDrawerToggle={handleDrawerToggle}
           AppRoutes={AppRoutes}
           logoText={"ShenYun"}
           logo={logo}
-          theme={theme}
+          // theme={theme}
           {...props}
         />
-        <Navbar
+        {/* <Navbar
           open={open}
           handleDrawerToggle={handleDrawerToggle}
           Routers={Routers}
           theme={theme}
-          {...props}
-        />
+          changeTheme={changeTheme}
+          img={img}
+        /> */}
 
-        <Main open={open} {...props} />
+        {/* <Main open={open} {...props} /> */}
       </div>
     </ThemeProvider>
   );
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  color: state.themeReducer.color,
-  img: state.themeReducer.img
-});
-const mapDispatchToProps = dispatch => ({
-  changeTheme: theme => dispatch(changeTheme(theme)),
-  loginOut: islogin => dispatch(loginOut(islogin))
-});
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// const mapStateToProps = (state, ownProps) => ({
+//   color: state.themeReducer.color,
+//   img: state.themeReducer.img,
+// });
+// const mapDispatchToProps = (dispatch) => ({
+//   changeTheme: (theme) => dispatch(changeTheme(theme)),
+//   loginOut: (islogin) => dispatch(loginOut(islogin)),
+// });
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

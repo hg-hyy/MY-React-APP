@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Avatar from "@material-ui/core/Avatar";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+import Typography from "@mui/material/Typography";
+import { makeStyles } from "@mui/styles";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(1),
-    height: 600
+    height: 600,
   },
   root1: {
     display: "flex",
@@ -22,8 +22,8 @@ const useStyles = makeStyles(theme => ({
     "& > *": {
       marginBottom: theme.spacing(10),
       width: "100%",
-      height: 700
-    }
+      height: 700,
+    },
   },
   image: {
     // backgroundImage: 'url(https://source.unsplash.com/random)',
@@ -34,28 +34,28 @@ const useStyles = makeStyles(theme => ({
         ? theme.palette.grey[900]
         : theme.palette.grey[50],
     backgroundSize: "cover",
-    backgroundPosition: "center"
+    backgroundPosition: "center",
   },
   paper: {
     margin: theme.spacing(8, 4),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   fixedHeight: {
-    height: 850
+    height: 850,
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
 export default function LoginPage(props) {
@@ -72,12 +72,12 @@ export default function LoginPage(props) {
   const [data, setData] = useState({ msg: "", code: 0, data: {} });
   let newUser = {
     email: email,
-    password: password
+    password: password,
   };
   // eslint-disable-next-line
   let myInit = {
     method: "POST",
-    body: new FormData(form)
+    body: new FormData(form),
   };
 
   function handleSubmit(event) {
@@ -156,7 +156,7 @@ export default function LoginPage(props) {
                   autoComplete="email"
                   autoFocus
                   value={email}
-                  onChange={e => setEmail(String(e.target.value))}
+                  onChange={(e) => setEmail(String(e.target.value))}
                 />
                 <TextField
                   variant="outlined"
@@ -169,7 +169,7 @@ export default function LoginPage(props) {
                   id="password"
                   autoComplete="current-password"
                   value={password}
-                  onChange={e => setPassword(String(e.target.value))}
+                  onChange={(e) => setPassword(String(e.target.value))}
                 />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}

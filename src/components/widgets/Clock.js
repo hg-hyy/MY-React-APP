@@ -1,5 +1,5 @@
-import React, { useState, useEffect,useRef } from "react";
-import Typography from "@material-ui/core/Typography";
+import React, { useState, useEffect, useRef } from "react";
+import Typography from "@mui/material/Typography";
 
 class Timer1 extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Timer1 extends React.Component {
 
   componentDidMount() {
     this.timerID = setInterval(() => this.tick(), 1000);
-    console.log(this.timerID)
+    console.log(this.timerID);
   }
 
   componentWillUnmount() {
@@ -18,7 +18,7 @@ class Timer1 extends React.Component {
 
   tick() {
     this.setState({
-      date: new Date()
+      date: new Date(),
     });
   }
 
@@ -28,17 +28,16 @@ class Timer1 extends React.Component {
 }
 
 function Timer() {
-
   const [time, setTime] = useState(new Date());
   function tick() {
     setTime(new Date());
   }
-  let timerID
+  let timerID;
   useEffect(() => {
     timerID = setInterval(() => tick(), 1000);
-    console.log(timerID)
-    return ()=>clearInterval(timerID)
-  },[timerID]);
+    console.log(timerID);
+    return () => clearInterval(timerID);
+  }, [timerID]);
 
   return <Typography>{time.toLocaleTimeString()}</Typography>;
 }

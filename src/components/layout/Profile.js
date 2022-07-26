@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import { Avatar, Typography } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-const useStyles = makeStyles(theme => ({
+import { makeStyles } from "@mui/styles";
+import { Avatar, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid";
+const useStyles = makeStyles((theme) => ({
   root: {
+    height: 66,
     display: "flex",
     margin: 0,
     padding: 0,
@@ -16,24 +17,24 @@ const useStyles = makeStyles(theme => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-    borderBottom: "2px solid red"
+    borderBottom: "2px solid red",
   },
   avatar: {
     width: 64,
-    height: 64
+    height: 64,
   },
   name: {
-    marginTop: theme.spacing(1)
-  }
+    marginTop: theme.spacing(1),
+  },
 }));
 
 const Profile = (props) => {
   const classes = useStyles();
-  const { logo, logoText,img } = props;
+  const { logo, logoText, img } = props;
   const user = {
     name: logoText,
     avatar: logo,
-    bio: "TRY MORE"
+    bio: "TRY MORE",
   };
   return (
     <Grid
@@ -72,7 +73,7 @@ const Profile = (props) => {
 };
 
 Profile.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Profile;

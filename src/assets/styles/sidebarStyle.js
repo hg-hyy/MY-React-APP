@@ -1,4 +1,4 @@
-const hexToRgb = input => {
+const hexToRgb = (input) => {
   input = input + "";
   input = input.replace("#", "");
   let hexRegex = /[0-9A-Fa-f]/g;
@@ -26,12 +26,10 @@ const hexToRgb = input => {
 
 const drawerWidth = 240;
 
-
-
 const defaultFont = {
   fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
   fontWeight: "300",
-  lineHeight: "1.5em"
+  lineHeight: "1.5em",
 };
 
 const primaryColor = ["#9c27b0", "#ab47bc", "#8e24aa", "#af2cc5"];
@@ -52,10 +50,10 @@ const grayColor = [
   "#333",
   "#a9afbb",
   "#eee",
-  "#e7e7e7"
+  "#e7e7e7",
 ];
 const blackColor = "#000";
-const whiteColor = "#FFF";
+const whiteColor = "#fFF";
 // eslint-disable-next-line
 const boxShadow = {
   boxShadow:
@@ -65,7 +63,7 @@ const boxShadow = {
     hexToRgb(blackColor) +
     ", 0.12), 0 8px 10px -5px rgba(" +
     hexToRgb(blackColor) +
-    ", 0.2)"
+    ", 0.2)",
 };
 
 const primaryBoxShadow = {
@@ -74,9 +72,9 @@ const primaryBoxShadow = {
     hexToRgb(blackColor) +
     ",.14), 0 7px 10px -5px rgba(" +
     hexToRgb(primaryColor[0]) +
-    ",.4)"
+    ",.4)",
 };
-const SidebarStyle = theme => ({
+const SidebarStyle = (theme) => ({
   logo: {
     position: "relative",
     padding: "15px 15px",
@@ -90,7 +88,7 @@ const SidebarStyle = theme => ({
       right: "15px",
       width: "calc(100% - 30px)",
       // backgroundColor: "rgba(" + hexToRgb(grayColor[6]) + ", 0.5)"
-    }
+    },
   },
   logoLink: {
     ...defaultFont,
@@ -104,23 +102,23 @@ const SidebarStyle = theme => ({
     textDecoration: "none",
     backgroundColor: "transparent",
     "&,&:hover": {
-      color: whiteColor
-    }
+      color: whiteColor,
+    },
   },
   logoImage: {
     width: "30px",
     display: "inline-block",
     maxHeight: "30px",
     marginLeft: "10px",
-    marginRight: "15px"
+    marginRight: "15px",
   },
   img: {
     width: "70px",
-    height:70,
+    height: 70,
     top: "0px",
     position: "absolute",
     verticalAlign: "middle",
-    border: "0"
+    border: "0",
   },
   background: {
     position: "absolute",
@@ -141,8 +139,8 @@ const SidebarStyle = theme => ({
       content: '""',
       display: "block",
       background: blackColor,
-      opacity: ".5"
-    }
+      opacity: ".5",
+    },
   },
   list: {
     marginTop: "20px",
@@ -151,15 +149,15 @@ const SidebarStyle = theme => ({
     paddingBottom: "0",
     marginBottom: "0",
     listStyle: "none",
-    position: "unset"
+    position: "unset",
   },
   item: {
     position: "relative",
     display: "block",
     textDecoration: "none",
     "&:hover,&:focus,&:visited,&": {
-      color: whiteColor
-    }
+      color: whiteColor,
+    },
   },
   itemLink: {
     width: "auto",
@@ -170,7 +168,7 @@ const SidebarStyle = theme => ({
     display: "block",
     padding: "10px 15px",
     backgroundColor: "transparent",
-    ...defaultFont
+    ...defaultFont,
   },
   itemIcon: {
     width: "24px",
@@ -181,25 +179,25 @@ const SidebarStyle = theme => ({
     marginRight: "24px",
     textAlign: "center",
     verticalAlign: "middle",
-    color: "rgba(" + hexToRgb(whiteColor) + ", 0.8)"
+    color: "rgba(" + hexToRgb(whiteColor) + ", 0.8)",
   },
   itemText: {
     ...defaultFont,
     margin: "0",
     lineHeight: "30px",
     fontSize: "14px",
-    color: whiteColor
+    color: whiteColor,
   },
   whiteFont: {
-    color: whiteColor
+    color: whiteColor,
   },
   purple: {
     backgroundColor: primaryColor[0],
     ...primaryBoxShadow,
     "&:hover,&:focus": {
       backgroundColor: primaryColor[0],
-      ...primaryBoxShadow
-    }
+      ...primaryBoxShadow,
+    },
   },
   blue: {
     backgroundColor: infoColor[0],
@@ -220,8 +218,8 @@ const SidebarStyle = theme => ({
         hexToRgb(blackColor) +
         ",.12), 0 7px 8px -5px rgba(" +
         hexToRgb(infoColor[0]) +
-        ",.2)"
-    }
+        ",.2)",
+    },
   },
   green: {
     backgroundColor: successColor[0],
@@ -242,8 +240,8 @@ const SidebarStyle = theme => ({
         hexToRgb(blackColor) +
         ",.12), 0 7px 8px -5px rgba(" +
         hexToRgb(successColor[0]) +
-        ",.2)"
-    }
+        ",.2)",
+    },
   },
   orange: {
     backgroundColor: warningColor[0],
@@ -264,8 +262,8 @@ const SidebarStyle = theme => ({
         hexToRgb(blackColor) +
         ",.12), 0 7px 8px -5px rgba(" +
         hexToRgb(warningColor[0]) +
-        ",.2)"
-    }
+        ",.2)",
+    },
   },
   red: {
     backgroundColor: dangerColor[0],
@@ -286,8 +284,8 @@ const SidebarStyle = theme => ({
         hexToRgb(blackColor) +
         ",.12), 0 7px 8px -5px rgba(" +
         hexToRgb(dangerColor[0]) +
-        ",.2)"
-    }
+        ",.2)",
+    },
   },
   sidebarWrapper: {
     position: "relative",
@@ -295,38 +293,38 @@ const SidebarStyle = theme => ({
     overflow: "auto",
     width: "239px",
     zIndex: "4",
-    overflowScrolling: "touch"
+    overflowScrolling: "touch",
   },
   activePro: {
     [theme.breakpoints.up("md")]: {
       position: "absolute",
       width: "100%",
-      bottom: "13px"
-    }
+      bottom: "13px",
+    },
   },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
   },
   drawerOpen: {
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   drawerClose: {
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+      duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: theme.spacing(9) + 1,
+    width: theme.spacing(9),
     [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9) + 1
-    }
-  }
+      width: theme.spacing(9),
+    },
+  },
 });
 
 export default SidebarStyle;

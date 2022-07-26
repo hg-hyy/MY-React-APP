@@ -1,10 +1,12 @@
-import React from 'react';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import { purple } from '@material-ui/core/colors';
-import Button from '@material-ui/core/Button';
+import React from "react";
+// import { createTheme } from "@mui/styles";
+import { createTheme } from "@mui/material/styles";
 
-const theme = createMuiTheme({
+import { ThemeProvider } from "@mui/material/styles";
+import { purple } from "@mui/material/colors";
+import Button from "@mui/material/Button";
+
+const theme = createTheme({
   palette: {
     primary: {
       // Purple and green play nicely together.
@@ -12,7 +14,7 @@ const theme = createMuiTheme({
     },
     secondary: {
       // This is green.A700 as hex.
-      main: '#11cb5f',
+      main: "#11cb5f",
     },
   },
 });

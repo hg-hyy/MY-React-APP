@@ -1,14 +1,14 @@
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import MobileStepper from "@material-ui/core/MobileStepper";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
+import { makeStyles, useTheme } from "@mui/styles";
+import MobileStepper from "@mui/material/MobileStepper";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
-
 const r = require.context("../../images", true, /^\.\/.*\.png$/);
 const images = r.keys().map(r);
 
@@ -16,31 +16,31 @@ const tileData = [];
 images.map((image, index) => {
   return tileData.push({
     img: image,
-    label: index + 1
+    label: index + 1,
   });
 });
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
-    flexGrow: 1
+    flexGrow: 1,
   },
   header: {
     display: "flex",
     alignItems: "center",
     height: 50,
     paddingLeft: theme.spacing(4),
-    backgroundColor: theme.palette.background.default
+    backgroundColor: theme.palette.background.default,
   },
   img: {
     height: 600,
     display: "block",
     maxWidth: "100%",
     overflow: "hidden",
-    width: "100%"
-  }
+    width: "100%",
+  },
 }));
 
 export default function Carousel() {
@@ -50,14 +50,14 @@ export default function Carousel() {
   const maxSteps = images.length;
 
   const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleStepChange = step => {
+  const handleStepChange = (step) => {
     setActiveStep(step);
   };
 

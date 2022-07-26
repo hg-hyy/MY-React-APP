@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import { makeStyles } from "@mui/styles";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
 import { signUp } from "../../actions/regist-actions";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     height: 800,
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
   },
   image: {
     // backgroundImage: 'url(https://source.unsplash.com/random)',
@@ -30,26 +30,26 @@ const useStyles = makeStyles(theme => ({
         ? theme.palette.grey[900]
         : theme.palette.grey[50],
     backgroundSize: "cover",
-    backgroundPosition: "center"
+    backgroundPosition: "center",
   },
 
   paper: {
     margin: theme.spacing(8, 4),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
 function Regist(props) {
@@ -67,7 +67,7 @@ function Regist(props) {
   let { from } = location.state || { from: { pathname: "/home" } };
   let newUser = {
     Username: username,
-    Password: password
+    Password: password,
   };
 
   // eslint-disable-next-line
@@ -80,7 +80,7 @@ function Regist(props) {
     if (isAuthenticated) {
       history.replace(from);
     }
-  },[isAuthenticated,from,history]);
+  }, [isAuthenticated, from, history]);
 
   return (
     <Container maxWidth="xl">
@@ -108,7 +108,7 @@ function Regist(props) {
                     label="Username"
                     autoFocus
                     value={username}
-                    onChange={e => setUsername(String(e.target.value))}
+                    onChange={(e) => setUsername(String(e.target.value))}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -121,7 +121,7 @@ function Regist(props) {
                     name="email"
                     autoComplete="email"
                     value={email}
-                    onChange={e => setEmail(String(e.target.value))}
+                    onChange={(e) => setEmail(String(e.target.value))}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -135,7 +135,7 @@ function Regist(props) {
                     id="password"
                     autoComplete="current-password"
                     value={password}
-                    onChange={e => setPassword(String(e.target.value))}
+                    onChange={(e) => setPassword(String(e.target.value))}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -149,7 +149,7 @@ function Regist(props) {
                     id="password1"
                     autoComplete="current-password"
                     value={password}
-                    onChange={e => setPassword(String(e.target.value))}
+                    onChange={(e) => setPassword(String(e.target.value))}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -161,7 +161,7 @@ function Regist(props) {
                   />
                 </Grid>
               </Grid>
-              {errors.map(error =>
+              {errors.map((error) =>
                 error.code ? (
                   <Typography component="p" variant="h6" key={error.msg}>
                     {error.msg}
@@ -195,13 +195,13 @@ function Regist(props) {
     </Container>
   );
 }
-const mapDispatchToProps = dispatch => ({
-  signUp: userData => dispatch(signUp(userData))
+const mapDispatchToProps = (dispatch) => ({
+  signUp: (userData) => dispatch(signUp(userData)),
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   errors: state.registReducer.errors,
-  isAuthenticated: state.registReducer.isAuthenticated
+  isAuthenticated: state.registReducer.isAuthenticated,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Regist);

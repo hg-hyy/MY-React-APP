@@ -1,29 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import PhoneIcon from "@material-ui/icons/Phone";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import PersonPinIcon from "@material-ui/icons/PersonPin";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
+import { makeStyles } from "@mui/styles";
+import AppBar from "@mui/material/AppBar";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import PhoneIcon from "@mui/icons-material/Phone";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
 import img2 from "../../images/chanel/2.jpg";
 import img3 from "../../images/chanel/3.jpg";
 import img4 from "../../images/chanel/4.jpg";
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     // maxWidth: 646,
-    width:"100%",
+    width: "100%",
   },
 }));
 
@@ -80,13 +80,13 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
 };
 
 function a11yProps(index) {
   return {
     id: `scrollable-force-tab-${index}`,
-    "aria-controls": `scrollable-force-tabpanel-${index}`
+    "aria-controls": `scrollable-force-tabpanel-${index}`,
   };
 }
 
@@ -111,7 +111,7 @@ export default function HorizontalTabs() {
           aria-label="scrollable force tabs"
           centered
         >
-          <Tab  icon={<PhoneIcon />} {...a11yProps(0)} />
+          <Tab icon={<PhoneIcon />} {...a11yProps(0)} />
           <Tab icon={<FavoriteIcon />} {...a11yProps(1)} />
           <Tab icon={<PersonPinIcon />} {...a11yProps(2)} />
         </Tabs>

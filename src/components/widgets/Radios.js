@@ -1,23 +1,23 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
+import { makeStyles } from "@mui/styles";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(3)
-  }
+    margin: theme.spacing(3),
+  },
 }));
 
 export default function Radios() {
   const classes = useStyles();
   const [value, setValue] = React.useState("female");
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setValue(event.target.value);
   };
 

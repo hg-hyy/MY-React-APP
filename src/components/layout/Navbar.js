@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import clsx from "clsx";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
 import NavItems from "./NavItems";
 
 import styles from "../../assets/styles/NavbarStyle";
@@ -17,7 +17,7 @@ function Navbar(props) {
     <AppBar
       position="fixed"
       className={clsx(classes.appBar, {
-        [classes.appBarShift]: open
+        [classes.appBarShift]: open,
       })}
     >
       <Toolbar>
@@ -29,7 +29,7 @@ function Navbar(props) {
 
 const mapStateToProps = (state, ownProps) => ({
   isAuthenticated: state.loginReducer.isAuthenticated,
-  data: state.reduxReducer.data
+  data: state.reduxReducer.data,
 });
 
 export default connect(mapStateToProps)(Navbar);

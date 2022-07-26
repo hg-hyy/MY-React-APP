@@ -1,52 +1,53 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles,useTheme  } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@mui/styles";
 import clsx from "clsx";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
 // eslint-disable-next-line
-import MenuIcon from "@material-ui/icons/Menu";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import Badge from "@material-ui/core/Badge";
-import InputBase from "@material-ui/core/InputBase";
-import SearchIcon from "@material-ui/icons/Search";
+import MenuIcon from "@mui/icons-material/Menu";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import Badge from "@mui/material/Badge";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
 import Right from "./Right";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import Remove from "@material-ui/icons/Remove";
-import Button from "@material-ui/core/Button";
-import MenuItem from "@material-ui/core/MenuItem";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import Remove from "@mui/icons-material/Remove";
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
 import img from "../../images/CL/CL1.jpg";
-import Divider from "@material-ui/core/Divider";
-import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
+import Divider from "@mui/material/Divider";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import styles from "../../assets/styles/NavbarStyle";
-import { Grid } from "@material-ui/core";
-import Chip from "@material-ui/core/Chip";
-import DoneIcon from "@material-ui/icons/Done";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
-import Dialog from "@material-ui/core/Dialog";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Radio from "@material-ui/core/Radio";
-import Popover from "@material-ui/core/Popover";
-import MenuList from "@material-ui/core/MenuList";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Checkbox from "@material-ui/core/Checkbox";
-import CommentIcon from "@material-ui/icons/Comment";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import Tooltip from "@material-ui/core/Tooltip";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
-import Brightness7Icon from "@material-ui/icons/Brightness7";
+import { Grid } from "@mui/material";
+import Chip from "@mui/material/Chip";
+import DoneIcon from "@mui/icons-material/Done";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Dialog from "@mui/material/Dialog";
+import RadioGroup from "@mui/material/RadioGroup";
+import Radio from "@mui/material/Radio";
+import Popover from "@mui/material/Popover";
+import MenuList from "@mui/material/MenuList";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
+import Checkbox from "@mui/material/Checkbox";
+import CommentIcon from "@mui/icons-material/Comment";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import Tooltip from "@mui/material/Tooltip";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 const useStyles = makeStyles(styles);
 const options = ["None", "purple", "blue", "green", "orange", "red"];
@@ -57,24 +58,23 @@ const data = [];
 images.map((image, index) => {
   return data.push({
     imgs: image,
-    theme: names[index]
+    theme: names[index],
   });
 });
 
 function User(props) {
   const classes = useStyles();
-  const{loginOut}=props
+  const { loginOut } = props;
   // const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
-    loginOut(false)
+    loginOut(false);
     setAnchorEl(null);
-
   };
   function handleListKeyDown(event) {
     if (event.key === "Tab") {
@@ -102,11 +102,11 @@ function User(props) {
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "center"
+          horizontal: "center",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "center"
+          horizontal: "center",
         }}
       >
         <MenuList
@@ -126,7 +126,7 @@ function Notify(props) {
   // const [open, setOpen] = useState(false);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -135,7 +135,7 @@ function Notify(props) {
   };
   const [checked, setChecked] = useState([0]);
 
-  const handleToggle = value => () => {
+  const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -164,15 +164,15 @@ function Notify(props) {
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "center"
+          horizontal: "center",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "center"
+          horizontal: "center",
         }}
       >
         <List className={classes.notify}>
-          {[0, 1].map(value => {
+          {[0, 1].map((value) => {
             const labelId = `checkbox-list-label-${value}`;
 
             return (
@@ -202,8 +202,8 @@ function Notify(props) {
             );
           })}
         </List>
-        <ExpansionPanel>
-          <ExpansionPanelSummary
+        <Accordion>
+          <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-label="Expand"
             aria-controls="additional-actions1-content"
@@ -211,18 +211,18 @@ function Notify(props) {
           >
             <FormControlLabel
               aria-label="Acknowledge"
-              onClick={event => event.stopPropagation()}
-              onFocus={event => event.stopPropagation()}
+              onClick={(event) => event.stopPropagation()}
+              onFocus={(event) => event.stopPropagation()}
               control={<Checkbox />}
               label="I propagation"
             />
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
+          </AccordionSummary>
+          <AccordionDetails>
             <Typography color="textSecondary">
               The click event of the nested action will
             </Typography>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
+          </AccordionDetails>
+        </Accordion>
       </Popover>
     </div>
   );
@@ -269,13 +269,13 @@ function Chips(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const id = open ? "pop" : undefined;
-  const handleClose = newValue => {
+  const handleClose = (newValue) => {
     setModelopen(false);
 
     if (newValue) {
       setValue(newValue);
 
-      data.map(item => {
+      data.map((item) => {
         if (item.theme === newValue) {
           newValue = item.imgs;
           return newValue;
@@ -287,7 +287,7 @@ function Chips(props) {
     setAnchorEl(null);
   };
 
-  const handleOpen = event => {
+  const handleOpen = (event) => {
     setModelopen(true);
     // setAnchorEl(event.currentTarget);
   };
@@ -312,7 +312,7 @@ function Chips(props) {
       />
       <Model
         classes={{
-          paper: classes.paper
+          paper: classes.paper,
         }}
         id="ringtone-menu"
         keepMounted
@@ -335,6 +335,7 @@ function Model(props) {
     }
   }, [valueProp, open]);
 
+  // eslint-disable-next-line
   const handleEntering = () => {
     if (radioGroupRef.current != null) {
       radioGroupRef.current.focus();
@@ -349,16 +350,14 @@ function Model(props) {
     onClose(value);
   };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setValue(event.target.value);
   };
 
   return (
     <Dialog
-      disableBackdropClick
       disableEscapeKeyDown
       maxWidth="xs"
-      onEntering={handleEntering}
       aria-labelledby="confirmation-dialog-title"
       open={open}
       {...other}
@@ -374,7 +373,7 @@ function Model(props) {
             value={value}
             onChange={handleChange}
           >
-            {options.map(option => (
+            {options.map((option) => (
               <FormControlLabel
                 value={option}
                 key={option}
@@ -393,7 +392,7 @@ function Model(props) {
             value={value}
             onChange={handleChange}
           >
-            {data.map(option => (
+            {data.map((option) => (
               <FormControlLabel
                 value={option.theme}
                 key={option.theme}
@@ -433,7 +432,7 @@ function Pop(props) {
     onClose(value);
   };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setValue(event.target.value);
   };
   return (
@@ -444,11 +443,11 @@ function Pop(props) {
       onClose={onClose}
       anchorOrigin={{
         vertical: "bottom",
-        horizontal: "center"
+        horizontal: "center",
       }}
       transformOrigin={{
         vertical: "top",
-        horizontal: "center"
+        horizontal: "center",
       }}
     >
       <FormControl component="fieldset" className={classes.formControl}>
@@ -459,7 +458,7 @@ function Pop(props) {
           value={value}
           onChange={handleChange}
         >
-          {options.map(option => (
+          {options.map((option) => (
             <FormControlLabel
               value={option}
               key={option}
@@ -477,7 +476,7 @@ function Pop(props) {
           value={value}
           onChange={handleChange}
         >
-          {data.map(option => (
+          {data.map((option) => (
             <FormControlLabel
               value={option.theme}
               key={option.theme}
@@ -501,12 +500,12 @@ function Pop(props) {
 
 export default function NavItems(props) {
   const classes = useStyles();
-  const { open, handleDrawerToggle,changeTheme } = props;
+  const { open, handleDrawerToggle, changeTheme } = props;
   const theme = useTheme();
   const handleTogglePaletteType = () => {
-    const paletteType = theme.palette.type === "light" ? "dark" : "light";
+    const paletteType = theme.palette.mode === "light" ? "dark" : "light";
 
-    changeTheme(paletteType );
+    changeTheme(paletteType);
   };
   return (
     <Grid container direction="row" alignItems="center" justify="space-between">
@@ -516,7 +515,7 @@ export default function NavItems(props) {
         onClick={handleDrawerToggle}
         edge="start"
         className={clsx(classes.menuButton, {
-          [classes.hide]: open
+          [classes.hide]: open,
         })}
       >
         {open ? <Remove /> : <MenuIcon />}
@@ -534,14 +533,14 @@ export default function NavItems(props) {
           placeholder="Search…"
           classes={{
             root: classes.inputRoot,
-            input: classes.inputInput
+            input: classes.inputInput,
           }}
           inputProps={{ "aria-label": "search" }}
         />
       </div>
 
       <Notify {...props} />
-      <User {...props}/>
+      <User {...props} />
       <Tooltip title="toggleTheme" enterDelay={300}>
         <IconButton
           color="inherit"
@@ -550,7 +549,7 @@ export default function NavItems(props) {
           data-ga-event-category="AppBar"
           data-ga-event-action="dark"
         >
-          {theme.palette.type === "light" ? (
+          {theme.palette.mode === "light" ? (
             <Brightness4Icon />
           ) : (
             <Brightness7Icon />

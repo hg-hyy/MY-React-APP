@@ -1,17 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
+import { makeStyles } from "@mui/styles";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 import Markdown from "markdown-to-jsx";
-import { withStyles } from "@material-ui/core/styles";
-import Link from "@material-ui/core/Link";
+import { withStyles } from "@mui/styles";
+import Link from "@mui/material/Link";
 
-const styles = theme => ({
+const styles = (theme) => ({
   listItem: {
-    marginTop: theme.spacing(1)
-  }
+    marginTop: theme.spacing(1),
+  },
 });
 
 const options = {
@@ -20,17 +20,17 @@ const options = {
       component: Typography,
       props: {
         gutterBottom: true,
-        variant: "h5"
-      }
+        variant: "h5",
+      },
     },
     h2: { component: Typography, props: { gutterBottom: true, variant: "h6" } },
     h3: {
       component: Typography,
-      props: { gutterBottom: true, variant: "subtitle1" }
+      props: { gutterBottom: true, variant: "subtitle1" },
     },
     h4: {
       component: Typography,
-      props: { gutterBottom: true, variant: "caption", paragraph: true }
+      props: { gutterBottom: true, variant: "caption", paragraph: true },
     },
     p: { component: Typography, props: { paragraph: true } },
     a: { component: Link },
@@ -39,16 +39,16 @@ const options = {
         <li className={classes.listItem}>
           <Typography component="span" {...props} />
         </li>
-      ))
-    }
-  }
+      )),
+    },
+  },
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   markdown: {
     ...theme.typography.body2,
-    padding: theme.spacing(3, 0)
-  }
+    padding: theme.spacing(3, 0),
+  },
 }));
 
 export default function Main(props) {
@@ -75,5 +75,5 @@ export default function Main(props) {
 
 Main.propTypes = {
   posts: PropTypes.array,
-  title: PropTypes.string
+  title: PropTypes.string,
 };

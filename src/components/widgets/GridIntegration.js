@@ -1,19 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
-import withWidth from '@material-ui/core/withWidth';
-import Typography from '@material-ui/core/Typography';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import Hidden from "@mui/material/Hidden";
 
-const useStyles = makeStyles(theme => ({
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary,
   },
 }));
@@ -59,7 +60,19 @@ function GridIntegration(props) {
 }
 
 GridIntegration.propTypes = {
-  width: PropTypes.oneOf(['lg', 'md', 'sm', 'xl', 'xs']).isRequired,
+  width: PropTypes.oneOf(["lg", "md", "sm", "xl", "xs"]).isRequired,
 };
+// eslint-disable-next-line
+function useWidth() {
+  const theme = useTheme();
+  const keys = [...theme.breakpoints.keys].reverse();
+  return (
+    keys.reduce((output, key) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const matches = useMediaQuery(theme.breakpoints.up(key));
+      return !output && matches ? key : output;
+    }, null) || "xs"
+  );
+}
 
-export default withWidth()(GridIntegration);
+export default function UseWidth(GridIntegration) {}

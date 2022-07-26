@@ -1,60 +1,54 @@
-import React from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/styles';
-import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import MoneyIcon from '@material-ui/icons/Money';
+import React from "react";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
+import { Card, CardContent, Grid, Typography, Avatar } from "@@mui/material";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import MoneyIcon from "@mui/icons-material/Money";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100%'
+    height: "100%",
   },
   content: {
-    alignItems: 'center',
-    display: 'flex'
+    alignItems: "center",
+    display: "flex",
   },
   title: {
-    fontWeight: 700
+    fontWeight: 700,
   },
   avatar: {
     backgroundColor: theme.palette.error.main,
     height: 56,
-    width: 56
+    width: 56,
   },
   icon: {
     height: 32,
-    width: 32
+    width: 32,
   },
   difference: {
     marginTop: theme.spacing(2),
-    display: 'flex',
-    alignItems: 'center'
+    display: "flex",
+    alignItems: "center",
   },
   differenceIcon: {
-    color: theme.palette.error.dark
+    color: theme.palette.error.dark,
   },
   differenceValue: {
     color: theme.palette.error.dark,
-    marginRight: theme.spacing(1)
-  }
+    marginRight: theme.spacing(1),
+  },
 }));
 
-const Budget = props => {
+const Budget = (props) => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent>
-        <Grid
-          container
-          justify="space-between"
-        >
+        <Grid container justify="space-between">
           <Grid item>
             <Typography
               className={classes.title}
@@ -74,16 +68,10 @@ const Budget = props => {
         </Grid>
         <div className={classes.difference}>
           <ArrowDownwardIcon className={classes.differenceIcon} />
-          <Typography
-            className={classes.differenceValue}
-            variant="body2"
-          >
+          <Typography className={classes.differenceValue} variant="body2">
             12%
           </Typography>
-          <Typography
-            className={classes.caption}
-            variant="caption"
-          >
+          <Typography className={classes.caption} variant="caption">
             Since last month
           </Typography>
         </div>
@@ -93,7 +81,7 @@ const Budget = props => {
 };
 
 Budget.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Budget;

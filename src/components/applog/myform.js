@@ -1,30 +1,22 @@
 /* jshint esversion: 6 */
 import React from "react";
 import { Table, Form, FormGroup, Label, Input } from "reactstrap";
-import  get  from "../../api/get";
+import get from "../../api/get";
 import MyModal from "./modal";
-import PNotify from "pnotify/dist/es/PNotify";
 
-
-
-import { DatePicker } from 'antd';
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-import moment from 'moment';
-
-// eslint-disable-next-line
-import PNotifyButtons from "pnotify/dist/es/PNotifyButtons";
-// eslint-disable-next-line
-import PNotifyConfirm from "pnotify/dist/es/PNotifyConfirm";
+import { DatePicker } from "antd";
+import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
+import moment from "moment";
+import { notice } from "@pnotify/core";
 
 let url = "http://127.0.0.1:8000/blog/check_log";
-
 
 class Myform extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       log_level: "info",
-      log_day: (new Date().toLocaleDateString()),
+      log_day: new Date().toLocaleDateString(),
       log_list: [],
     };
 
@@ -36,11 +28,9 @@ class Myform extends React.Component {
   onChange(date, dateString) {
     // console.log(dateString);
     this.setState({
-      log_day:dateString
+      log_day: dateString,
     });
   }
-
-
 
   handleInputChange(event) {
     const target = event.target;
@@ -48,39 +38,44 @@ class Myform extends React.Component {
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 
   handleSubmit(event) {
     let params = {
       log_level: this.state.log_level,
-      log_day: this.state.log_day
+      log_day: this.state.log_day,
     };
-    get(url, params).then(res =>res.json()).then(result => {
-      console.log(result);
-      this.setState({
-        log_level: result.log_level,
-        log_list: result.log_list,
-      });
-    },error => {
-      console.log(error)
-      this.setState({
-        // isLoaded: true,
-        // error
-      });
-    });
+    get(url, params)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          this.setState({
+            log_level: result.log_level,
+            log_list: result.log_list,
+          });
+        },
+        (error) => {
+          console.log(error);
+          this.setState({
+            // isLoaded: true,
+            // error
+          });
+        }
+      );
 
-    PNotify.notice({
+    notice({
       title: "日志查询完成：",
       text: this.state.log_level,
       modules: {
         Animate: {
           animate: true,
           inClass: "zoomInLeft",
-          outClass: "zoomOutRight"
-        }
-      }
+          outClass: "zoomOutRight",
+        },
+      },
     });
 
     event.preventDefault();
@@ -108,8 +103,10 @@ class Myform extends React.Component {
 
           <FormGroup>
             <Label for="log_day">日期：</Label>
-            <DatePicker value={moment(this.state.log_day)}
-              onChange={this.onChange} />
+            <DatePicker
+              value={moment(this.state.log_day)}
+              onChange={this.onChange}
+            />
             <Input
               id="log_day"
               type="date"

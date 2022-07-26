@@ -4,12 +4,11 @@ import Mylist from "./mylist";
 import MyTable from "./mytable";
 import Myform from "./myform";
 import Antform from "./antform";
-// import 'antd/dist/antd.css';
-// import Anttable from './anttable';
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "pnotify/dist/PNotifyBrightTheme.css";
-
+import "@pnotify/core/dist/BrightTheme.css";
+import PNotify from "@pnotify/core";
+import "@pnotify/core/dist/PNotify.css";
 import {
   Collapse,
   Navbar,
@@ -21,25 +20,18 @@ import {
   Container,
   Row,
   Col,
-  Jumbotron,
-  Button
+  Button,
 } from "reactstrap";
-import PNotify from "pnotify/dist/es/PNotify";
 
-// eslint-disable-next-line
-import PNotifyButtons from "pnotify/dist/es/PNotifyButtons";
-// eslint-disable-next-line
-import PNotifyConfirm from "pnotify/dist/es/PNotifyConfirm";
-
-import "pnotify/dist/PNotifyBrightTheme.css";
+import "@pnotify/core/dist/PNotify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-PNotify.defaults.styling = "bootstrap4"; // Bootstrap version 4
+// PNotify.defaults.styling = "bootstrap4"; // Bootstrap version 4
 
 const styles = {
   fontFamily: "sans-serif",
   textAlign: "left",
-  marginTop: "20px"
+  marginTop: "20px",
 };
 
 class NameForm extends React.Component {
@@ -64,9 +56,9 @@ class NameForm extends React.Component {
         Animate: {
           animate: true,
           inClass: "zoomInLeft",
-          outClass: "zoomOutRight"
-        }
-      }
+          outClass: "zoomOutRight",
+        },
+      },
     });
     event.preventDefault();
   }
@@ -93,7 +85,7 @@ class Reservation extends React.Component {
     super(props);
     this.state = {
       isGoing: true,
-      numberOfGuests: 2
+      numberOfGuests: 2,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -105,7 +97,7 @@ class Reservation extends React.Component {
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 
@@ -147,17 +139,17 @@ class Applog extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
     };
   }
   toggle() {
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !this.state.isOpen,
     });
   }
   render() {
     return (
-      <Container  fluid={true}>
+      <Container fluid={true}>
         <Navbar color="inverse" light expand="md">
           <NavbarBrand href="/"> reactstrap </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
@@ -174,30 +166,29 @@ class Applog extends React.Component {
             </Nav>
           </Collapse>
         </Navbar>
-        <Jumbotron>
-          <Row>
-            <Col>
-              <h1>Welcome to React</h1>
-              <p>
-                <Button
-                  tag="a"
-                  color="success"
-                  size="large"
-                  href="http://reactstrap.github.io"
-                  target="_blank"
-                >
-                  View Reactstrap Docs
-                </Button>
-              </p>
-            </Col>
-          </Row>
-          <NameForm />
-          <Reservation />
-          <Mylist />
-          <MyTable />
-          <Myform />
-          <Antform />
-        </Jumbotron>
+
+        <Row>
+          <Col>
+            <h1>Welcome to React</h1>
+            <p>
+              <Button
+                tag="a"
+                color="success"
+                size="large"
+                href="http://reactstrap.github.io"
+                target="_blank"
+              >
+                View Reactstrap Docs
+              </Button>
+            </p>
+          </Col>
+        </Row>
+        <NameForm />
+        <Reservation />
+        <Mylist />
+        <MyTable />
+        <Myform />
+        <Antform />
       </Container>
     );
   }

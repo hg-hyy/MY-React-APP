@@ -1,17 +1,17 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Link from "@material-ui/core/Link";
-const useStyles = makeStyles(theme => ({
+import { makeStyles } from "@mui/styles";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+const useStyles = makeStyles((theme) => ({
   "@global": {
     ul: {
       margin: 0,
       padding: 0,
-      listStyle: "none"
-    }
+      listStyle: "none",
+    },
   },
   footer: {
     borderTop: `1px solid ${theme.palette.divider}`,
@@ -20,9 +20,9 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(3),
     [theme.breakpoints.up("sm")]: {
       paddingTop: theme.spacing(6),
-      paddingBottom: theme.spacing(6)
-    }
-  }
+      paddingBottom: theme.spacing(6),
+    },
+  },
 }));
 
 function Copyright() {
@@ -40,7 +40,7 @@ function Copyright() {
 const footers = [
   {
     title: "Company",
-    description: ["Team", "History", "Contact us", "Locations"]
+    description: ["Team", "History", "Contact us", "Locations"],
   },
   {
     title: "Features",
@@ -49,8 +49,8 @@ const footers = [
       "Random feature",
       "Team feature",
       "Developer stuff",
-      "Another one"
-    ]
+      "Another one",
+    ],
   },
   {
     title: "Resources",
@@ -58,13 +58,13 @@ const footers = [
       "Resource",
       "Resource name",
       "Another resource",
-      "Final resource"
-    ]
+      "Final resource",
+    ],
   },
   {
     title: "Legal",
-    description: ["Privacy policy", "Terms of use"]
-  }
+    description: ["Privacy policy", "Terms of use"],
+  },
 ];
 
 export default function Footer() {
@@ -73,13 +73,13 @@ export default function Footer() {
   return (
     <Container maxWidth="lg" component="footer" className={classes.footer}>
       <Grid container spacing={4} justify="space-evenly">
-        {footers.map(footer => (
+        {footers.map((footer) => (
           <Grid item xs={6} sm={3} key={footer.title}>
             <Typography variant="h6" color="textPrimary" gutterBottom>
               {footer.title}
             </Typography>
             <ul>
-              {footer.description.map(item => (
+              {footer.description.map((item) => (
                 <li key={item}>
                   <Link href="#" variant="subtitle1" color="textSecondary">
                     {item}

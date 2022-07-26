@@ -3,20 +3,20 @@ import { SET_AUTH_TRUE, SET_AUTH_FALSE } from "../actions/redux_actions";
 
 const initialState = {
   isAuthenticated: false,
-  data:{}
+  data: {},
 };
 
-export default function(state = initialState, action) {
+export default function reduxReducer(state = initialState, action) {
   switch (action.type) {
     case SET_AUTH_TRUE:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
     case SET_AUTH_FALSE:
       return {
         ...state,
-        isAuthenticated: action.payload
+        isAuthenticated: action.payload,
       };
     default:
       return state;

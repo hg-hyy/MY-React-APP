@@ -1,74 +1,74 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import Grid from "@material-ui/core/Grid";
-import StarIcon from "@material-ui/icons/StarBorder";
+import { makeStyles } from "@mui/styles";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Grid from "@mui/material/Grid";
+import StarIcon from "@mui/icons-material/StarBorder";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   icon: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6)
+    padding: theme.spacing(8, 0, 6),
   },
   heroButtons: {
-    marginTop: theme.spacing(4)
+    marginTop: theme.spacing(4),
   },
   cardGrid: {
     paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8)
+    paddingBottom: theme.spacing(8),
   },
   card: {
     height: "100%",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   cardMedia: {
-    paddingTop: "56.25%" // 16:9
+    paddingTop: "56.25%", // 16:9
   },
   cardContent: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   root: {
-    width: 1200
+    width: 1200,
   },
   "@global": {
     ul: {
       margin: 0,
       padding: 0,
-      listStyle: "none"
-    }
+      listStyle: "none",
+    },
   },
   appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`
+    borderBottom: `1px solid ${theme.palette.divider}`,
   },
   toolbar: {
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   toolbarTitle: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   link: {
-    margin: theme.spacing(1, 1.5)
+    margin: theme.spacing(1, 1.5),
   },
   cardHeader: {
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.grey[700]
-        : theme.palette.grey[200]
+        : theme.palette.grey[200],
   },
   cardPricing: {
     display: "flex",
     justifyContent: "center",
     alignItems: "baseline",
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   footer: {
     borderTop: `1px solid ${theme.palette.divider}`,
@@ -77,8 +77,8 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(3),
     [theme.breakpoints.up("sm")]: {
       paddingTop: theme.spacing(6),
-      paddingBottom: theme.spacing(6)
-    }
+      paddingBottom: theme.spacing(6),
+    },
   },
 }));
 
@@ -90,10 +90,10 @@ const tiers = [
       "10 users included",
       "2 GB of storage",
       "Help center access",
-      "Email support"
+      "Email support",
     ],
     buttonText: "Sign up for free",
-    buttonVariant: "outlined"
+    buttonVariant: "outlined",
   },
   {
     title: "Pro",
@@ -103,10 +103,10 @@ const tiers = [
       "20 users included",
       "10 GB of storage",
       "Help center access",
-      "Priority email support"
+      "Priority email support",
     ],
     buttonText: "Get started",
-    buttonVariant: "contained"
+    buttonVariant: "contained",
   },
   {
     title: "Enterprise",
@@ -115,11 +115,11 @@ const tiers = [
       "50 users included",
       "30 GB of storage",
       "Help center access",
-      "Phone & email support"
+      "Phone & email support",
     ],
     buttonText: "Contact us",
-    buttonVariant: "outlined"
-  }
+    buttonVariant: "outlined",
+  },
 ];
 
 export default function Price() {
@@ -151,7 +151,7 @@ export default function Price() {
       </div>
       <Container className={classes.cardGrid} component="main">
         <Grid container spacing={5} alignItems="flex-end">
-          {tiers.map(tier => (
+          {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
             <Grid
               item
@@ -179,7 +179,7 @@ export default function Price() {
                     </Typography>
                   </div>
                   <ul>
-                    {tier.description.map(line => (
+                    {tier.description.map((line) => (
                       <Typography
                         component="li"
                         variant="subtitle1"

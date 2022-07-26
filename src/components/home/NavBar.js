@@ -1,27 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import CameraIcon from "@material-ui/icons/PhotoCamera";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import HomeIcon from "@material-ui/icons/Home";
-import WhatshotIcon from "@material-ui/icons/Whatshot";
+import { makeStyles } from "@mui/styles";
+import Typography from "@mui/material/Typography";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import CameraIcon from "@mui/icons-material/PhotoCamera";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import HomeIcon from "@mui/icons-material/Home";
+import WhatshotIcon from "@mui/icons-material/Whatshot";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(0.5),
     width: 20,
-    height: 20
+    height: 20,
   },
   album: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   link: {
     display: "flex",
-    margin: theme.spacing(1, 1.5)
-  }
+    margin: theme.spacing(1, 1.5),
+  },
 }));
 
 function IconBreadcrumbs() {

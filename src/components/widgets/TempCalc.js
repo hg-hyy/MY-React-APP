@@ -1,57 +1,55 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
-import red from "@material-ui/core/colors/red";
-import purple from "@material-ui/core/colors/purple";
-import {
-  makeStyles,
-  createMuiTheme,
-  ThemeProvider
-} from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import red from "@mui/material/colors/red";
+import purple from "@mui/material/colors/purple";
+import { makeStyles, ThemeProvider } from "@mui/styles";
+import { createTheme } from "@mui/material/styles";
+
+import Typography from "@mui/material/Typography";
 const primary = red[500]; // #F44336
 const accent = purple.A200; // #E040FB (替代方法)
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(1),
-    width: 300
+    width: 300,
   },
   high: {
     backgroundColor: accent,
-    color: primary
-  }
+    color: primary,
+  },
 }));
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       light: "#757ce8",
       main: "#3f50b5",
       dark: "#002884",
-      contrastText: "#fff"
+      contrastText: "#fff",
     },
     // primary:purple,
     secondary: {
       light: "#ff7961",
       main: "#f44336",
       dark: "#ba000d",
-      contrastText: "#000"
+      contrastText: "#000",
     },
-    divider: "rgba(255,255,255,1)"
+    divider: "rgba(255,255,255,1)",
   },
   typography: {
     fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
+      "-apple-system",
+      "BlinkMacSystemFont",
       '"Segoe UI"',
-      'Roboto',
+      "Roboto",
       '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
+      "Arial",
+      "sans-serif",
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
-    ].join(','),
+    ].join(","),
   },
 });
 
@@ -86,12 +84,8 @@ function toFahrenheit(celsius) {
 }
 function TempInput(props) {
   const classes = useStyles();
-  const {
-    celsius,
-    handleCelsiusChange,
-    fahrenheit,
-    handleFahrenheitChange
-  } = props;
+  const { celsius, handleCelsiusChange, fahrenheit, handleFahrenheitChange } =
+    props;
   return (
     <div className={classes.root}>
       <TextField
@@ -118,7 +112,7 @@ export default function TmepCalc() {
   const [celsius, setCelsius] = React.useState("0");
   const [fahrenheit, setFahrenheit] = React.useState("0");
 
-  const handleCelsiusChange = event => {
+  const handleCelsiusChange = (event) => {
     const input = parseFloat(event.target.value);
     if (Number.isNaN(input)) {
       setCelsius("请输入数字");
@@ -129,7 +123,7 @@ export default function TmepCalc() {
     setCelsius(input.toString());
     setFahrenheit(f.toString());
   };
-  const handleFahrenheitChange = event => {
+  const handleFahrenheitChange = (event) => {
     const input = parseFloat(event.target.value);
     if (Number.isNaN(input)) {
       setFahrenheit("请输入数字");

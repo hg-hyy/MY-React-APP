@@ -1,51 +1,52 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import CartList from "../../containers/CartList";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@mui/styles";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
 
-const useStyles = makeStyles(theme => ({
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CartList from "../../containers/CartList";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
+import TextField from "@mui/material/TextField";
+
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: "flex",
     height: 268,
-    borderRadius: 5
+    borderRadius: 5,
     // overflow: "auto"
   },
   tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`
+    borderRight: `1px solid ${theme.palette.divider}`,
   },
   inline: {
-    display: "inline"
+    display: "inline",
   },
   type: {
     overflow: "auto",
-    width: "100%"
-  }
+    width: "100%",
+  },
 }));
 
 function MultilineTextFields() {
   const [value, setValue] = React.useState("Controlled");
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setValue(event.target.value);
   };
 
@@ -86,14 +87,14 @@ const images = r.keys().map(r);
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
 };
 
 function ListOfMes() {
   return (
     <div>
-      <ExpansionPanel>
-        <ExpansionPanelSummary
+      <Accordion>
+        <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-label="Expand"
           aria-controls="additional-actions1-content"
@@ -101,20 +102,20 @@ function ListOfMes() {
         >
           <FormControlLabel
             aria-label="Acknowledge"
-            onClick={event => event.stopPropagation()}
-            onFocus={event => event.stopPropagation()}
+            onClick={(event) => event.stopPropagation()}
+            onFocus={(event) => event.stopPropagation()}
             control={<Checkbox />}
             label="HtabI should stop the click event propagation"
           />
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        </AccordionSummary>
+        <AccordionDetails>
           <Typography color="textSecondary">
             The click event of the nested action
           </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel>
-        <ExpansionPanelSummary
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-label="Expand"
           aria-controls="additional-actions2-content"
@@ -122,20 +123,20 @@ function ListOfMes() {
         >
           <FormControlLabel
             aria-label="Acknowledge"
-            onClick={event => event.stopPropagation()}
-            onFocus={event => event.stopPropagation()}
+            onClick={(event) => event.stopPropagation()}
+            onFocus={(event) => event.stopPropagation()}
             control={<Checkbox />}
             label="HtabI should stop the focus event propagation"
           />
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        </AccordionSummary>
+        <AccordionDetails>
           <Typography color="textSecondary">
             The focus event of the nested action will propagate
           </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel>
-        <ExpansionPanelSummary
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-label="Expand"
           aria-controls="additional-actions3-content"
@@ -143,18 +144,18 @@ function ListOfMes() {
         >
           <FormControlLabel
             aria-label="Acknowledge"
-            onClick={event => event.stopPropagation()}
-            onFocus={event => event.stopPropagation()}
+            onClick={(event) => event.stopPropagation()}
+            onFocus={(event) => event.stopPropagation()}
             control={<Checkbox />}
             label="HtabI should provide an aria-label on each "
           />
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        </AccordionSummary>
+        <AccordionDetails>
           <Typography color="textSecondary">
             If you forget to put an aria-label on the nested action,
           </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+        </AccordionDetails>
+      </Accordion>
     </div>
   );
 }
@@ -253,7 +254,7 @@ function TabPanel(props) {
 function a11yProps(index) {
   return {
     id: `vertical-tab-${index}`,
-    "aria-controls": `vertical-tabpanel-${index}`
+    "aria-controls": `vertical-tabpanel-${index}`,
   };
 }
 

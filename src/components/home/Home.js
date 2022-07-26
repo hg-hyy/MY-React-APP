@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
-import Container from "@material-ui/core/Container";
+import Container from "@mui/material/Container";
 
 import Carousel from "./Carousel";
 import Checkout from "./checkout/Checkout";

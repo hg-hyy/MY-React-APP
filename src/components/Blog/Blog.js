@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import TwitterIcon from "@material-ui/icons/Twitter";
+import { makeStyles } from "@mui/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
 import Header from "./Header";
 import MainFeaturedPost from "./MainFeaturedPost";
 import FeaturedPost from "./FeaturedPost";
@@ -13,10 +13,10 @@ import Main from "./Main";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   mainGrid: {
-    marginTop: theme.spacing(3)
-  }
+    marginTop: theme.spacing(3),
+  },
 }));
 
 const sections = [
@@ -29,7 +29,7 @@ const sections = [
   { title: "Science", url: "#" },
   { title: "Health", url: "#" },
   { title: "Style", url: "#" },
-  { title: "Travel", url: "#" }
+  { title: "Travel", url: "#" },
 ];
 
 const mainFeaturedPost = {
@@ -38,7 +38,7 @@ const mainFeaturedPost = {
     "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
   image: require("../../images/shifaaz.jpg"),
   imgText: "main image description",
-  linkText: "Continue reading…"
+  linkText: "Continue reading…",
 };
 
 const featuredPosts = [
@@ -48,7 +48,7 @@ const featuredPosts = [
     description:
       "This is a wider card with supporting text below as a natural lead-in to additional content.",
     image: require("../../images/adrey.jpg"),
-    imageText: "Image Text"
+    imageText: "Image Text",
   },
   {
     title: "Post title",
@@ -56,8 +56,8 @@ const featuredPosts = [
     description:
       "This is a wider card with supporting text below as a natural lead-in to additional content.",
     image: require("../../images/ruslan.jpg"),
-    imageText: "Image Text"
-  }
+    imageText: "Image Text",
+  },
 ];
 
 const sidebar = {
@@ -67,13 +67,13 @@ const sidebar = {
   archives: [
     { title: "March 2020", url: "#" },
     { title: "February 2020", url: "#" },
-    { title: "January 2020", url: "#" }
+    { title: "January 2020", url: "#" },
   ],
   social: [
     { name: "GitHub", icon: GitHubIcon },
     { name: "Twitter", icon: TwitterIcon },
-    { name: "Facebook", icon: FacebookIcon }
-  ]
+    { name: "Facebook", icon: FacebookIcon },
+  ],
 };
 
 export default function Blog(props) {
@@ -82,8 +82,8 @@ export default function Blog(props) {
   useEffect(() => {
     const readmePath = require("./blog-post1.md");
     fetch(readmePath)
-      .then(res => res.text())
-      .then(text => setMark(text));
+      .then((res) => res.text())
+      .then((text) => setMark(text));
   });
   return (
     <React.Fragment>
@@ -93,7 +93,7 @@ export default function Blog(props) {
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
-            {featuredPosts.map(post => (
+            {featuredPosts.map((post) => (
               <FeaturedPost key={post.title} post={post} />
             ))}
           </Grid>

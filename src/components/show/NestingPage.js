@@ -5,27 +5,27 @@ import {
   Route,
   Link,
   useParams,
-  useRouteMatch
+  useRouteMatch,
 } from "react-router-dom";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import PersonIcon from "@material-ui/icons/Person";
-import ChatIcon from "@material-ui/icons/Chat";
-import EditIcon from "@material-ui/icons/Edit";
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import PersonIcon from "@mui/icons-material/Person";
+import ChatIcon from "@mui/icons-material/Chat";
+import EditIcon from "@mui/icons-material/Edit";
+import { makeStyles } from "@mui/styles";
+import Grid from "@mui/material/Grid";
+import List from "@mui/material/List";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Checkbox from "@mui/material/Checkbox";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    margin: 'auto',
+    margin: "auto",
   },
   cardHeader: {
     padding: theme.spacing(1, 2),
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     width: 200,
     height: 230,
     backgroundColor: theme.palette.background.paper,
-    overflow: 'auto',
+    overflow: "auto",
   },
   button: {
     margin: theme.spacing(0.5, 0),
@@ -42,18 +42,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function not(a, b) {
-  return a.filter(value => b.indexOf(value) === -1);
+  return a.filter((value) => b.indexOf(value) === -1);
 }
 
 function intersection(a, b) {
-  return a.filter(value => b.indexOf(value) !== -1);
+  return a.filter((value) => b.indexOf(value) !== -1);
 }
 
 function union(a, b) {
   return [...a, ...not(b, a)];
 }
 
- function TransferList() {
+function TransferList() {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
   const [left, setLeft] = React.useState([0, 1, 2, 3]);
@@ -62,7 +62,7 @@ function union(a, b) {
   const leftChecked = intersection(checked, left);
   const rightChecked = intersection(checked, right);
 
-  const handleToggle = value => () => {
+  const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -75,9 +75,9 @@ function union(a, b) {
     setChecked(newChecked);
   };
 
-  const numberOfChecked = items => intersection(checked, items).length;
+  const numberOfChecked = (items) => intersection(checked, items).length;
 
-  const handleToggleAll = items => () => {
+  const handleToggleAll = (items) => () => {
     if (numberOfChecked(items) === items.length) {
       setChecked(not(checked, items));
     } else {
@@ -104,10 +104,15 @@ function union(a, b) {
         avatar={
           <Checkbox
             onClick={handleToggleAll(items)}
-            checked={numberOfChecked(items) === items.length && items.length !== 0}
-            indeterminate={numberOfChecked(items) !== items.length && numberOfChecked(items) !== 0}
+            checked={
+              numberOfChecked(items) === items.length && items.length !== 0
+            }
+            indeterminate={
+              numberOfChecked(items) !== items.length &&
+              numberOfChecked(items) !== 0
+            }
             disabled={items.length === 0}
-            inputProps={{ 'aria-label': 'all items selected' }}
+            inputProps={{ "aria-label": "all items selected" }}
           />
         }
         title={title}
@@ -115,17 +120,22 @@ function union(a, b) {
       />
       <Divider />
       <List className={classes.list} dense component="div" role="list">
-        {items.map(value => {
+        {items.map((value) => {
           const labelId = `transfer-list-all-item-${value}-label`;
 
           return (
-            <ListItem key={value} role="listitem" button onClick={handleToggle(value)}>
+            <ListItem
+              key={value}
+              role="listitem"
+              button
+              onClick={handleToggle(value)}
+            >
               <ListItemIcon>
                 <Checkbox
                   checked={checked.indexOf(value) !== -1}
                   tabIndex={-1}
                   disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
+                  inputProps={{ "aria-labelledby": labelId }}
                 />
               </ListItemIcon>
               <ListItemText id={labelId} primary={`List item ${value + 1}`} />
@@ -138,8 +148,14 @@ function union(a, b) {
   );
 
   return (
-    <Grid container spacing={2} justify="center" alignItems="center" className={classes.root}>
-      <Grid item>{customList('Choices', left)}</Grid>
+    <Grid
+      container
+      spacing={2}
+      justify="center"
+      alignItems="center"
+      className={classes.root}
+    >
+      <Grid item>{customList("Choices", left)}</Grid>
       <Grid item>
         <Grid container direction="column" alignItems="center">
           <Button
@@ -164,7 +180,7 @@ function union(a, b) {
           </Button>
         </Grid>
       </Grid>
-      <Grid item>{customList('Chosen', right)}</Grid>
+      <Grid item>{customList("Chosen", right)}</Grid>
     </Grid>
   );
 }
@@ -200,7 +216,7 @@ export default function NestingExample() {
 function Home() {
   return (
     <div>
-      <TransferList/>
+      <TransferList />
     </div>
   );
 }

@@ -1,29 +1,29 @@
 import React from "react";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import FolderIcon from "@material-ui/icons/Folder";
 import RestoreIcon from "@material-ui/icons/Restore";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Link from "@material-ui/core/Link";
+import Typography from "@mui/material/Typography";
+import { makeStyles } from "@mui/styles";
+import Link from "@mui/material/Link";
 import PropTypes from "prop-types";
-import Container from "@material-ui/core/Container";
+import Container from "@mui/material/Container";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
-    minHeight: "10vh"
+    minHeight: "10vh",
   },
   main: {
     marginTop: theme.spacing(0),
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   footer: {
     padding: theme.spacing(1),
-    marginTop: "auto"
+    marginTop: "auto",
     // backgroundColor:
     //   theme.palette.type === "dark"
     //     ? theme.palette.grey[800]
@@ -32,8 +32,8 @@ const useStyles = makeStyles(theme => ({
   footer1: {
     backgroundColor: theme.palette.background.paper,
     // marginTop: theme.spacing(8),
-    padding: theme.spacing(6, 0)
-  }
+    padding: theme.spacing(6, 0),
+  },
 }));
 
 function BottomNav() {
@@ -83,7 +83,7 @@ function Copyright() {
 
 BottomNav.propTypes = {
   description: PropTypes.string,
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 export default function Footer(props) {

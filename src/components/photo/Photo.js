@@ -1,7 +1,8 @@
 /* jshint esversion: 6 */
 import React from "react";
-import { Menu, Icon, Result, Button } from "antd";
-import Container from "@material-ui/core/Container";
+import { Menu, Result, Button } from "antd";
+import { SmileOutlined } from "@ant-design/icons";
+import Container from "@mui/material/Container";
 import { Switch, Route, Link } from "react-router-dom";
 import Mylog from "../applog/Applog";
 import Home from "./home";
@@ -68,52 +69,58 @@ function Warning() {
 }
 class Photo extends React.Component {
   state = {
-    current: "mail"
+    current: "mail",
   };
 
-  handleClick = e => {
+  handleClick = (e) => {
     // console.log("click ", e);
     this.setState({
-      current: e.key
+      current: e.key,
     });
   };
 
   render() {
     return (
       <Container maxWidth="xl">
-        <Menu style={{marginBottom:10}}
+        <Menu
+          style={{ marginBottom: 10 }}
           onClick={this.handleClick}
           selectedKeys={[this.state.current]}
           mode="horizontal"
         >
           <Menu.Item key="home">
             <Link to="/Photo">
-              <Icon type="home" />
+              {/* <Icon type="home" /> */}
+              <SmileOutlined />
               Home
             </Link>
           </Menu.Item>
           <Menu.Item key="log">
             <Link to="/Photo/applog">
-              <Icon type="message" />
+              {/* <Icon type="message" /> */}
+              <SmileOutlined />
               Applog
             </Link>
           </Menu.Item>
           <Menu.Item key="show">
             <Link to="/Photo/show">
-              <Icon type="dashboard" />
+              {/* <Icon type="dashboard" /> */}
+              <SmileOutlined />
               Show
             </Link>
           </Menu.Item>
           <Menu.Item key="chart">
             <Link to="/Photo/chart">
-              <Icon type="database" />
+              {/* <Icon type="database" /> */}
+              <SmileOutlined />
               Chart
             </Link>
           </Menu.Item>
           <SubMenu
             title={
               <span className="submenu-title-wrapper">
-                <Icon type="setting" />
+                {/* <Icon type="setting" /> */}
+                <SmileOutlined />
                 Message
               </span>
             }

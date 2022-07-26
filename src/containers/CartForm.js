@@ -1,35 +1,38 @@
 import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Grid from "@material-ui/core/Grid";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
-import EditIcon from "@material-ui/icons/Edit";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Snackbar from "@material-ui/core/Snackbar";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import NoteOutlinedIcon from "@material-ui/icons/NoteOutlined";
-const useStyles = makeStyles(theme => ({
+import Button from "@mui/material/Button";
+
+import TextField from "@mui/material/TextField";
+import { makeStyles } from "@mui/styles";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import EditIcon from "@mui/icons-material/Edit";
+
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+
+import DialogTitle from "@mui/material/DialogTitle";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import NoteOutlinedIcon from "@mui/icons-material/NoteOutlined";
+const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
       margin: theme.spacing(1),
     },
-    backgroundColor: theme.palette.primary.light
+    backgroundColor: theme.palette.primary.light,
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: "center"
+    textAlign: "center",
     // color: theme.palette.text.secondary
   },
   formControl: {
@@ -40,19 +43,19 @@ const useStyles = makeStyles(theme => ({
     width: 193.5,
   },
   selectEmpty: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
   extendedIcon: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   container: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
 }));
 
 function DialogSelect(props) {
-  const {dialog,handleDialogClose} = props
+  const { dialog, handleDialogClose } = props;
   const classes = useStyles();
   const [pdt, setPdt] = useState("");
   const { carts, delCart } = props;
@@ -75,7 +78,7 @@ function DialogSelect(props) {
                 id="demo-simple-select-outlined"
                 value={pdt}
                 // displayEmpty
-                onChange={e => setPdt(String(e.target.value))}
+                onChange={(e) => setPdt(String(e.target.value))}
               >
                 {carts.length === 0 ? (
                   <MenuItem value="">
@@ -83,7 +86,7 @@ function DialogSelect(props) {
                   </MenuItem>
                 ) : (
                   carts &&
-                  carts.map(cart => (
+                  carts.map((cart) => (
                     <MenuItem key={cart.product} value={cart.product}>
                       {cart.product}
                     </MenuItem>
@@ -118,14 +121,8 @@ function DialogSelect(props) {
 
 export default function CartForm(props) {
   const classes = useStyles();
-  const {
-    carts,
-    addCart,
-    updCart,
-    delCart,
-    delCartByID,
-    seleteFromCart
-  } = props;
+  const { carts, addCart, updCart, delCart, delCartByID, seleteFromCart } =
+    props;
   const queueRef = React.useRef([]);
   const [id, setId] = useState(1);
   const [proudct, setProudct] = useState("");
@@ -155,10 +152,10 @@ export default function CartForm(props) {
     processQueue();
   };
 
-  const handleClick = message => () => {
+  const handleClick = (message) => () => {
     queueRef.current.push({
       message,
-      key: new Date().getTime()
+      key: new Date().getTime(),
     });
 
     if (open) {
@@ -190,7 +187,7 @@ export default function CartForm(props) {
         key={messageInfo ? messageInfo.key : undefined}
         anchorOrigin={{
           vertical: "top",
-          horizontal: "right"
+          horizontal: "right",
         }}
         open={open}
         autoHideDuration={6000}
@@ -225,7 +222,7 @@ export default function CartForm(props) {
       <form
         noValidate
         autoComplete="off"
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           // if (!input.value.trim()) {
           //   return;
@@ -247,11 +244,11 @@ export default function CartForm(props) {
           fullWidth
           margin="normal"
           InputLabelProps={{
-            shrink: true
+            shrink: true,
           }}
           variant="outlined"
           value={proudct}
-          onChange={e => setProudct(String(e.target.value))}
+          onChange={(e) => setProudct(String(e.target.value))}
         />
         <TextField
           id="quantity"
@@ -263,11 +260,11 @@ export default function CartForm(props) {
           // fullWidth
           // margin="normal"
           InputLabelProps={{
-            shrink: true
+            shrink: true,
           }}
           variant="outlined"
           value={quantity}
-          onChange={e => setQuantity(Number(e.target.value))}
+          onChange={(e) => setQuantity(Number(e.target.value))}
         />
         <TextField
           id="unitCost"
@@ -279,11 +276,11 @@ export default function CartForm(props) {
           // fullWidth
           // margin="normal"
           InputLabelProps={{
-            shrink: true
+            shrink: true,
           }}
           variant="outlined"
           value={unitCost}
-          onChange={e => setUnitCost(Number(e.target.value))}
+          onChange={(e) => setUnitCost(Number(e.target.value))}
         />
         <FormControl variant="outlined" className={classes.formControl}>
           <InputLabel ref={inputLabel} id="pid">
@@ -294,7 +291,7 @@ export default function CartForm(props) {
             id="demo-simple-select-outlined"
             value={id}
             // displayEmpty
-            onChange={e => setId(Number(e.target.value))}
+            onChange={(e) => setId(Number(e.target.value))}
             labelWidth={labelWidth}
           >
             {carts.length === 0 ? (
@@ -303,7 +300,7 @@ export default function CartForm(props) {
               </MenuItem>
             ) : (
               carts &&
-              carts.map(cart => (
+              carts.map((cart) => (
                 <MenuItem key={cart.id} value={cart.id}>
                   {cart.id}
                 </MenuItem>
@@ -320,7 +317,7 @@ export default function CartForm(props) {
             id="demo-simple-select-outlined"
             value={proudct}
             // displayEmpty
-            onChange={e => setProudct(String(e.target.value))}
+            onChange={(e) => setProudct(String(e.target.value))}
             labelWidth={labelWidth}
           >
             {carts.length === 0 ? (
@@ -329,7 +326,7 @@ export default function CartForm(props) {
               </MenuItem>
             ) : (
               carts &&
-              carts.map(cart => (
+              carts.map((cart) => (
                 <MenuItem key={cart.product} value={cart.product}>
                   {cart.product}
                 </MenuItem>
@@ -384,7 +381,12 @@ export default function CartForm(props) {
         </BottomNavigation>
       </form>
       {Alert}
-      <DialogSelect carts={carts} delCart={delCart} dialog={dialog} handleDialogClose={handleDialogClose}/>
+      <DialogSelect
+        carts={carts}
+        delCart={delCart}
+        dialog={dialog}
+        handleDialogClose={handleDialogClose}
+      />
     </Grid>
   );
 }

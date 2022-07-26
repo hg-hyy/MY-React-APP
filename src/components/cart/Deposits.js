@@ -1,21 +1,21 @@
 import React from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@mui/styles";
 import clsx from "clsx";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 // eslint-disable-next-line
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
 
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import PropTypes from "prop-types";
-import Slider from "@material-ui/core/Slider";
-import Tooltip from "@material-ui/core/Tooltip";
+import Slider from "@mui/material/Slider";
+import Tooltip from "@mui/material/Tooltip";
 
 function ValueLabelComponent(props) {
   const { children, open, value } = props;
@@ -30,13 +30,13 @@ function ValueLabelComponent(props) {
 ValueLabelComponent.propTypes = {
   children: PropTypes.element.isRequired,
   open: PropTypes.bool.isRequired,
-  value: PropTypes.number.isRequired
+  value: PropTypes.number.isRequired,
 };
 
 const PrettoSlider = withStyles({
   root: {
     color: "#52af77",
-    height: 8
+    height: 8,
   },
   thumb: {
     height: 24,
@@ -46,21 +46,21 @@ const PrettoSlider = withStyles({
     marginTop: -8,
     marginLeft: -12,
     "&:focus,&:hover,&$active": {
-      boxShadow: "inherit"
-    }
+      boxShadow: "inherit",
+    },
   },
   active: {},
   valueLabel: {
-    left: "calc(-50% + 4px)"
+    left: "calc(-50% + 4px)",
   },
   track: {
     height: 8,
-    borderRadius: 4
+    borderRadius: 4,
   },
   rail: {
     height: 8,
-    borderRadius: 4
-  }
+    borderRadius: 4,
+  },
 })(Slider);
 
 function CustomizedSlider() {
@@ -79,34 +79,34 @@ function CustomizedSlider() {
   );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: 300 + theme.spacing(2),
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
   },
   margin: {
-    height: theme.spacing(3)
+    height: theme.spacing(3),
   },
   depositContext: {
-    flex: 1
+    flex: 1,
   },
   paper: {
     // padding: theme.spacing(1),
     display: "flex",
     overflow: "auto",
     flexDirection: "column",
-    background:"linear-gradient(to right,#38ADAE, #CD295A)"
+    background: "linear-gradient(to right,#38ADAE, #CD295A)",
   },
   fixedHeight: {
-    height: 380
-  }
+    height: 380,
+  },
 }));
 
 function ScrollDialog() {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
 
-  const handleClickOpen = scrollType => () => {
+  const handleClickOpen = (scrollType) => () => {
     setOpen(true);
     setScroll(scrollType);
   };
@@ -170,9 +170,8 @@ export default function Deposits() {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
-    
     <Container maxWidth="lg">
-      <Paper className={fixedHeightPaper} >
+      <Paper className={fixedHeightPaper}>
         <React.Fragment>
           <Typography component="h2" variant="h6" color="primary" gutterBottom>
             Recent Deposits
@@ -188,7 +187,7 @@ export default function Deposits() {
               color="primary"
               href="http://www.baidu.com"
               to="/"
-              onClick={event => {
+              onClick={(event) => {
                 event.preventDefault();
               }}
             >

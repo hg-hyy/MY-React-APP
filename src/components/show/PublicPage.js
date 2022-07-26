@@ -1,44 +1,44 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import { Grid } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
+import Paper from "@mui/material/Paper";
+import { makeStyles } from "@mui/styles";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { Grid } from "@mui/material";
+import TextField from "@mui/material/TextField";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    height: 700
+    height: 700,
   },
   button: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   instructions: {
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
   root1: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200
-  }
+    width: 200,
+  },
 }));
 
-const useStyles1 = makeStyles(theme => ({
+const useStyles1 = makeStyles((theme) => ({
   root: {
     "& > *": {
       margin: theme.spacing(1),
-      width: 200
-    }
-  }
+      width: 200,
+    },
+  },
 }));
 
 function LayoutTextFields() {
@@ -54,7 +54,7 @@ function LayoutTextFields() {
         fullWidth
         margin="normal"
         InputLabelProps={{
-          shrink: true
+          shrink: true,
         }}
         variant="outlined"
         color="secondary"
@@ -68,7 +68,7 @@ function LayoutTextFields() {
         fullWidth
         margin="normal"
         InputLabelProps={{
-          shrink: true
+          shrink: true,
         }}
         variant="outlined"
         color="secondary"
@@ -139,11 +139,11 @@ export default function PublicPage() {
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
 
-  const isStepOptional = step => {
+  const isStepOptional = (step) => {
     return step === 1;
   };
 
-  const isStepSkipped = step => {
+  const isStepSkipped = (step) => {
     return skipped.has(step);
   };
 
@@ -154,12 +154,12 @@ export default function PublicPage() {
       newSkipped.delete(activeStep);
     }
 
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
   };
 
   const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const handleSkip = () => {
@@ -169,8 +169,8 @@ export default function PublicPage() {
       throw new Error("You can't skip a step that isn't optional.");
     }
 
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
-    setSkipped(prevSkipped => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setSkipped((prevSkipped) => {
       const newSkipped = new Set(prevSkipped.values());
       newSkipped.add(activeStep);
       return newSkipped;

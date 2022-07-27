@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useMemo } from "react";
+import { Routes, Route, Link, Outlet } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
 import CssBaseline from "@mui/material/CssBaseline";
 import jwt_decode from "jwt-decode";
 import Sidebar from "./Sidebar";
 import Main from "./Main";
-import AppRoutes from "../layout/routes";
 import logo from "../../images/CL/CL1.jpg";
 import Routers from "./routes";
 import changeTheme from "../../actions/theme-actions";
 import { loginOut } from "../../actions/login-actions";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -22,6 +22,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import NavItems from "./NavItems";
+import { ColorModeContext } from "./theme-context";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,19 +51,24 @@ function App() {
     open ? setOpen(false) : setOpen(true);
   };
 
-  const cl = useSelector((state) => state.themeReducer.color);
-  const img = useSelector((state) => state.themeReducer.img);
-  checkToken();
-  const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${cl})`);
+  const [mode, setMode] = useState("light");
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+      },
+    }),
+    [setMode]
+  );
 
-  const theme = React.useMemo(
+  const theme = useMemo(
     () =>
       createTheme({
         palette: {
-          mode: prefersDarkMode ? "dark" : "light",
+          mode,
         },
       }),
-    [prefersDarkMode]
+    [mode]
   );
 
   const drawerWidth = 240;
@@ -123,44 +129,56 @@ function App() {
     }),
   }));
 
+  const DrawerHeader = styled("div")(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  }));
+
   return (
-    <ThemeProvider theme={theme}>
-      <Box sx={{ display: "flex", flexGrow: 1 }}>
-        <CssBaseline />
-        <AppBar position="fixed" open={open}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerToggle}
-              edge="start"
-              sx={{
-                marginRight: 5,
-                // ...(open && { display: "none" }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              MY-REACT-APP
-            </Typography>
-            <Box sx={{ flexGrow: 1 }} />
-            <NavItems changeTheme={changeTheme} />
-          </Toolbar>
-        </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <Sidebar
-            AppRoutes={Routers}
-            open={open}
-            logo={logo}
-            logoText="shenyun"
-          />
-        </Drawer>
-        <Box component="main" sx={{ flexGrow: 1 }}>
-          <Main />
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <Box sx={{ display: "flex", flexGrow: 1 }}>
+          <CssBaseline />
+          <AppBar position="fixed" open={open}>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerToggle}
+                edge="start"
+                sx={{
+                  marginRight: 5,
+                  // ...(open && { display: "none" }),
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap component="div">
+                MY-REACT-APP
+              </Typography>
+              <Box sx={{ flexGrow: 1 }} />
+              <NavItems changeTheme={changeTheme} />
+            </Toolbar>
+          </AppBar>
+          <Drawer variant="permanent" open={open}>
+            <Sidebar
+              AppRoutes={Routers}
+              open={open}
+              logo={logo}
+              logoText="shenyun"
+            />
+          </Drawer>
+          <Box component="main" sx={{ flexGrow: 1, mt: 1 }}>
+            <DrawerHeader />
+            <Main />
+          </Box>
         </Box>
-      </Box>
-    </ThemeProvider>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 

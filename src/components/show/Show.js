@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Switch, Route, Link, Redirect, useHistory } from "react-router-dom";
+import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import { loginIn, loginOut } from "../../actions/redux_actions";
 import Typography from "@mui/material/Typography";
 import BottomNavigation from "@mui/material/BottomNavigation";
@@ -73,7 +73,8 @@ function NavBar() {
   );
 }
 function AuthButton(props) {
-  let history = useHistory();
+  const navigate = useNavigate();
+
   const { isAuthenticated, signout, data } = props;
   return isAuthenticated ? (
     <Typography variant="h3" component="h2" gutterBottom>
@@ -83,7 +84,7 @@ function AuthButton(props) {
         color="primary"
         onClick={() => {
           signout();
-          history.push("/show/signin");
+          navigate.push("/show/signin");
         }}
       >
         Sign out
@@ -100,11 +101,11 @@ function PrivateRoute({ children, isAuthenticated, ...rest }) {
   return (
     <Route
       {...rest}
-      render={({ location }) =>
+      element={({ location }) =>
         isAuthenticated ? (
           children
         ) : (
-          <Redirect
+          <navigate
             to={{
               pathname: "/show/signin",
               state: { from: location },
@@ -120,31 +121,20 @@ function Show(props) {
   return (
     <Container maxWidth="xl">
       <AuthButton {...props} />
-      <Switch>
-        <Route path="/show/nesting">
-          <NestingPage />
-        </Route>
-        <Route path="/show/lovePage">
-          <LovePage />
-        </Route>
-        <Route path="/show/signin">
-          <LoginPage {...props} />
-        </Route>
-        <PrivateRoute path="/show/protected" {...props}>
-          <ProtectedPage {...props} />
-        </PrivateRoute>
-        <Route exact path="/show">
-          <PublicPage />
-        </Route>
-        <Route exact path="/show/hidden">
-          <Hiddens />
-        </Route>
-        <Route exact path="/show/Iframe">
-          <Iframe />
-        </Route>
-        <Route component={NotFound} />
-      </Switch>
       <NavBar />
+      <Routes>
+        <Route path="nesting" element={<NestingPage />} />
+        <Route path="lovePage" element={<LovePage />} />
+        <Route path="signin" element={<LoginPage {...props} />} />
+        {/* <PrivateRoute path="/show/protected" {...props}>
+          <ProtectedPage {...props} />
+        </PrivateRoute> */}
+        <Route index element={<PublicPage />} />
+        <Route exact path="hidden" element={<Hiddens />} />
+        <Route exact path="Iframe" element={<Iframe />} />
+        <Route component={NotFound} />
+      </Routes>
+      <Outlet />
     </Container>
   );
 }

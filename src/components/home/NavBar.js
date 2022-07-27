@@ -28,24 +28,26 @@ function IconBreadcrumbs() {
   const classes = useStyles();
 
   return (
-    <Breadcrumbs aria-label="breadcrumb">
-      <Link color="inherit" to="/home" className={classes.link}>
-        <HomeIcon className={classes.icon} />
-        Home
-      </Link>
-      <Link color="inherit" to="/home/price" className={classes.link}>
-        <WhatshotIcon className={classes.icon} />
-        Price
-      </Link>
-      <Link color="inherit" to="/home/album" className={classes.link}>
-        <WhatshotIcon className={classes.icon} />
-        Album
-      </Link>
-      <Link color="inherit" to="/home/checkout" className={classes.link}>
-        <WhatshotIcon className={classes.icon} />
-        Checkout
-      </Link>
-    </Breadcrumbs>
+    <div>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Link color="inherit" to="carousel" className={classes.link}>
+          <HomeIcon className={classes.icon} />
+          Home
+        </Link>
+        <Link color="inherit" to="price" className={classes.link}>
+          <WhatshotIcon className={classes.icon} />
+          Price
+        </Link>
+        <Link color="inherit" to="album" className={classes.link}>
+          <WhatshotIcon className={classes.icon} />
+          Album
+        </Link>
+        <Link color="inherit" to="checkout" className={classes.link}>
+          <WhatshotIcon className={classes.icon} />
+          Checkout
+        </Link>
+      </Breadcrumbs>
+    </div>
   );
 }
 

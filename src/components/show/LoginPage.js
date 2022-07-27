@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LoginPage(props) {
   const classes = useStyles();
   const { isAuthenticated, signin } = props;
-  let history = useHistory();
+  let navigate = useNavigate();
   let location = useLocation();
   let { from } = location.state || { from: { pathname: "/show" } };
   // eslint-disable-next-line
@@ -105,7 +105,7 @@ export default function LoginPage(props) {
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.replace(from);
+      navigate.replace(from);
     }
   });
 

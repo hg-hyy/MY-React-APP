@@ -23,7 +23,7 @@ function Sidebar(props) {
       {AppRoutes &&
         AppRoutes.map((item, key) => {
           return (
-            <NavLink to={item.path} activeClassName="active" key={key}>
+            <NavLink to={item.path} activeclassname="active" key={key}>
               <Tooltip
                 title={item.name}
                 placement="right"
@@ -48,7 +48,7 @@ function Sidebar(props) {
                         mr: open ? 3 : "auto",
                         justifyContent: "center",
                       }}
-                      children={item.icon}
+                      children={<item.icon />}
                     ></ListItemIcon>
 
                     <ListItemText

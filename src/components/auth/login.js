@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -67,7 +67,7 @@ function Login(props) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  let history = useHistory();
+  const navigate = useNavigate();
   let location = useLocation();
 
   let { from } = location.state || { from: { pathname: "/" } };
@@ -90,9 +90,9 @@ function Login(props) {
 
   useEffect(() => {
     if (localStorage.jwToken) {
-      history.replace(from);
+      navigate.replace(from);
     }
-  }, [from, history, isAuthenticated]);
+  }, [from, navigate, isAuthenticated]);
 
   return (
     <Container maxWidth="xl">

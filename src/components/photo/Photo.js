@@ -3,7 +3,7 @@ import React from "react";
 import { Menu, Result, Button } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
 import Container from "@mui/material/Container";
-import { Switch, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Outlet } from "react-router-dom";
 import Mylog from "../applog/Applog";
 import Home from "./home";
 import Show from "./show";
@@ -89,34 +89,35 @@ class Photo extends React.Component {
           mode="horizontal"
         >
           <Menu.Item key="home">
-            <Link to="/Photo">
+            <Link to="home">
               {/* <Icon type="home" /> */}
               <SmileOutlined />
               Home
             </Link>
           </Menu.Item>
           <Menu.Item key="log">
-            <Link to="/Photo/applog">
+            <Link to="applog">
               {/* <Icon type="message" /> */}
               <SmileOutlined />
               Applog
             </Link>
           </Menu.Item>
           <Menu.Item key="show">
-            <Link to="/Photo/show">
+            <Link to="show">
               {/* <Icon type="dashboard" /> */}
               <SmileOutlined />
               Show
             </Link>
           </Menu.Item>
           <Menu.Item key="chart">
-            <Link to="/Photo/chart">
+            <Link to="chart">
               {/* <Icon type="database" /> */}
               <SmileOutlined />
               Chart
             </Link>
           </Menu.Item>
           <SubMenu
+            key="submenu"
             title={
               <span className="submenu-title-wrapper">
                 {/* <Icon type="setting" /> */}
@@ -126,51 +127,34 @@ class Photo extends React.Component {
             }
           >
             <Menu.Item key="setting:4">
-              <Link to="/Photo/error403">403</Link>
+              <Link to="error403">403</Link>
             </Menu.Item>
             <Menu.Item key="setting:5">
-              <Link to="/Photo/error404">404</Link>
+              <Link to="error404">404</Link>
             </Menu.Item>
             <Menu.Item key="setting:6">
-              <Link to="/Photo/error500">500</Link>
+              <Link to="error500">500</Link>
             </Menu.Item>
             <Menu.Item key="setting:7">
-              <Link to="/Photo/info">Info</Link>
+              <Link to="info">Info</Link>
             </Menu.Item>
             <Menu.Item key="setting:8">
-              <Link to="/Photo/warning">Warning</Link>
+              <Link to="warning">Warning</Link>
             </Menu.Item>
           </SubMenu>
         </Menu>
-        <Switch>
-          <Route path="/Photo/error403">
-            <Error403 />
-          </Route>
-          <Route path="/Photo/error404">
-            <Error404 />
-          </Route>
-          <Route path="/Photo/error500">
-            <Error500 />
-          </Route>
-          <Route path="/Photo/info">
-            <Info />
-          </Route>
-          <Route path="/Photo/warning">
-            <Warning />
-          </Route>
-          <Route path="/Photo/applog">
-            <Mylog />
-          </Route>
-          <Route path="/Photo/show">
-            <Show />
-          </Route>
-          <Route path="/Photo/chart">
-            <Mychart />
-          </Route>
-          <Route path="/Photo">
-            <Home />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="home" element={<Home />} />
+          <Route path="applog" element={<Mylog />} />
+          <Route path="show" element={<Show />} />
+          <Route path="chart" element={<Mychart />} />
+          <Route path="error403" element={<Error403 />} />
+          <Route path="error404" element={<Error404 />} />
+          <Route path="error500" element={<Error500 />} />
+          <Route path="info" element={<Info />} />
+        </Routes>
+        <Outlet />
       </Container>
     );
   }

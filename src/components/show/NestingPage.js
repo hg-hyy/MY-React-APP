@@ -1,11 +1,11 @@
 import React from "react";
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
   Link,
   useParams,
-  useRouteMatch,
+  matchPath,
 } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
@@ -200,14 +200,14 @@ export default function NestingExample() {
 
         <hr />
 
-        <Switch>
+        <Routes>
           <Route exact path="/home">
             <Home />
           </Route>
           <Route path="/topics">
             <Topics />
           </Route>
-        </Switch>
+        </Routes>
       </div>
     </Router>
   );
@@ -225,7 +225,7 @@ function Topics() {
   // The `path` lets us build <Route> paths that are
   // relative to the parent route, while the `url` lets
   // us build relative links.
-  let { path, url } = useRouteMatch();
+  let { path, url } = matchPath();
   console.log(path, url);
   return (
     <div>
@@ -242,14 +242,14 @@ function Topics() {
         </li>
       </ul>
 
-      <Switch>
+      <Routes>
         <Route exact path={path}>
           <h3>Please select a topic.</h3>
         </Route>
         <Route exact path={`${path}/:id`}>
           <Topic />
         </Route>
-      </Switch>
+      </Routes>
     </div>
   );
 }

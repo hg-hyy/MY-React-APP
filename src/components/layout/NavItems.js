@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles, useTheme } from "@mui/styles";
-import clsx from "clsx";
+import React, { useEffect, useState, useContext } from "react";
+import { useTheme } from "@mui/styles";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 // eslint-disable-next-line
@@ -15,14 +14,10 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import Remove from "@mui/icons-material/Remove";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import img from "../../images/CL/CL1.jpg";
-import Divider from "@mui/material/Divider";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import styles from "../../assets/styles/NavbarStyle";
-import { Grid } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import DoneIcon from "@mui/icons-material/Done";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -50,8 +45,8 @@ import Tooltip from "@mui/material/Tooltip";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useSelector } from "react-redux";
+import { ColorModeContext } from "./theme-context";
 
-const useStyles = makeStyles(styles);
 const options = ["None", "purple", "blue", "green", "orange", "red"];
 const names = ["harlen", "moham", "sarah", "visual", "wesley", "zuhri"];
 const r = require.context("../../images/theme", false, /^\.\/.*\.jpg$/);
@@ -71,11 +66,11 @@ const Search = styled("div")(({ theme }) => ({
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginRight: theme.spacing(2),
+  marginRight: theme.spacing(1),
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
+    marginLeft: theme.spacing(1),
     width: "auto",
   },
 }));
@@ -104,7 +99,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 function User(props) {
-  const classes = useStyles();
   const { loginOut } = props;
   // const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -114,7 +108,7 @@ function User(props) {
   };
 
   const handleClose = () => {
-    loginOut(false);
+    // loginOut(false);
     setAnchorEl(null);
   };
   function handleListKeyDown(event) {
@@ -127,7 +121,7 @@ function User(props) {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <div className={classes.navitems}>
+    <Box sx={{ mx: 1 }}>
       <Button
         color="inherit"
         aria-controls="simple-menu"
@@ -159,13 +153,13 @@ function User(props) {
           <MenuItem onClick={handleClose}>Logout</MenuItem>
         </MenuList>
       </Popover>
-    </div>
+    </Box>
   );
 }
 
 function Notify(props) {
   // const [open, setOpen] = useState(false);
-  const classes = useStyles();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -192,7 +186,7 @@ function Notify(props) {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <div className={classes.navitems}>
+    <Box sx={{ mx: 1 }}>
       <IconButton color="inherit" onClick={handleClick}>
         <Badge badgeContent={99} color="secondary">
           <NotificationsIcon fontSize="large" />
@@ -212,7 +206,7 @@ function Notify(props) {
           horizontal: "center",
         }}
       >
-        <List className={classes.notify}>
+        <List>
           {[0, 1].map((value) => {
             const labelId = `checkbox-list-label-${value}`;
 
@@ -265,7 +259,7 @@ function Notify(props) {
           </AccordionDetails>
         </Accordion>
       </Popover>
-    </div>
+    </Box>
   );
 }
 
@@ -274,9 +268,9 @@ function Account(props) {
     (state) => state.loginReducer.isAuthenticated
   );
   const { user } = useSelector((state) => state.reduxReducer.data);
-  const classes = useStyles();
+
   return (
-    <List className={classes.account}>
+    <List>
       <ListItem style={{ padding: 0, margin: 0 }}>
         {user.email ? (
           <ListItemAvatar>
@@ -285,14 +279,12 @@ function Account(props) {
         ) : null}
 
         <ListItemText
-          className={classes.account}
           primary={user.email ? user.email : "未登录"}
           secondary={
             <React.Fragment>
               <Typography
                 component="span"
                 variant="overline"
-                className={classes.inline}
                 color="textPrimary"
               >
                 {user.email ? "Administrator" : ""}
@@ -306,7 +298,6 @@ function Account(props) {
 }
 
 function Chips(props) {
-  const classes = useStyles();
   const [modelopen, setModelopen] = useState(false);
   const [value, setValue] = useState("blue");
   const { img, changeTheme } = props;
@@ -337,7 +328,7 @@ function Chips(props) {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", m: 1 }}>
       <Chip
         variant="outlined"
         deleteIcon={<DoneIcon />}
@@ -352,12 +343,8 @@ function Chips(props) {
         onClose={handleClose}
         value={value}
         anchorEl={anchorEl}
-        classes={classes}
       />
       <Model
-        classes={{
-          paper: classes.paper,
-        }}
         id="ringtone-menu"
         keepMounted
         open={modelopen}
@@ -368,7 +355,6 @@ function Chips(props) {
   );
 }
 function Model(props) {
-  const classes = useStyles();
   const { onClose, value: valueProp, open, ...other } = props;
   const [value, setValue] = useState(valueProp);
   const radioGroupRef = React.useRef(null);
@@ -408,7 +394,7 @@ function Model(props) {
     >
       <DialogTitle id="confirmation-dialog-title">Phone Ringtone</DialogTitle>
       <DialogContent dividers>
-        <FormControl component="fieldset" className={classes.formControl}>
+        <FormControl component="fieldset">
           <FormLabel component="legend">Gender</FormLabel>
           <RadioGroup
             ref={radioGroupRef}
@@ -427,7 +413,7 @@ function Model(props) {
             ))}
           </RadioGroup>
         </FormControl>
-        <FormControl component="fieldset" className={classes.formControl}>
+        <FormControl component="fieldset">
           <FormLabel component="legend">Theme</FormLabel>
           <RadioGroup
             ref={radioGroupRef}
@@ -459,7 +445,7 @@ function Model(props) {
   );
 }
 function Pop(props) {
-  const { id, onClose, value: valueProp, open, anchorEl, classes } = props;
+  const { id, onClose, value: valueProp, open, anchorEl } = props;
   const [value, setValue] = useState(valueProp);
 
   useEffect(() => {
@@ -494,7 +480,7 @@ function Pop(props) {
         horizontal: "center",
       }}
     >
-      <FormControl component="fieldset" className={classes.formControl}>
+      <FormControl component="fieldset">
         <FormLabel component="legend">Color</FormLabel>
         <RadioGroup
           aria-label="ringtone"
@@ -512,7 +498,7 @@ function Pop(props) {
           ))}
         </RadioGroup>
       </FormControl>
-      <FormControl component="fieldset" className={classes.formControl}>
+      <FormControl component="fieldset">
         <FormLabel component="legend">Theme</FormLabel>
         <RadioGroup
           aria-label="ringtone"
@@ -530,7 +516,7 @@ function Pop(props) {
           ))}
         </RadioGroup>
       </FormControl>
-      <FormControl component="fieldset" className={classes.formControl}>
+      <FormControl component="fieldset">
         <Button autoFocus onClick={handleCancel} color="primary">
           Cancel
         </Button>
@@ -543,13 +529,8 @@ function Pop(props) {
 }
 
 export default function NavItems(props) {
-  const { changeTheme } = props;
   const theme = useTheme();
-  const handleTogglePaletteType = () => {
-    const paletteType = theme.palette.mode === "light" ? "dark" : "light";
-
-    changeTheme(paletteType);
-  };
+  const colorMode = useContext(ColorModeContext);
   return (
     <Box
       sx={{
@@ -572,22 +553,20 @@ export default function NavItems(props) {
       <User {...props} />
       <Tooltip title="toggleTheme" enterDelay={300}>
         <IconButton
+          sx={{ mx: 1 }}
+          onClick={colorMode.toggleColorMode}
           color="inherit"
-          onClick={handleTogglePaletteType}
-          aria-label="toggleTheme"
-          data-ga-event-category="AppBar"
-          data-ga-event-action="dark"
         >
-          {theme.palette.mode === "light" ? (
-            <Brightness4Icon />
-          ) : (
+          {theme.palette.mode === "dark" ? (
             <Brightness7Icon />
+          ) : (
+            <Brightness4Icon />
           )}
         </IconButton>
       </Tooltip>
       {/* <Account {...props} /> */}
       <Chips img={img} {...props} />
-      <Divider orientation="vertical" flexItem />
+
       <Right />
     </Box>
   );

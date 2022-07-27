@@ -1,21 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
-import { makeStyles } from "@mui/styles";
-import clsx from "clsx";
-
 import Routers from "./routes";
+import { styled } from "@mui/material/styles";
+import Home from "../home/Home";
+import Price from "../home/Price";
+import Album from "../home/Album";
+import Carousel from "../home/Carousel";
+import Checkout from "../home/checkout/Checkout";
 import NotFound from "../notfound/404";
-import styles from "../../assets/styles/MainStyle";
-const useStyles = makeStyles(styles);
-
+import Show from "../show/Show";
+import Photo from "../photo/Photo";
+const MainHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+}));
 let ps;
 
 function Main(props) {
+  const navigate = useNavigate();
+
   const mainPanel = React.createRef();
-  const classes = useStyles();
   const { open } = props;
   // eslint-disable-next-line
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -45,42 +53,27 @@ function Main(props) {
     };
   }, [mainPanel]);
   return (
-    <main
-      className={clsx(classes.content, {
-        [classes.appBarShift]: open,
-        [classes.drawerClose]: !open,
-      })}
-    >
-      <div className={classes.toolbar} />
-      <div className={classes.mainPanel} ref={mainPanel}>
-        <Switch>
-          {Routers.map((item, index) => {
-            return (
-              <Route
-                key={index}
-                path={item.path}
-                exact={item.exact}
-                render={(props) =>
-                  !item.auth ? (
-                    <item.component {...props} />
-                  ) : localStorage.jwToken ? (
-                    <item.component {...props} />
-                  ) : (
-                    <Redirect
-                      to={{
-                        pathname: "/Login",
-                        state: { from: props.location },
-                      }}
-                    />
-                  )
-                }
-              />
-            );
-          })}
-          <Route component={NotFound} />
-        </Switch>
-      </div>
-    </main>
+    <MainHeader ref={mainPanel}>
+      <Routes>
+        {Routers.map((item, index) => {
+          return (
+            <Route key={index} path={item.path} element={<item.component />} />
+          );
+        })}
+        <Route path="/" element={<Home />}>
+          <Route index element={<Carousel />} />
+          <Route path="price" element={<Price />} />
+          <Route path="album" element={<Album />} />
+          <Route path="carousel" element={<Carousel />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+        <Route path="/show/*" element={<Show />} />
+        <Route path="/photo/*" element={<Photo />} />
+
+        <Route component={NotFound} />
+      </Routes>
+    </MainHeader>
   );
 }
 

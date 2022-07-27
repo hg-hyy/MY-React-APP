@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -61,7 +61,7 @@ function Regist(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  let history = useHistory();
+  let navigate = useNavigate();
   let location = useLocation();
 
   let { from } = location.state || { from: { pathname: "/home" } };
@@ -78,9 +78,9 @@ function Regist(props) {
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.replace(from);
+      navigate.replace(from);
     }
-  }, [isAuthenticated, from, history]);
+  }, [isAuthenticated, from, navigate]);
 
   return (
     <Container maxWidth="xl">

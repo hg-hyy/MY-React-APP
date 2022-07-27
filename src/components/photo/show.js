@@ -64,13 +64,13 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-
-import DatePicker from "@mui/lab/DatePicker";
-import TimePicker from "@mui/lab/TimePicker";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-
+import Stack from "@mui/material/Stack";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { notification } from "antd";
 
 const openNotification = () => {
@@ -250,94 +250,72 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function IconLabelButtons() {
-  const classes = useStyles();
-
   return (
-    <div>
-      <Button
-        variant="contained"
-        color="secondary"
-        className={classes.button}
-        startIcon={<DeleteIcon />}
-        onClick={openNotification}
-      >
-        Delete
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        onClick={log_version}
-        startIcon={<SendIcon />}
-      >
-        Send
-      </Button>
-      <Button
-        variant="contained"
-        color="default"
-        className={classes.button}
-        onClick={get1}
-        startIcon={<CloudUploadIcon />}
-      >
-        Upload
-      </Button>
-      <Button
-        variant="contained"
-        color="secondary"
-        className={classes.button}
-        startIcon={<KeyboardVoiceIcon />}
-        onClick={openNotification}
-      >
-        Talk
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        // size="small"
-        className={classes.button}
-        startIcon={<SaveIcon />}
-      >
-        Save
-      </Button>
-    </div>
+    <Box sx={{ my: 1 }}>
+      <Stack direction="row" spacing={2}>
+        <Button
+          variant="outlined"
+          startIcon={<DeleteIcon />}
+          onClick={openNotification}
+        >
+          Delete
+        </Button>
+        <Button
+          variant="contained"
+          endIcon={<KeyboardVoiceIcon />}
+          onClick={log_version}
+        >
+          log_version
+        </Button>
+        <Button
+          variant="contained"
+          endIcon={<SendIcon />}
+          onClick={openNotification}
+        >
+          openNotification
+        </Button>
+        <Button
+          variant="contained"
+          component="label"
+          endIcon={<CloudUploadIcon />}
+          onClick={get1}
+        >
+          Upload
+          <input hidden accept="image/*" multiple type="file" />
+        </Button>
+      </Stack>
+    </Box>
   );
 }
 
-function countryToFlag(isoCode) {
-  return typeof String.fromCodePoint !== "undefined"
-    ? isoCode
-        .toUpperCase()
-        .replace(/./g, (char) =>
-          String.fromCodePoint(char.charCodeAt(0) + 127397)
-        )
-    : isoCode;
-}
-
 function CountrySelect() {
-  const classes = useStyles();
-
   return (
     <Autocomplete
       id="country-select-demo"
-      style={{ width: 300 }}
+      sx={{ width: 300, my: 1 }}
       options={countries}
-      classes={{
-        option: classes.option,
-      }}
       autoHighlight
       getOptionLabel={(option) => option.label}
-      renderOption={(option) => (
-        <React.Fragment>
-          <span>{countryToFlag(option.code)}</span>
+      renderOption={(props, option) => (
+        <Box
+          component="li"
+          sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+          {...props}
+        >
+          <img
+            loading="lazy"
+            width="20"
+            src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+            srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+            alt=""
+          />
           {option.label} ({option.code}) +{option.phone}
-        </React.Fragment>
+        </Box>
       )}
       renderInput={(params) => (
         <TextField
           {...params}
           label="Choose a country"
-          variant="outlined"
-          fullWidth
           inputProps={{
             ...params.inputProps,
             autoComplete: "new-password", // disable autocomplete and autofill
@@ -1122,53 +1100,42 @@ TabPanel.propTypes = {
 };
 
 function MaterialUIPickers() {
-  // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState(
-    new Date("2014-08-18T21:11:54")
-  );
+  const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+  const handleChange = (newValue) => {
+    setValue(newValue);
   };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Grid container justify="space-around">
-        <DatePicker
-          disableToolbar
-          variant="inline"
-          format="MM/dd/yyyy"
-          margin="normal"
-          id="date-picker-inline"
-          label="Date picker inline"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            "aria-label": "change date",
-          }}
+      <Stack spacing={3}>
+        <DesktopDatePicker
+          label="Date desktop"
+          inputFormat="MM/dd/yyyy"
+          value={value}
+          onChange={handleChange}
+          renderInput={(params) => <TextField {...params} />}
         />
-        <DatePicker
-          margin="normal"
-          id="date-picker-dialog"
-          label="Date picker dialog"
-          format="MM/dd/yyyy"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            "aria-label": "change date",
-          }}
+        <MobileDatePicker
+          label="Date mobile"
+          inputFormat="MM/dd/yyyy"
+          value={value}
+          onChange={handleChange}
+          renderInput={(params) => <TextField {...params} />}
         />
         <TimePicker
-          margin="normal"
-          id="time-picker"
-          label="Time picker"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            "aria-label": "change time",
-          }}
+          label="Time"
+          value={value}
+          onChange={handleChange}
+          renderInput={(params) => <TextField {...params} />}
         />
-      </Grid>
+        <DateTimePicker
+          label="Date&Time picker"
+          value={value}
+          onChange={handleChange}
+          renderInput={(params) => <TextField {...params} />}
+        />
+      </Stack>
     </LocalizationProvider>
   );
 }
@@ -1205,8 +1172,13 @@ function FormDialog() {
     setFullWidth(event.target.checked);
   };
   return (
-    <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+    <Box sx={{ my: 1 }}>
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={handleClickOpen}
+        endIcon={<SaveIcon />}
+      >
         Open form dialog
       </Button>
       <Dialog
@@ -1275,13 +1247,20 @@ function FormDialog() {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Box>
   );
 }
 
 function Show() {
   return (
-    <div>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyItems: "flex-start",
+        alignItems: "start",
+      }}
+    >
       <FormDialog />
       <IconLabelButtons />
       <CountrySelect />
@@ -1290,7 +1269,7 @@ function Show() {
       <NestedList />
       <EnhancedTable />
       <RecipeReviewCard />
-    </div>
+    </Box>
   );
 }
 

@@ -16,7 +16,7 @@ import { login } from "../../actions/login-actions";
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(3),
-    height: 800,
+    height: 850,
   },
   image: {
     backgroundImage: `url(${require("../../images/yang.jpg")})`,
@@ -95,7 +95,7 @@ function Login(props) {
   }, [from, navigate, isAuthenticated]);
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xxl">
       <Grid container component="main" className={classes.root}>
         <Grid item xs={false} sm={4} md={7} lg={8} className={classes.image} />
         <Grid

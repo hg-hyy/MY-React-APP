@@ -1,6 +1,5 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
 import AddTodo from "../../containers/AddTodo";
 import VisibleTodoList from "../../containers/VisibleTodoList";
 import UndoRedo from "../../containers/UndoRedo";
@@ -14,6 +13,9 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import SearchIcon from "@mui/icons-material/Search";
+import { Box } from "@mui/material";
+import Container from "@mui/material/Container";
+
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
     position: "relative",
@@ -137,7 +139,7 @@ MainFeaturedPost.propTypes = {
 
 function ToDo() {
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xxl" sx={{ pt: 3 }}>
       <MainFeaturedPost />
       <Grid container spacing={3}>
         <Grid item xs={12}>

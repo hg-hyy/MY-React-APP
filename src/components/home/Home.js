@@ -7,7 +7,7 @@ import Footer from "./Footer";
 
 export default function Home() {
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xxl" sx={{ pt: 3 }}>
       <NavBar />
       <Outlet />
       <Footer />

@@ -16,13 +16,7 @@ const root = createRoot(container);
 
 root.render(
   <Provider store={store}>
-    <Router
-      getUserConfirmation={(message, callback) => {
-        // this is the default behavior
-        const allowTransition = window.confirm(message);
-        callback(allowTransition);
-      }}
-    >
+    <Router>
       <App />
     </Router>
   </Provider>

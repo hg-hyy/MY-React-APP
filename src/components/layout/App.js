@@ -1,6 +1,4 @@
 import React, { useState, useMemo } from "react";
-import { Routes, Route, Link, Outlet } from "react-router-dom";
-
 import { useDispatch } from "react-redux";
 import CssBaseline from "@mui/material/CssBaseline";
 import jwt_decode from "jwt-decode";
@@ -172,7 +170,7 @@ function App() {
               logoText="shenyun"
             />
           </Drawer>
-          <Box component="main" sx={{ flexGrow: 1, mt: 1 }}>
+          <Box sx={{ flexGrow: 1 }}>
             <DrawerHeader />
             <Main />
           </Box>

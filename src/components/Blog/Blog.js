@@ -88,7 +88,7 @@ export default function Blog(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="xl">
+      <Container maxWidth="xxl" sx={{ pt: 3 }}>
         <Header title="Blog" sections={sections} />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />

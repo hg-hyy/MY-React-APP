@@ -10,8 +10,9 @@ import HorizontalTabs from "../components/cart/HorizontalTabs";
 import CartTable from "./CartTable";
 import CartForm from "./CartForm";
 import Donut from "../components/cart/Donut";
-import { Container } from "@mui/material";
 import Line from "../components/chart/Line";
+
+import Container from "@mui/material/Container";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,7 +39,7 @@ export default function AddToCart(props) {
   const { carts, addCart, updCart, delCart, delCartByID, seleteFromCart } =
     props;
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xxl" sx={{ pt: 3 }}>
       <Grid container spacing={2}>
         <Grid item xs={12} md={8} lg={5}>
           <Paper className={fixedHeightPaper}>

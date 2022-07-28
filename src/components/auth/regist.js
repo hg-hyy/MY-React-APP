@@ -18,7 +18,7 @@ import { signUp } from "../../actions/regist-actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: 800,
+    height: 850,
     marginTop: theme.spacing(3),
   },
   image: {
@@ -83,7 +83,7 @@ function Regist(props) {
   }, [isAuthenticated, from, navigate]);
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xxl">
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />

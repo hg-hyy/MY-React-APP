@@ -16,7 +16,7 @@ import { login } from "../../actions/login-actions";
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(3),
-    height: 850,
+    height: 820,
   },
   image: {
     backgroundImage: `url(${require("../../images/yang.jpg")})`,

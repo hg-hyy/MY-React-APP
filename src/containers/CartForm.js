@@ -129,7 +129,7 @@ export default function CartForm(props) {
   const [quantity, setQuantity] = useState(10);
   const [unitCost, setUnitCost] = useState(100);
   const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
+  const [labelwidth, setLabelWidth] = React.useState(0);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
   const [messageInfo, setMessageInfo] = useState(undefined);
@@ -292,7 +292,7 @@ export default function CartForm(props) {
             value={id}
             // displayEmpty
             onChange={(e) => setId(Number(e.target.value))}
-            labelWidth={labelWidth}
+            labelwidth={labelwidth}
           >
             {carts.length === 0 ? (
               <MenuItem value="">
@@ -318,7 +318,7 @@ export default function CartForm(props) {
             value={proudct}
             // displayEmpty
             onChange={(e) => setProudct(String(e.target.value))}
-            labelWidth={labelWidth}
+            labelwidth={labelwidth}
           >
             {carts.length === 0 ? (
               <MenuItem value="">

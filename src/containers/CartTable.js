@@ -149,8 +149,7 @@ export default function CartTable(props) {
         count={carts.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
+        onPageChange={handleChangePage}
         ActionsComponent={TablePaginationActions}
       />
     </TableContainer>

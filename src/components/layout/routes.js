@@ -101,7 +101,7 @@ const AppRoutes = [
     layout: "/admin",
   },
   {
-    path: "/home",
+    path: "/",
     name: "home",
     icon: HomeIcon,
     component: Home,

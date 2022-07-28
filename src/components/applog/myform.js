@@ -103,10 +103,7 @@ class Myform extends React.Component {
 
           <FormGroup>
             <Label for="log_day">日期：</Label>
-            <DatePicker
-              value={moment(this.state.log_day)}
-              onChange={this.onChange}
-            />
+            <DatePicker onChange={this.onChange} />
             <Input
               id="log_day"
               type="date"

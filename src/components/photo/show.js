@@ -21,7 +21,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 import SaveIcon from "@mui/icons-material/Save";
-import Autocomplete from "@mui/lab/Autocomplete";
+import Autocomplete from "@mui/material/Autocomplete";
 import FormHelperText from "@mui/material/FormHelperText";
 import ListSubheader from "@mui/material/ListSubheader";
 import List from "@mui/material/List";
@@ -590,9 +590,9 @@ function SimpleSelect() {
   const [age, setAge] = React.useState("");
 
   const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
+  const [labelwidth, setlabelwidth] = React.useState(0);
   React.useEffect(() => {
-    setLabelWidth(inputLabel.current.offsetWidth);
+    setlabelwidth(inputLabel.current.offsetWidth);
   }, []);
 
   const handleChange = (event) => {
@@ -609,7 +609,7 @@ function SimpleSelect() {
         id="demo-simple-select-outlined"
         value={age}
         onChange={handleChange}
-        labelWidth={labelWidth}
+        labelwidth={labelwidth}
       >
         <MenuItem value="">
           <em>None</em>
@@ -759,7 +759,7 @@ function EnhancedTableHead(props) {
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
-            padding={headCell.disablePadding ? "none" : "default"}
+            padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
@@ -990,8 +990,8 @@ function EnhancedTable() {
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
       <FormControlLabel

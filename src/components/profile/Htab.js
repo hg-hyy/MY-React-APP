@@ -68,7 +68,7 @@ function CircularStatic() {
     };
   }, []);
 
-  return <CircularProgress variant="static" value={completed} />;
+  return <CircularProgress variant="determinate" value={completed} />;
 }
 
 function CircularIntegration() {
@@ -138,7 +138,7 @@ function MultilineTextFields() {
     setValue(event.target.value);
   };
   const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
+  const [labelwidth, setLabelWidth] = React.useState(0);
   React.useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
   }, []);
@@ -210,7 +210,7 @@ function MultilineTextFields() {
               native
               value={value}
               onChange={handleChange}
-              labelWidth={labelWidth}
+              labelwidth={labelwidth}
               inputProps={{
                 name: "age",
                 id: "outlined-age-native-simple",
@@ -233,7 +233,7 @@ function MultilineTextFields() {
               value={value}
               fullWidth
               onChange={handleChange}
-              labelWidth={labelWidth}
+              labelwidth={labelwidth}
               inputProps={{
                 name: "age",
                 id: "outlined-age-native-simple",

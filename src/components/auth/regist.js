@@ -18,7 +18,7 @@ import { signUp } from "../../actions/regist-actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: 850,
+    height: 820,
     marginTop: theme.spacing(3),
   },
   image: {

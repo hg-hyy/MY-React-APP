@@ -1,7 +1,6 @@
 /* jshint esversion: 6 */
-import React from "react";
+import React, { useState } from "react";
 import { Menu, Result, Button } from "antd";
-import { SmileOutlined } from "@ant-design/icons";
 import { Routes, Route, Link, Outlet } from "react-router-dom";
 import Mylog from "../applog/Applog";
 import Home from "./home";
@@ -10,8 +9,12 @@ import Mychart from "../chart/mychart";
 import "../../assets/App.css";
 import NotFound from "../notfound/404";
 import Container from "@mui/material/Container";
-
-const { SubMenu } = Menu;
+import {
+  AppstoreOutlined,
+  MailOutlined,
+  SettingOutlined,
+  SmileOutlined,
+} from "@ant-design/icons";
 
 function Error403() {
   return (
@@ -68,98 +71,85 @@ function Warning() {
     />
   );
 }
-class Photo extends React.Component {
-  state = {
-    current: "mail",
+
+const items = [
+  getItem(
+    "Home",
+    "sub1",
+    <Link to="home">
+      <SmileOutlined />
+    </Link>
+  ),
+  getItem(
+    "Applog",
+    "sub2",
+    <Link to="applog">
+      <SmileOutlined />
+    </Link>
+  ),
+  getItem(
+    "Show",
+    "sub3",
+    <Link to="show">
+      <SmileOutlined />
+    </Link>
+  ),
+  getItem(
+    "Chart",
+    "sub4",
+    <Link to="chart">
+      <SmileOutlined />
+    </Link>
+  ),
+  getItem("Navigation Three", "sub5", <SettingOutlined />, [
+    getItem("403", "1", <Link to="error403"></Link>),
+    getItem("404", "2", <Link to="error404"></Link>),
+    getItem("500", "3", <Link to="error500"></Link>),
+    getItem("Info", "4", <Link to="info"></Link>),
+    getItem("warning", "5", <Link to="warning"></Link>),
+  ]),
+];
+
+function getItem(label, key, icon, children, type) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  };
+}
+
+function Photo() {
+  const onClick = (e) => {
+    console.log("click ", e);
   };
 
-  handleClick = (e) => {
-    // console.log("click ", e);
-    this.setState({
-      current: e.key,
-    });
-  };
-
-  render() {
-    return (
-      <Container maxWidth="xxl" sx={{ pt: 3 }}>
-        <Menu
-          style={{ marginBottom: 10 }}
-          onClick={this.handleClick}
-          selectedKeys={[this.state.current]}
-          mode="horizontal"
-        >
-          <Menu.Item key="home">
-            <Link to="home">
-              {/* <Icon type="home" /> */}
-              <SmileOutlined />
-              Home
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="log">
-            <Link to="applog">
-              {/* <Icon type="message" /> */}
-              <SmileOutlined />
-              Applog
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="show">
-            <Link to="show">
-              {/* <Icon type="dashboard" /> */}
-              <SmileOutlined />
-              Show
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="chart">
-            <Link to="chart">
-              {/* <Icon type="database" /> */}
-              <SmileOutlined />
-              Chart
-            </Link>
-          </Menu.Item>
-          <SubMenu
-            key="submenu"
-            title={
-              <span className="submenu-title-wrapper">
-                {/* <Icon type="setting" /> */}
-                <SmileOutlined />
-                Message
-              </span>
-            }
-          >
-            <Menu.Item key="setting:4">
-              <Link to="error403">403</Link>
-            </Menu.Item>
-            <Menu.Item key="setting:5">
-              <Link to="error404">404</Link>
-            </Menu.Item>
-            <Menu.Item key="setting:6">
-              <Link to="error500">500</Link>
-            </Menu.Item>
-            <Menu.Item key="setting:7">
-              <Link to="info">Info</Link>
-            </Menu.Item>
-            <Menu.Item key="setting:8">
-              <Link to="warning">Warning</Link>
-            </Menu.Item>
-          </SubMenu>
-        </Menu>
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="home" element={<Home />} />
-          <Route path="applog" element={<Mylog />} />
-          <Route path="show" element={<Show />} />
-          <Route path="chart" element={<Mychart />} />
-          <Route path="error403" element={<Error403 />} />
-          <Route path="error404" element={<Error404 />} />
-          <Route path="error500" element={<Error500 />} />
-          <Route path="info" element={<Info />} />
-          <Route path="warning" element={<Warning />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Outlet />
-      </Container>
-    );
-  }
+  return (
+    <Container maxWidth="xxl" sx={{ pt: 3 }}>
+      <Menu
+        style={{ marginBottom: 10, width: "auto" }}
+        onClick={onClick}
+        defaultSelectedKeys={["1"]}
+        defaultOpenKeys={[]}
+        mode="horizontal"
+        items={items}
+      />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="home" element={<Home />} />
+        <Route path="applog" element={<Mylog />} />
+        <Route path="show" element={<Show />} />
+        <Route path="chart" element={<Mychart />} />
+        <Route path="error403" element={<Error403 />} />
+        <Route path="error404" element={<Error404 />} />
+        <Route path="error500" element={<Error500 />} />
+        <Route path="info" element={<Info />} />
+        <Route path="warning" element={<Warning />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Outlet />
+    </Container>
+  );
 }
 export default Photo;

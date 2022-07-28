@@ -2,6 +2,7 @@
 import React from "react";
 import { Form, Input, Select, Cascader, DatePicker } from "antd";
 import { Table, Switch, Radio, Divider, Button, message, Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import get from "../../api/get";
 import moment from "moment";
 import Mycomment from "./comment";
@@ -240,8 +241,8 @@ class Antform extends React.Component {
         <Avatar
           shape="square"
           size={128}
-          icon="user"
-          src="../../static/aoa/images/CL/CL1.JPG"
+          icon={<UserOutlined />}
+          src={"/src/images/CL/CL1.JPG"}
         />
         {/* <Badge count={5}>
           <a href="#" className="head-example" />
@@ -259,7 +260,6 @@ class Antform extends React.Component {
             </Select>
             <span style={{ marginLeft: 5 }}>日志时间：</span>
             <DatePicker
-              value={moment(this.state.log_day)}
               style={{ display: "inline-block", width: "calc(30% - 12px)" }}
               onChange={this.onChange}
             />

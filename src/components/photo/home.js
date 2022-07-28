@@ -73,7 +73,7 @@ function Home() {
         </Col>
         <Col span={8}>
           {/* <div className={classes.root}> */}
-          <ImageList cellHeight={200} spacing={1} className={classes.ImageList}>
+          <ImageList rowHeight={200} spacing={1} className={classes.ImageList}>
             {tileData.map((tile) => (
               <ImageListItem
                 key={tile.title}
@@ -83,7 +83,7 @@ function Home() {
                 <img src={tile.img} alt={tile.title} />
                 <ImageListItemBar
                   title={tile.title}
-                  titlePosition="top"
+                  position="top"
                   actionIcon={
                     <IconButton
                       aria-label={`star ${tile.title}`}

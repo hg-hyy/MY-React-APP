@@ -9,7 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Skeleton from "@mui/lab/Skeleton";
+import Skeleton from "@mui/material/Skeleton";
 
 const useStyles = makeStyles((theme) => ({
   card: {

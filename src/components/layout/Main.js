@@ -19,7 +19,31 @@ const MainHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 let ps;
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
+  static getDerivedStateFromError(error) {
+    // 更新 state 使下一次渲染能够显示降级后的 UI
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    // 你同样可以将错误日志上报给服务器
+    console.log(error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // 你可以自定义降级后的 UI 并渲染
+      return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children;
+  }
+}
 function Main(props) {
   const navigate = useNavigate();
 
@@ -54,25 +78,31 @@ function Main(props) {
   }, [mainPanel]);
   return (
     <MainHeader ref={mainPanel}>
-      <Routes>
-        {Routers.map((item, index) => {
-          return (
-            <Route key={index} path={item.path} element={<item.component />} />
-          );
-        })}
-        <Route path="/" element={<Home />}>
-          <Route index element={<Carousel />} />
-          <Route path="price" element={<Price />} />
-          <Route path="album" element={<Album />} />
-          <Route path="carousel" element={<Carousel />} />
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-        <Route path="/show/*" element={<Show />} />
-        <Route path="/photo/*" element={<Photo />} />
+      <ErrorBoundary>
+        <Routes>
+          {Routers.map((item, index) => {
+            return (
+              <Route
+                key={index}
+                path={item.path}
+                element={<item.component />}
+              />
+            );
+          })}
+          <Route path="/" element={<Home />}>
+            <Route index element={<Carousel />} />
+            <Route path="price" element={<Price />} />
+            <Route path="album" element={<Album />} />
+            <Route path="carousel" element={<Carousel />} />
+            <Route path="checkout" element={<Checkout />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+          <Route path="/show/*" element={<Show />} />
+          <Route path="/photo/*" element={<Photo />} />
 
-        <Route component={NotFound} />
-      </Routes>
+          <Route component={NotFound} />
+        </Routes>
+      </ErrorBoundary>
     </MainHeader>
   );
 }

@@ -9,6 +9,7 @@ import Home from "./home";
 import Show from "./show";
 import Mychart from "../chart/mychart";
 import "../../assets/App.css";
+import NotFound from "../notfound/404";
 
 const { SubMenu } = Menu;
 
@@ -153,6 +154,7 @@ class Photo extends React.Component {
           <Route path="error404" element={<Error404 />} />
           <Route path="error500" element={<Error500 />} />
           <Route path="info" element={<Info />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Outlet />
       </Container>

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 
 export default function Iframe() {
-
   function receiveMessageFromIframe(event) {
     // if (!event.data.startsWith("setImmediate")) {
     // React will send message started with setImmediate
@@ -11,10 +10,10 @@ export default function Iframe() {
     // }
   }
 
-  useEffect(() => {
-    window.addEventListener("message", receiveMessageFromIframe, false); // "message" name cannot be changed
-  });
-  
+  // useEffect(() => {
+  //   window.addEventListener("message", receiveMessageFromIframe, false); // "message" name cannot be changed
+  // });
+
   function handleParentClick() {
     //必须是iframe加载完成后才可以向子域发送数据
     const childFrameObj = document.getElementById("myFrame");
@@ -51,7 +50,6 @@ export default function Iframe() {
         height={0}
         frameBorder={1}
         scrolling="no"
-
         srcDoc="<h1>myFrame</h1>
           <p>Send Message: <button id='message_button'}>Hi parent</button></p>
           <span>Show Message</span>

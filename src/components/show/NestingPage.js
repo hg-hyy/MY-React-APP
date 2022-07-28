@@ -1,11 +1,15 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   Link,
   useParams,
   matchPath,
+  useLocation,
+  useMatch,
+  useSearchParams,
+  useHref,
+  Outlet,
 } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
@@ -185,34 +189,6 @@ function TransferList() {
   );
 }
 
-export default function NestingExample() {
-  return (
-    <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/home">Home</Link>
-          </li>
-          <li>
-            <Link to="/topics">Topics</Link>
-          </li>
-        </ul>
-
-        <hr />
-
-        <Routes>
-          <Route exact path="/home">
-            <Home />
-          </Route>
-          <Route path="/topics">
-            <Topics />
-          </Route>
-        </Routes>
-      </div>
-    </Router>
-  );
-}
-
 function Home() {
   return (
     <div>
@@ -221,59 +197,6 @@ function Home() {
   );
 }
 
-function Topics() {
-  // The `path` lets us build <Route> paths that are
-  // relative to the parent route, while the `url` lets
-  // us build relative links.
-  let { path, url } = matchPath();
-  console.log(path, url);
-  return (
-    <div>
-      <h2>Topics</h2>
-      <ul>
-        <li>
-          <Link to={`${url}/rendering`}>Rendering</Link>
-        </li>
-        <li>
-          <Link to={`${url}/components`}>Components</Link>
-        </li>
-        <li>
-          <Link to={`${url}/props`}>Props</Link>
-        </li>
-      </ul>
-
-      <Routes>
-        <Route exact path={path}>
-          <h3>Please select a topic.</h3>
-        </Route>
-        <Route exact path={`${path}/:id`}>
-          <Topic />
-        </Route>
-      </Routes>
-    </div>
-  );
-}
-
-function Topic() {
-  // The <Route> that rendered this component has a
-  // path of `/topics/:topicId`. The `:topicId` portion
-  // of the URL indicates a placeholder that we can
-  // get from `useParams()`.
-  let { id } = useParams();
-
-  return (() => {
-    switch (id) {
-      case "rendering":
-        return <Rendering />;
-      case "components":
-        return <Components />;
-      case "props":
-        return <Props />;
-      default:
-        return <ShoppingCartIcon fontSize="large" />;
-    }
-  })();
-}
 function Rendering() {
   // The <Route> that rendered this component has a
   // path of `/topics/:topicId`. The `:topicId` portion
@@ -313,6 +236,136 @@ function Props() {
     <div>
       <ChatIcon fontSize="large" />
       <h3>{props}333</h3>
+    </div>
+  );
+}
+
+function SearchParams() {
+  let [searchParams, setSearchParams] = useSearchParams();
+
+  function serializeFormQuery(data) {
+    let list = [];
+    Object.keys(data).forEach((ele) => {
+      list.push(`${ele}=${data[ele]}`);
+    });
+    return list.join("&");
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    // The serialize function here would be responsible for
+    // creating an object of { key: value } pairs from the
+    // fields in the form that make up the query.
+    let params = serializeFormQuery(event.target);
+    setSearchParams(params);
+    console.log(params);
+  }
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          name="search"
+          value={searchParams.get("filter") || ""}
+          onChange={(event) => {
+            let filter = event.target.value;
+            if (filter) {
+              setSearchParams({ filter });
+            } else {
+              setSearchParams({});
+            }
+          }}
+        />
+        <button>提交</button>
+      </form>
+    </div>
+  );
+}
+
+function Topic() {
+  // The <Route> that rendered this component has a
+  // path of `/topics/:topicId`. The `:topicId` portion
+  // of the URL indicates a placeholder that we can
+  // get from `useParams()`.
+  let { topicid } = useParams();
+  console.log(topicid);
+  return (() => {
+    switch (topicid) {
+      case "rendering":
+        return <Rendering />;
+      case "components":
+        return <Components />;
+      case "props":
+        return <Props />;
+      default:
+        return <ShoppingCartIcon fontSize="large" />;
+    }
+  })();
+}
+
+function Topics() {
+  // const url = useHref();
+  let location = useLocation();
+  let params = useParams();
+  const match = matchPath(
+    {
+      path: "show/nesting/topics/:topicid",
+      caseSensitive: false, // Optional. Should be `true` if the static portions of the `path` should be matched in the same case.
+      end: true, // Optional. Should be `true` if this pattern should match the entire URL pathname
+    },
+    "/show/nesting/topics/:topicid"
+  );
+  console.log(location);
+  console.log(match);
+  console.log(params);
+  return (
+    <div>
+      <h2>Topics</h2>
+      <ul>
+        <li>
+          <Link to="rendering">Rendering</Link>
+        </li>
+        <li>
+          <Link to="components">Components</Link>
+        </li>
+        <li>
+          <Link to="props">Props</Link>
+        </li>
+      </ul>
+      <Outlet />
+    </div>
+  );
+}
+
+export default function NestingExample() {
+  return (
+    <div>
+      <ul>
+        <li>
+          <Link to="home">Home</Link>
+        </li>
+        <li>
+          <Link to="topics">Topics</Link>
+        </li>
+        <li>
+          <Link to="searchparams">search</Link>
+        </li>
+      </ul>
+      <hr />
+      <Routes>
+        <Route path="home" element={<Home />} />
+        <Route path="topics" element={<Topics />}>
+          <Route
+            index
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>Select an topic</p>
+              </main>
+            }
+          />
+          <Route path=":topicid" element={<Topic />} />
+        </Route>
+        <Route path="searchparams" element={<SearchParams />} />
+      </Routes>
     </div>
   );
 }

@@ -2,8 +2,8 @@
 import { SET_AUTH_TRUE, SET_AUTH_FALSE } from "../actions/redux_actions";
 
 const initialState = {
-  isAuthenticated: false,
-  data: { email: "" },
+  isAuthenticated: true,
+  data: { email: "1021509854@qq.com" },
 };
 
 export default function reduxReducer(state = initialState, action) {

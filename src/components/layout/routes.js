@@ -17,6 +17,25 @@ import Regist from "../auth/regist";
 import Show from "../show/Show";
 import Home from "../home/Home";
 import Photo from "../photo/Photo";
+import { useRoutes } from "react-router-dom";
+
+function Routers() {
+  let element = useRoutes([
+    {
+      path: "/",
+      element: <Home />,
+      children: [
+        {
+          path: "messages",
+          element: <Home />,
+        },
+        { path: "tasks", element: <Show /> },
+      ],
+    },
+    { path: "team", element: <Show /> },
+  ]);
+  return element;
+}
 
 const AppRoutes = [
   {

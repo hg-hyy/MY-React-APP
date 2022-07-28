@@ -14,6 +14,7 @@ specifiers:
   '@mui/lab': 5.0.0-alpha.91
   '@mui/material': ^5.9.1
   '@mui/styles': ^5.9.1
+  '@mui/system': 5.4.1
   '@mui/x-date-pickers': 5.0.0-beta.2
   '@pnotify/core': ^5.2.0
   '@popperjs/core': ^2.11.5
@@ -35,6 +36,7 @@ specifiers:
   font-awesome: ^4.7.0
   highcharts: ^10.2.0
   highcharts-react-official: ^3.1.0
+  history: ^5.3.0
   jquery: ^3.6.0
   jwt-decode: ^3.1.2
   markdown-to-jsx: ^7.1.7
@@ -47,7 +49,8 @@ specifiers:
   react-dom: ^18.2.0
   react-draggable: ^4.4.5
   react-redux: ^7.2.8
-  react-router-dom: '6'
+  react-router: 6.3.0
+  react-router-dom: 6.3.0
   react-scripts: 5.0.1
   react-swipeable-views: ^0.14.0
   react-swipeable-views-utils: ^0.14.0
@@ -75,7 +78,8 @@ dependencies:
   '@mui/lab': registry.npmmirror.com/@mui/lab/5.0.0-alpha.91_r77wrw6tsidtyq5ckpz73kvb3a
   '@mui/material': registry.npmmirror.com/@mui/material/5.9.1_qsuhhlyfbpdicstla2jcf7xfmy
   '@mui/styles': registry.npmmirror.com/@mui/styles/5.9.1_react@18.2.0
-  '@mui/x-date-pickers': registry.npmmirror.com/@mui/x-date-pickers/5.0.0-beta.2_q53w74kimtelamt7675pc4kibe
+  '@mui/system': registry.npmmirror.com/@mui/system/5.4.1_fdnqutfacy7v3gmlcm66flps3q
+  '@mui/x-date-pickers': registry.npmmirror.com/@mui/x-date-pickers/5.0.0-beta.2_stuwbpgdl3s6wupfpfems4kypa
   '@pnotify/core': registry.npmmirror.com/@pnotify/core/5.2.0
   '@popperjs/core': registry.npmmirror.com/@popperjs/core/2.11.5
   '@reduxjs/toolkit': registry.npmmirror.com/@reduxjs/toolkit/1.8.3_4wic3pw3dccvku2ikwp24gz4m4
@@ -95,6 +99,7 @@ dependencies:
   font-awesome: registry.npmmirror.com/font-awesome/4.7.0
   highcharts: registry.npmmirror.com/highcharts/10.2.0
   highcharts-react-official: registry.npmmirror.com/highcharts-react-official/3.1.0_3nkh26uip7sop2ui37k2do7gj4
+  history: registry.npmmirror.com/history/5.3.0
   jquery: registry.npmmirror.com/jquery/3.6.0
   jwt-decode: registry.npmmirror.com/jwt-decode/3.1.2
   markdown-to-jsx: registry.npmmirror.com/markdown-to-jsx/7.1.7_react@18.2.0
@@ -107,6 +112,7 @@ dependencies:
   react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
   react-draggable: registry.npmmirror.com/react-draggable/4.4.5_biqbaboplfbrettd7655fr4n2y
   react-redux: registry.npmmirror.com/react-redux/7.2.8_biqbaboplfbrettd7655fr4n2y
+  react-router: registry.npmmirror.com/react-router/6.3.0_react@18.2.0
   react-router-dom: registry.npmmirror.com/react-router-dom/6.3.0_biqbaboplfbrettd7655fr4n2y
   react-scripts: registry.npmmirror.com/react-scripts/5.0.1_lq6jojhgvzolvbk5gwopsvmqva
   react-swipeable-views: registry.npmmirror.com/react-swipeable-views/0.14.0_react@18.2.0
@@ -3276,6 +3282,38 @@ packages:
       react: registry.npmmirror.com/react/18.2.0
     dev: false
 
+  registry.npmmirror.com/@mui/system/5.4.1_fdnqutfacy7v3gmlcm66flps3q:
+    resolution: {integrity: sha512-07JBYf9iQdxIHZU8cFOLoxBnkQDUPLb7UBhNxo4998yEqpWFJ00WKgEVYBKvPl0X+MRU/20wqFz6yGIuCx4AeA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@mui/system/-/system-5.4.1.tgz}
+    id: registry.npmmirror.com/@mui/system/5.4.1
+    name: '@mui/system'
+    version: 5.4.1
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@emotion/react': ^11.5.0
+      '@emotion/styled': ^11.3.0
+      '@types/react': ^16.8.6 || ^17.0.0
+      react: ^17.0.0
+    peerDependenciesMeta:
+      '@emotion/react':
+        optional: true
+      '@emotion/styled':
+        optional: true
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': registry.npmmirror.com/@babel/runtime/7.18.9
+      '@emotion/react': registry.npmmirror.com/@emotion/react/11.9.3_lxeixztqul6ae7cp3cpkyxlhzm
+      '@emotion/styled': registry.npmmirror.com/@emotion/styled/11.9.3_lrdyawhmscavswn6eqk2uibmxm
+      '@mui/private-theming': registry.npmmirror.com/@mui/private-theming/5.9.1_react@18.2.0
+      '@mui/styled-engine': registry.npmmirror.com/@mui/styled-engine/5.8.7_fdnqutfacy7v3gmlcm66flps3q
+      '@mui/types': registry.npmmirror.com/@mui/types/7.1.4
+      '@mui/utils': registry.npmmirror.com/@mui/utils/5.9.1_react@18.2.0
+      clsx: registry.npmmirror.com/clsx/1.2.1
+      csstype: registry.npmmirror.com/csstype/3.1.0
+      prop-types: registry.npmmirror.com/prop-types/15.8.1
+      react: registry.npmmirror.com/react/18.2.0
+    dev: false
+
   registry.npmmirror.com/@mui/system/5.9.1_fdnqutfacy7v3gmlcm66flps3q:
     resolution: {integrity: sha512-ZixTmc2+sYp++avoYJ38eM70nfwwudN06vYCU4kfwa4nQPiH+bhLYZnfYkcXRKiDR/hfT0dptbOOfQGZqBYczQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@mui/system/-/system-5.9.1.tgz}
     id: registry.npmmirror.com/@mui/system/5.9.1
@@ -3336,7 +3374,7 @@ packages:
       react-is: registry.npmmirror.com/react-is/18.2.0
     dev: false
 
-  registry.npmmirror.com/@mui/x-date-pickers/5.0.0-beta.2_q53w74kimtelamt7675pc4kibe:
+  registry.npmmirror.com/@mui/x-date-pickers/5.0.0-beta.2_stuwbpgdl3s6wupfpfems4kypa:
     resolution: {integrity: sha512-UEXQ2tmhosklAQwOUtwQBI2WngSdp5Q8vYqsmvxNJxuXYuM/DawdQBwyfFyK7jx5wf/RTsniG1e12hqii3wPYg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@mui/x-date-pickers/-/x-date-pickers-5.0.0-beta.2.tgz}
     id: registry.npmmirror.com/@mui/x-date-pickers/5.0.0-beta.2
     name: '@mui/x-date-pickers'
@@ -3375,6 +3413,7 @@ packages:
       '@emotion/react': registry.npmmirror.com/@emotion/react/11.9.3_lxeixztqul6ae7cp3cpkyxlhzm
       '@emotion/styled': registry.npmmirror.com/@emotion/styled/11.9.3_lrdyawhmscavswn6eqk2uibmxm
       '@mui/material': registry.npmmirror.com/@mui/material/5.9.1_qsuhhlyfbpdicstla2jcf7xfmy
+      '@mui/system': registry.npmmirror.com/@mui/system/5.4.1_fdnqutfacy7v3gmlcm66flps3q
       '@mui/utils': registry.npmmirror.com/@mui/utils/5.9.1_react@18.2.0
       '@types/react-transition-group': registry.npmmirror.com/@types/react-transition-group/4.4.5
       clsx: registry.npmmirror.com/clsx/1.2.1

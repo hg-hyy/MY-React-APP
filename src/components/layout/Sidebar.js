@@ -23,7 +23,17 @@ function Sidebar(props) {
       {AppRoutes &&
         AppRoutes.map((item, key) => {
           return (
-            <NavLink to={item.path} activeclassname="active" key={key}>
+            <NavLink
+              to={item.path}
+              activeclassname="active"
+              key={key}
+              style={({ isActive }) => {
+                return {
+                  display: "block",
+                  backgroundColor: isActive ? "blue" : "",
+                };
+              }}
+            >
               <Tooltip
                 title={item.name}
                 placement="right"

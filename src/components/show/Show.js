@@ -1,6 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
 import { loginIn, loginOut } from "../../actions/redux_actions";
 import Typography from "@mui/material/Typography";
 import BottomNavigation from "@mui/material/BottomNavigation";
@@ -16,8 +23,8 @@ import LovePage from "./LovePage";
 import PublicPage from "./PublicPage";
 import ProtectedPage from "./ProtectedPage";
 import NestingPage from "./NestingPage";
-import Hiddens from "../widgets/Hiddens";
-import Iframe from "../widgets/Iframe";
+import Hiddens from "./Hiddens";
+import Iframe from "./Iframe";
 import NotFound from "../notfound/404";
 
 function NavBar() {
@@ -72,10 +79,14 @@ function NavBar() {
     </div>
   );
 }
-function AuthButton(props) {
+function AuthButton() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state) => state.reduxReducer.isAuthenticated
+  );
+  const data = useSelector((state) => state.reduxReducer.data);
 
-  const { isAuthenticated, signout, data } = props;
   return isAuthenticated ? (
     <Typography variant="h3" component="h2" gutterBottom>
       Welcome {data.email}!
@@ -83,8 +94,8 @@ function AuthButton(props) {
         variant="contained"
         color="primary"
         onClick={() => {
-          signout();
-          navigate.push("/show/signin");
+          dispatch(loginOut());
+          navigate("signin");
         }}
       >
         Sign out
@@ -97,55 +108,43 @@ function AuthButton(props) {
   );
 }
 
-function PrivateRoute({ children, isAuthenticated, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      element={({ location }) =>
-        isAuthenticated ? (
-          children
-        ) : (
-          <navigate
-            to={{
-              pathname: "/show/signin",
-              state: { from: location },
-            }}
-          />
-        )
-      }
-    />
-  );
-}
-
 function Show(props) {
+  const isAuthenticated = useSelector(
+    (state) => state.reduxReducer.isAuthenticated
+  );
+  const data = useSelector((state) => state.reduxReducer.data);
+
   return (
     <Container maxWidth="xl">
-      <AuthButton {...props} />
-      <NavBar />
+      <AuthButton />
       <Routes>
-        <Route path="nesting" element={<NestingPage />} />
-        <Route path="lovePage" element={<LovePage />} />
-        <Route path="signin" element={<LoginPage {...props} />} />
-        {/* <PrivateRoute path="/show/protected" {...props}>
-          <ProtectedPage {...props} />
-        </PrivateRoute> */}
         <Route index element={<PublicPage />} />
-        <Route exact path="hidden" element={<Hiddens />} />
-        <Route exact path="Iframe" element={<Iframe />} />
-        <Route component={NotFound} />
+        <Route
+          path="protected"
+          element={
+            isAuthenticated ? (
+              <ProtectedPage data={data} />
+            ) : (
+              <Navigate to="/show/signin" replace={true} />
+            )
+          }
+        />
+        <Route path="lovePage" element={<LovePage />} />
+        <Route
+          path="signin"
+          element={
+            <LoginPage signin={loginIn} isAuthenticated={isAuthenticated} />
+          }
+        />
+        <Route path="nesting/*" element={<NestingPage />} />
+        <Route path="hidden" element={<Hiddens width="md" />} />
+        <Route path="Iframe" element={<Iframe />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Outlet />
+      <NavBar />
     </Container>
   );
 }
-const mapDispatchToProps = (dispatch) => ({
-  signin: (newUser) => dispatch(loginIn(newUser)),
-  signout: () => dispatch(loginOut()),
-});
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.reduxReducer.isAuthenticated,
-  data: state.reduxReducer.data,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Show);
+export default Show;

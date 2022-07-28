@@ -13,7 +13,6 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import SearchIcon from "@mui/icons-material/Search";
-import { Box } from "@mui/material";
 import Container from "@mui/material/Container";
 
 const useStyles = makeStyles((theme) => ({

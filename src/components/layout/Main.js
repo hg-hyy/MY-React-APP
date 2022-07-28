@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import Routers from "./routes";
-import { styled } from "@mui/material/styles";
 import Home from "../home/Home";
 import Price from "../home/Price";
 import Album from "../home/Album";
@@ -41,11 +39,8 @@ class ErrorBoundary extends React.Component {
     return this.props.children;
   }
 }
-function Main(props) {
-  const navigate = useNavigate();
-
+function Main() {
   const mainPanel = React.createRef();
-  const { open } = props;
   // eslint-disable-next-line
   const [mobileOpen, setMobileOpen] = useState(false);
   const resizeFunction = () => {
@@ -53,53 +48,57 @@ function Main(props) {
       setMobileOpen(false);
     }
   };
-  // useEffect(() => {
-  //   if (navigator.platform.indexOf("Win") > -1) {
-  //     ps = new PerfectScrollbar(mainPanel.current, {
-  //       suppressScrollX: true,
-  //       suppressScrollY: false,
-  //       // wheelSpeed: 1,
-  //       // wheelPropagation: true,
-  //       // minScrollbarLength: 20
-  //     });
-  //     document.body.style.overflow = "hidden";
-  //   }
-  //   window.addEventListener("resize", resizeFunction);
-  //   // Specify how to clean up after this effect:
-  //   return function cleanup() {
-  //     if (navigator.platform.indexOf("Win") > -1) {
-  //       ps.destroy();
-  //     }
-  //     window.removeEventListener("resize", resizeFunction);
-  //   };
-  // }, [mainPanel]);
+  useEffect(() => {
+    if (navigator.userAgentData.platform.indexOf("Windows") > -1) {
+      ps = new PerfectScrollbar(mainPanel.current, {
+        suppressScrollX: true,
+        suppressScrollY: false,
+        // wheelSpeed: 1,
+        // wheelPropagation: true,
+        // minScrollbarLength: 20
+      });
+      document.body.style.overflow = "hidden";
+    }
+    window.addEventListener("resize", resizeFunction);
+    // Specify how to clean up after this effect:
+    return function cleanup() {
+      if (navigator.userAgentData.platform.indexOf("Windows") > -1) {
+        ps.destroy();
+      }
+      window.removeEventListener("resize", resizeFunction);
+    };
+  }, [mainPanel]);
   return (
     <ErrorBoundary>
-      <Routes>
-        {Routers.map((item, index) => {
-          return (
-            <Route key={index} path={item.path} element={<item.component />} />
-          );
-        })}
-        <Route path="/" element={<Home />}>
-          <Route index element={<Carousel />} />
-          <Route path="price" element={<Price />} />
-          <Route path="album" element={<Album />} />
-          <Route path="carousel" element={<Carousel />} />
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-        <Route path="/show/*" element={<Show />} />
-        <Route path="/photo/*" element={<Photo />} />
-        <Route component={NotFound} />
-      </Routes>
+      <Box
+        ref={mainPanel}
+        sx={{ position: "relative", width: "100%", height: "850px" }}
+      >
+        <Routes>
+          {Routers.map((item, index) => {
+            return (
+              <Route
+                key={index}
+                path={item.path}
+                element={<item.component />}
+              />
+            );
+          })}
+          <Route path="/" element={<Home />}>
+            <Route index element={<Carousel />} />
+            <Route path="price" element={<Price />} />
+            <Route path="album" element={<Album />} />
+            <Route path="carousel" element={<Carousel />} />
+            <Route path="checkout" element={<Checkout />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+          <Route path="show/*" element={<Show />} />
+          <Route path="photo/*" element={<Photo />} />
+          <Route component={NotFound} />
+        </Routes>
+      </Box>
     </ErrorBoundary>
   );
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  isAuthenticated: state.loginReducer.isAuthenticated,
-  data: state.reduxReducer.data,
-});
-
-export default connect(mapStateToProps)(Main);
+export default Main;

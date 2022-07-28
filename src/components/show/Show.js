@@ -17,7 +17,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import LoginPage from "./LoginPage";
 import LovePage from "./LovePage";

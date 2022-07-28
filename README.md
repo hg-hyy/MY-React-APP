@@ -8,6 +8,8 @@
 
 ## 版本改动很大，很多需要更新。。
 
+### pnpm install
+
 ### `pnpm start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

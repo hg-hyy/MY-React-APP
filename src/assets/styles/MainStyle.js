@@ -30,12 +30,14 @@ const MainStyle = (theme) => ({
     // width: `calc(100% - ${drawerWidth1}px)`,
     [theme.breakpoints.down("sm")]: {
       width: "100%",
+
       marginLeft: 0,
     },
   },
   mainPanel: {
     position: "relative",
     height: 850,
+
     maxHeight: "100%",
   },
 });

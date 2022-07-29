@@ -100,7 +100,7 @@ const items = [
       <SmileOutlined />
     </Link>
   ),
-  getItem("Navigation Three", "sub5", <SettingOutlined />, [
+  getItem("error", "sub5", <SettingOutlined />, [
     getItem("403", "1", <Link to="error403"></Link>),
     getItem("404", "2", <Link to="error404"></Link>),
     getItem("500", "3", <Link to="error500"></Link>),
@@ -121,7 +121,7 @@ function getItem(label, key, icon, children, type) {
 
 function Photo() {
   const onClick = (e) => {
-    console.log("click ", e);
+    // console.log("click ", e);
   };
 
   return (
@@ -129,8 +129,8 @@ function Photo() {
       <Menu
         style={{ marginBottom: 10, width: "auto" }}
         onClick={onClick}
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={[]}
+        defaultSelectedKeys={["sub1"]}
+        defaultOpenKeys={["sub1"]}
         mode="horizontal"
         items={items}
       />

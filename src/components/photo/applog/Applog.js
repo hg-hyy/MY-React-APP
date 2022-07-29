@@ -1,8 +1,7 @@
 /* jshint esversion: 6 */
 import React from "react";
 import Antdlist from "./antdlist";
-import MyTable from "./mytable";
-import Myform from "./myform";
+import AntdTable from "./antdtable";
 import Antdform from "./antdform";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@pnotify/core/dist/BrightTheme.css";
@@ -13,8 +12,7 @@ function Applog() {
   return (
     <Box>
       <Antdlist />
-      <MyTable />
-      <Myform />
+      <AntdTable />
       <Antdform />
     </Box>
   );

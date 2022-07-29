@@ -44,8 +44,9 @@ import FormLabel from "@mui/material/FormLabel";
 import Tooltip from "@mui/material/Tooltip";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { ColorModeContext } from "./theme-context";
+import { loginOut } from "../../actions/login-actions";
 
 const options = ["None", "purple", "blue", "green", "orange", "red"];
 const names = ["harlen", "moham", "sarah", "visual", "wesley", "zuhri"];
@@ -98,8 +99,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-function User(props) {
-  const { loginOut } = props;
+function User() {
+  const dispatch = useDispatch();
   // const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -108,7 +109,7 @@ function User(props) {
   };
 
   const handleClose = () => {
-    // loginOut(false);
+    dispatch(loginOut(false));
     setAnchorEl(null);
   };
   function handleListKeyDown(event) {
@@ -157,9 +158,7 @@ function User(props) {
   );
 }
 
-function Notify(props) {
-  // const [open, setOpen] = useState(false);
-
+function Notify() {
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

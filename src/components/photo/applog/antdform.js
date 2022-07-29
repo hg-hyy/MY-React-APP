@@ -15,13 +15,15 @@ import {
   Space,
 } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import moment from "moment";
+
 import get from "../../../api/get";
 import Mycomment from "./comment";
 import { notice } from "@pnotify/core";
 const url = "http://127.0.0.1:8000/blog/check_log";
 
 const { Option } = Select;
-
+const dateFormat = "YYYY/MM/DD";
 // eslint-disable-next-line
 const tellMe = (key) => {
   message.info(`Click on item ${key}`);
@@ -192,7 +194,6 @@ class Antdform extends React.Component {
     get(url, params)
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
         this.setState({
           log_level: result.log_level,
           log_list: result.log_list,
@@ -278,7 +279,11 @@ class Antdform extends React.Component {
                 <Option value="all">all</Option>
               </Select>
               <span style={{ marginLeft: 5 }}>日志时间：</span>
-              <DatePicker onChange={this.onChange} />
+              <DatePicker
+                onChange={this.onChange}
+                defaultValue={moment("2022/07/29", dateFormat)}
+                format={dateFormat}
+              />
               <Button type="primary" htmlType="submit">
                 Submit
               </Button>

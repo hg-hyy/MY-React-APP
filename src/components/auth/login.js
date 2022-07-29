@@ -90,7 +90,7 @@ function Login(props) {
 
   useEffect(() => {
     if (localStorage.jwToken) {
-      navigate.replace(from);
+      navigate(from);
     }
   }, [from, navigate, isAuthenticated]);
 

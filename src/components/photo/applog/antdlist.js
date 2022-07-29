@@ -68,9 +68,9 @@ class Antdlist extends React.Component {
               </span>
             ))
           }
-          renderItem={(item) => (
+          renderItem={(item, index) => (
             <List.Item>
-              <Typography.Text mark>[index]</Typography.Text> {item}
+              <Typography.Text mark>{index + 1}</Typography.Text> {item}
             </List.Item>
           )}
         />

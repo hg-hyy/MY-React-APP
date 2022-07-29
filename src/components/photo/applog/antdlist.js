@@ -6,13 +6,13 @@ var myInit = {
   method: "GET",
   mode: "cors",
   headers: {
-    "Access-Control-Allow-Origin": "*"
-  }
+    "Access-Control-Allow-Origin": "*",
+  },
 };
 
 let url = "http://127.0.0.1:8000/blog/blog_version";
 
-class Mylist extends React.Component {
+class Antdlist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,29 +20,29 @@ class Mylist extends React.Component {
       isLoaded: false,
       items: [],
       version: " ",
-      msg: ""
+      msg: "",
     };
   }
 
   componentDidMount() {
     fetch(url, { method: "GET" })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(
-        result => {
+        (result) => {
           // console.log(result.items);
           this.setState({
             isLoaded: true,
             items: result.items,
-            version: result.version
+            version: result.version,
           });
         },
         // 注意：需要在此处处理错误
         // 而不是使用 catch() 去捕获错误
         // 因为使用 catch 去捕获异常会掩盖掉组件本身可能产生的 bug
-        error => {
+        (error) => {
           this.setState({
             isLoaded: true,
-            error
+            error,
           });
         }
       );
@@ -51,40 +51,32 @@ class Mylist extends React.Component {
   render() {
     const { error, isLoaded, items } = this.state;
     if (error) {
-      return <div> Error: {error.message} </div>;
+      return <div> blog_version: {error.message} </div>;
     } else if (!isLoaded) {
       return <div> Loading... </div>;
     } else {
       return (
-        <div>
-          {/* {items &&
-            items.map(item => (
-              <li key={item.name}>
+        <List
+          header={<div>Header</div>}
+          footer={<div>Footer</div>}
+          bordered
+          dataSource={
+            items &&
+            items.map((item) => (
+              <span key={item.name}>
                 {item.name} {item.price}
-              </li>
-            ))} */}
-          <List
-            header={<div>Header</div>}
-            footer={<div>Footer</div>}
-            // size="large"
-            // bordered
-            dataSource={items &&
-              items.map(item => (
-                <span key={item.name}>
-                  {item.name} {item.price}
-                </span>
-
-              ))}
-            renderItem={item => (
-              <List.Item>
-                <Typography.Text mark>[index]</Typography.Text> {item}
-              </List.Item>
-            )}
-          />
-      </div>
+              </span>
+            ))
+          }
+          renderItem={(item) => (
+            <List.Item>
+              <Typography.Text mark>[index]</Typography.Text> {item}
+            </List.Item>
+          )}
+        />
       );
     }
   }
 }
 
-export default Mylist;
+export default Antdlist;

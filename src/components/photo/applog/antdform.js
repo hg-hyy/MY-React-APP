@@ -1,13 +1,24 @@
 /* jshint esversion: 6 */
 import React from "react";
-import { Form, Input, Select, Cascader, DatePicker } from "antd";
-import { Table, Switch, Radio, Divider, Button, message, Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
-import get from "../../api/get";
-import moment from "moment";
+import {
+  Form,
+  Input,
+  Select,
+  Cascader,
+  DatePicker,
+  Table,
+  Switch,
+  Radio,
+  Divider,
+  Button,
+  message,
+  Space,
+} from "antd";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import get from "../../../api/get";
 import Mycomment from "./comment";
 import { notice } from "@pnotify/core";
-let url = "http://127.0.0.1:8000/blog/check_log";
+const url = "http://127.0.0.1:8000/blog/check_log";
 
 const { Option } = Select;
 
@@ -101,13 +112,13 @@ const options = [
 ];
 
 const expandedRowRender = (record) => <p>{record.详情}</p>;
-const title = () => <Button>1111111</Button>;
+const title = () => <Button>blog logs</Button>;
 const showHeader = true;
 const footer = () => <Button>1111111</Button>;
 const scroll = { y: 240 };
 const pagination = { position: "bottom" };
 
-class Antform extends React.Component {
+class Antdform extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -130,7 +141,17 @@ class Antform extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.onFinish = this.onFinish.bind(this);
+    this.onFinishFailed = this.onFinishFailed.bind(this);
   }
+
+  onFinish = (values) => {
+    console.log("Success:", values);
+  };
+
+  onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
 
   onChange(date, dateString) {
     // console.log(dateString);
@@ -163,7 +184,7 @@ class Antform extends React.Component {
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit() {
     let params = {
       log_level: this.state.log_level,
       log_day: this.state.log_day,
@@ -190,8 +211,6 @@ class Antform extends React.Component {
         },
       },
     });
-
-    event.preventDefault();
   }
 
   handleToggle = (prop) => (enable) => {
@@ -238,52 +257,42 @@ class Antform extends React.Component {
     const { state } = this;
     return (
       <div>
-        <Avatar
-          shape="square"
-          size={128}
-          icon={<UserOutlined />}
-          src={"/src/images/CL/CL1.JPG"}
-        />
-        {/* <Badge count={5}>
-          <a href="#" className="head-example" />
-        </Badge> */}
-        <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+        <Form
+          {...formItemLayout}
+          name="basic"
+          // labelCol={{ span: 8 }}
+          // wrapperCol={{ span: 16 }}
+          initialValues={{ remember: true }}
+          onFinish={this.handleSubmit}
+          onFinishFailed={this.onFinishFailed}
+          autoComplete="off"
+        >
           <Form.Item label="日志级别" validateStatus="success">
-            <Select
-              defaultValue={this.state.log_level}
-              style={{ display: "inline-block", width: "calc(20% - 12px)" }}
-              onChange={this.handleChange}
-            >
-              <Option value="info">info</Option>
-              <Option value="error">error</Option>
-              <Option value="all">all</Option>
-            </Select>
-            <span style={{ marginLeft: 5 }}>日志时间：</span>
-            <DatePicker
-              style={{ display: "inline-block", width: "calc(30% - 12px)" }}
-              onChange={this.onChange}
-            />
-            <Input
-              type="submit"
-              value="Submit"
-              style={{
-                display: "inline-block",
-                width: "calc(20% - 12px)",
-                marginLeft: 5,
-              }}
-            ></Input>
-          </Form.Item>
+            <Space direction="horizontal">
+              <Select
+                defaultValue={this.state.log_level}
+                onChange={this.handleChange}
+              >
+                <Option value="info">info</Option>
+                <Option value="error">error</Option>
+                <Option value="all">all</Option>
+              </Select>
+              <span style={{ marginLeft: 5 }}>日志时间：</span>
+              <DatePicker onChange={this.onChange} />
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
 
-          <Form.Item label="城市：" validateStatus="validating" help="地区">
-            <Cascader
-              defaultValue={["1"]}
-              options={options}
-              style={{ display: "inline-block", width: "calc(50% - 12px)" }}
-            />
-          </Form.Item>
+              <Cascader defaultValue={["1"]} options={options} />
 
-          <Form.Item label="Success" hasFeedback validateStatus="success">
-            <Input.Password allowClear placeholder="input password " />
+              <Input.Password
+                placeholder="input password"
+                allowClear
+                iconRender={(visible) =>
+                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+              />
+            </Space>
           </Form.Item>
         </Form>
         <Form
@@ -359,4 +368,4 @@ class Antform extends React.Component {
     );
   }
 }
-export default Antform;
+export default Antdform;

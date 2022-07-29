@@ -1,7 +1,16 @@
 /* jshint esversion: 6 */
 import React from "react";
-import { Table, Form, FormGroup, Label, Input } from "reactstrap";
-import get from "../../api/get";
+import {
+  Table,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  Row,
+  Col,
+} from "reactstrap";
+import get from "../../../api/get";
 import MyModal from "./modal";
 
 import { DatePicker } from "antd";
@@ -85,37 +94,45 @@ class Myform extends React.Component {
     const { log_level, log_list } = this.state;
     return (
       <div>
-        <Form inline onSubmit={this.handleSubmit}>
-          <FormGroup>
-            <Label for="log_level">日志级别</Label>
-            <Input
-              type="select"
-              name="log_level"
-              id="log_level"
-              selected={this.state.log_level}
-              onChange={this.handleInputChange}
-            >
-              <option>info</option>
-              <option>error</option>
-              <option>all</option>
-            </Input>
-          </FormGroup>
-
-          <FormGroup>
-            <Label for="log_day">日期：</Label>
-            <DatePicker onChange={this.onChange} />
-            <Input
-              id="log_day"
-              type="date"
-              name="log_day"
-              value={this.state.log_day}
-              onChange={this.handleInputChange}
-            />
-          </FormGroup>
-
-          <Input type="submit" value="Submit" color="primary"></Input>
-          {/* <Button type="primary">Button</Button> */}
+        <Form onSubmit={this.handleSubmit}>
+          <Row>
+            <Col md={1}>
+              <FormGroup>
+                <Label for="log_level">日志级别</Label>
+                <Input
+                  type="select"
+                  name="log_level"
+                  id="log_level"
+                  selected={this.state.log_level}
+                  onChange={this.handleInputChange}
+                >
+                  <option>info</option>
+                  <option>error</option>
+                  <option>all</option>
+                </Input>
+              </FormGroup>
+            </Col>
+            <Col md={2}>
+              <FormGroup>
+                <Label for="log_day">日期：</Label>
+                {/* <DatePicker onChange={this.onChange} /> */}
+                <Input
+                  id="log_day"
+                  type="date"
+                  name="log_day"
+                  value={this.state.log_day}
+                  onChange={this.handleInputChange}
+                />
+              </FormGroup>
+            </Col>
+            <Col md={2}>
+              <FormGroup>
+                <Button>查询</Button>
+              </FormGroup>
+            </Col>
+          </Row>
         </Form>
+
         <Table>
           <thead>
             <tr>

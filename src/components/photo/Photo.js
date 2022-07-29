@@ -1,12 +1,11 @@
 /* jshint esversion: 6 */
-import React, { useState } from "react";
-import { Menu, Result, Button } from "antd";
+import React from "react";
 import { Routes, Route, Link, Outlet } from "react-router-dom";
-import Mylog from "../applog/Applog";
+import { Menu, Result, Button } from "antd";
+import Applog from "./applog/Applog";
 import Home from "./home";
 import Show from "./show";
 import Mychart from "../chart/mychart";
-import "../../assets/App.css";
 import NotFound from "../notfound/404";
 import Container from "@mui/material/Container";
 import {
@@ -77,7 +76,7 @@ const items = [
     "Home",
     "sub1",
     <Link to="home">
-      <SmileOutlined />
+      <AppstoreOutlined />
     </Link>
   ),
   getItem(
@@ -91,7 +90,7 @@ const items = [
     "Show",
     "sub3",
     <Link to="show">
-      <SmileOutlined />
+      <MailOutlined />
     </Link>
   ),
   getItem(
@@ -138,7 +137,7 @@ function Photo() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="home" element={<Home />} />
-        <Route path="applog" element={<Mylog />} />
+        <Route path="applog" element={<Applog />} />
         <Route path="show" element={<Show />} />
         <Route path="chart" element={<Mychart />} />
         <Route path="error403" element={<Error403 />} />

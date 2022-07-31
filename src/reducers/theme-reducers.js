@@ -1,8 +1,7 @@
 import { CHANGE_THEME } from "../actions/theme-actions";
 
 const initialState = {
-  color: "blue",
-  img: "",
+  img: null,
 };
 
 export default function themeReducer(state = initialState, action) {
@@ -10,7 +9,6 @@ export default function themeReducer(state = initialState, action) {
     case CHANGE_THEME:
       return {
         ...state,
-        color: action.payload,
         img: action.payload,
       };
     default:

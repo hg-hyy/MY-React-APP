@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CssBaseline from "@mui/material/CssBaseline";
 import jwt_decode from "jwt-decode";
 import Sidebar from "./Sidebar";
@@ -24,6 +24,8 @@ import { ColorModeContext } from "./theme-context";
 
 function App() {
   const dispatch = useDispatch();
+
+  const img = useSelector((state) => state.themeReducer.img);
 
   function checkToken() {
     try {
@@ -168,6 +170,17 @@ function App() {
               open={open}
               logo={logo}
               logoText="shenyun"
+            />
+            <img
+              src={img}
+              alt=""
+              style={{
+                position: "absolute",
+                top: 66,
+                width: "100%",
+                height: "903px",
+                objectFit: "cover",
+              }}
             />
           </Drawer>
           <Box sx={{ flexGrow: 1 }}>

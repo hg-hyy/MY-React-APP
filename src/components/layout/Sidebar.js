@@ -1,8 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
-
 import List from "@mui/material/List";
 import Tooltip from "@mui/material/Tooltip";
 import Profile from "./Profile";
@@ -15,12 +13,8 @@ import ListItemText from "@mui/material/ListItemText";
 function Sidebar(props) {
   const { AppRoutes, open } = props;
 
-  function activeRoute(routeName) {
-    return window.location.href.includes(routeName);
-  }
-
   const links = (
-    <List>
+    <List sx={{ zIndex: 1002 }}>
       {AppRoutes &&
         AppRoutes.map((item, key) => {
           return (
@@ -97,9 +91,4 @@ Sidebar.propTypes = {
   open: PropTypes.bool,
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  isAuthenticated: state.loginReducer.isAuthenticated,
-  data: state.reduxReducer.data,
-});
-
-export default connect(mapStateToProps)(Sidebar);
+export default Sidebar;

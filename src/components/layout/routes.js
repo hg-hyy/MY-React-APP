@@ -8,7 +8,7 @@ import AppsIcon from "@mui/icons-material/Apps";
 import HomeIcon from "@mui/icons-material/Home";
 import BugReport from "@mui/icons-material/BugReport";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
-
+import Warn from "../warnManage/warn";
 import ToDo from "../todo/ToDo";
 import Cart from "../cart/Cart";
 import Blog from "../Blog/Blog";
@@ -106,6 +106,13 @@ const AppRoutes = [
     name: "home",
     icon: HomeIcon,
     component: Home,
+    layout: "/admin",
+  },
+  {
+    path: "/warn",
+    name: "warn",
+    icon: BugReport,
+    component: Warn,
     layout: "/admin",
   },
 ];

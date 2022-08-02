@@ -1,24 +1,20 @@
 import React from "react";
-
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
 import App from "./components/layout/App";
 import "./assets/material-react.css";
 import "./assets/App.css";
 import * as serviceWorker from "./serviceWorker";
-// eslint-disable-next-line
-import { selectSubreddit, fetchPosts } from "./actions/subreddit-actions";
 import store from "./reducers/store";
-// store.dispatch(selectSubreddit("reactjs"))
 import { createRoot } from "react-dom/client";
 const container = document.getElementById("app");
 const root = createRoot(container);
 
 root.render(
   <Provider store={store}>
-    <Router>
+    <BrowserRouter>
       <App />
-    </Router>
+    </BrowserRouter>
   </Provider>
 );
 

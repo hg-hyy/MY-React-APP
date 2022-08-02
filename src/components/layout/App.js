@@ -143,7 +143,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Box sx={{ display: "flex", flexGrow: 1 }}>
           <CssBaseline />
-          <AppBar position="fixed" open={open}>
+          {/* <AppBar position="fixed" open={open}>
             <Toolbar>
               <IconButton
                 color="inherit"
@@ -151,7 +151,7 @@ function App() {
                 onClick={handleDrawerToggle}
                 edge="start"
                 sx={{
-                  marginRight: 5,
+                  mr: 5,
                   // ...(open && { display: "none" }),
                 }}
               >
@@ -163,7 +163,7 @@ function App() {
               <Box sx={{ flexGrow: 1 }} />
               <NavItems changeTheme={changeTheme} />
             </Toolbar>
-          </AppBar>
+          </AppBar> */}
           <Drawer variant="permanent" open={open}>
             <Sidebar
               AppRoutes={Routers}
@@ -178,8 +178,9 @@ function App() {
                 position: "absolute",
                 top: 66,
                 width: "100%",
-                height: "903px",
+                height: `calc(100vh - 66px)`,
                 objectFit: "cover",
+                opacity: 0.8,
               }}
             />
           </Drawer>

@@ -25,7 +25,7 @@ function Sidebar(props) {
               style={({ isActive }) => {
                 return {
                   display: "block",
-                  backgroundColor: isActive ? "blue" : "",
+                  backgroundColor: isActive ? "#81d4fa" : "",
                 };
               }}
             >
@@ -60,6 +60,7 @@ function Sidebar(props) {
                       primary={item.name}
                       sx={{
                         opacity: open ? 1 : 0,
+                        color: "black",
                         // bgcolor: "primary.main",
                       }}
                     />

@@ -84,7 +84,7 @@ function Main() {
               />
             );
           })}
-          <Route path="/" element={<Home />}>
+          <Route path="/home" element={<Home />}>
             <Route index element={<Carousel />} />
             <Route path="price" element={<Price />} />
             <Route path="album" element={<Album />} />

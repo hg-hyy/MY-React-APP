@@ -6,6 +6,7 @@ import ChatIcon from "@mui/icons-material/Chat";
 import EditIcon from "@mui/icons-material/Edit";
 import AppsIcon from "@mui/icons-material/Apps";
 import HomeIcon from "@mui/icons-material/Home";
+import BugReport from "@mui/icons-material/BugReport";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
 import ToDo from "../todo/ToDo";
@@ -36,6 +37,10 @@ function Routers() {
   ]);
   return element;
 }
+
+const Test = () => {
+  return <div>test undefined</div>;
+};
 
 const AppRoutes = [
   {
@@ -101,13 +106,18 @@ const AppRoutes = [
     layout: "/admin",
   },
   {
-    path: "/",
+    path: "/home",
     name: "home",
     icon: HomeIcon,
     component: Home,
     layout: "/admin",
-
-    exact: true,
+  },
+  {
+    path: "/",
+    name: "test",
+    icon: BugReport,
+    component: Test,
+    layout: "/admin",
   },
 ];
 

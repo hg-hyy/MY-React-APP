@@ -15,7 +15,7 @@ let url = "http://127.0.0.1:8000/blog/show_log";
 
 let params = {
   log_level: "info",
-  log_name: "info-2022-07-29.log",
+  log_name: "info-2022-08-02.log",
 };
 
 const columns = [

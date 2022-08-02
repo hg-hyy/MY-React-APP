@@ -39,8 +39,6 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Box from "@mui/material/Box";
 import { styled, alpha } from "@mui/material/styles";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import Tooltip from "@mui/material/Tooltip";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
@@ -48,7 +46,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ColorModeContext } from "./theme-context";
 import { loginOut } from "../../actions/login-actions";
 import changeTheme from "../../actions/theme-actions";
-const options = ["None", "purple", "blue", "green", "orange", "red"];
+// const options = ["None", "purple", "blue", "green", "orange", "red"];
 const names = ["harlen", "moham", "sarah", "visual", "wesley", "zuhri"];
 const r = require.context("../../images/theme", false, /^\.\/.*\.jpg$/);
 const images = r.keys().map(r);
@@ -266,7 +264,7 @@ function Account() {
   const { user } = useSelector((state) => state.reduxReducer.data);
 
   return (
-    <List>
+    <List sx={{ mx: 1 }}>
       <ListItem style={{ padding: 0, margin: 0 }}>
         {user ? (
           <ListItemAvatar>
@@ -292,30 +290,27 @@ function Account() {
     </List>
   );
 }
-function Model(props) {
-  const { onClose, value: valueProp, open, ...other } = props;
-  const [value, setValue] = useState(valueProp);
-  const radioGroupRef = React.useRef(null);
 
+function ThemeDialog(props) {
+  const { handleClose, open, themevalue } = props;
+  const [value, setValue] = React.useState(themevalue);
+  const radioGroupRef = React.useRef(null);
   React.useEffect(() => {
     if (!open) {
-      setValue(valueProp);
+      setValue(themevalue);
     }
-  }, [valueProp, open]);
-
-  // eslint-disable-next-line
+  }, [themevalue, open]);
   const handleEntering = () => {
     if (radioGroupRef.current != null) {
       radioGroupRef.current.focus();
     }
   };
-
   const handleCancel = () => {
-    onClose();
+    handleClose();
   };
 
   const handleOk = () => {
-    onClose(value);
+    handleClose(value);
   };
 
   const handleChange = (event) => {
@@ -324,174 +319,15 @@ function Model(props) {
 
   return (
     <Dialog
-      sx={{ "& .MuiDialog-paper": { width: "80%", maxHeight: 435 } }}
+      sx={{ "& .MuiDialog-paper": { width: "50%", maxHeight: 435 } }}
       maxWidth="xs"
+      open={open}
       TransitionProps={{ onEntering: handleEntering }}
-      open={open}
-      {...other}
+      ref={radioGroupRef}
     >
-      <DialogTitle id="confirmation-dialog-title">theme</DialogTitle>
+      <DialogTitle>Theme</DialogTitle>
       <DialogContent dividers>
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Theme</FormLabel>
-          <RadioGroup
-            ref={radioGroupRef}
-            aria-label="ringtone"
-            name="ringtone"
-            value={value}
-            onChange={handleChange}
-          >
-            {data.map((option) => (
-              <FormControlLabel
-                value={option.theme}
-                key={option.theme}
-                control={<Radio />}
-                label={option.theme}
-              />
-            ))}
-          </RadioGroup>
-        </FormControl>
-      </DialogContent>
-      <DialogActions>
-        <Button autoFocus onClick={handleCancel} color="primary">
-          Cancel
-        </Button>
-        <Button onClick={handleOk} color="primary">
-          Ok
-        </Button>
-      </DialogActions>
-    </Dialog>
-  );
-}
-function Pop(props) {
-  const { id, onClose, value: valueProp, open, anchorEl } = props;
-  const [value, setValue] = useState(valueProp);
-
-  useEffect(() => {
-    if (!open) {
-      setValue(valueProp);
-    }
-  }, [valueProp, open]);
-
-  const handleCancel = () => {
-    onClose();
-  };
-
-  const handleOk = () => {
-    onClose(value);
-  };
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-  return (
-    <Popover
-      id={id}
-      open={open}
-      anchorEl={anchorEl}
-      onClose={onClose}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "center",
-      }}
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "center",
-      }}
-    >
-      <FormControl component="fieldset">
-        <FormLabel component="legend">Theme</FormLabel>
-        <RadioGroup
-          aria-label="ringtone"
-          name="ringtone"
-          value={value}
-          onChange={handleChange}
-        >
-          {data.map((option) => (
-            <FormControlLabel
-              value={option.theme}
-              key={option.theme}
-              control={<Radio />}
-              label={option.theme}
-            />
-          ))}
-        </RadioGroup>
-      </FormControl>
-      <FormControl component="fieldset">
-        <Button autoFocus onClick={handleCancel} color="primary">
-          Cancel
-        </Button>
-        <Button onClick={handleOk} color="primary">
-          Ok
-        </Button>
-      </FormControl>
-    </Popover>
-  );
-}
-
-const options1 = [
-  "None",
-  "Atria",
-  "Callisto",
-  "Dione",
-  "Ganymede",
-  "Hangouts Call",
-  "Luna",
-  "Oberon",
-  "Phobos",
-  "Pyxis",
-  "Sedna",
-  "Titania",
-  "Triton",
-  "Umbriel",
-];
-
-function ConfirmationDialogRaw(props) {
-  const { onClose, value: valueProp, open, ...other } = props;
-  const [value, setValue] = React.useState(valueProp);
-  const radioGroupRef = React.useRef(null);
-
-  React.useEffect(() => {
-    if (!open) {
-      setValue(valueProp);
-    }
-  }, [valueProp, open]);
-
-  const handleEntering = () => {
-    if (radioGroupRef.current != null) {
-      radioGroupRef.current.focus();
-    }
-  };
-
-  const handleCancel = () => {
-    onClose();
-  };
-
-  const handleOk = () => {
-    onClose(value);
-  };
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  return (
-    <Dialog
-      sx={{ "& .MuiDialog-paper": { width: "80%", maxHeight: 435 } }}
-      maxWidth="xs"
-      TransitionProps={{ onEntering: handleEntering }}
-      open={open}
-      {...other}
-    >
-      <DialogTitle>Phone Ringtone</DialogTitle>
-      <DialogContent dividers>
-        <RadioGroup
-          ref={radioGroupRef}
-          aria-label="ringtone"
-          name="ringtone"
-          value={value}
-          onChange={handleChange}
-        >
+        <RadioGroup name="theme" value={value} onChange={handleChange}>
           {data.map((option) => (
             <FormControlLabel
               value={option.theme}
@@ -512,43 +348,28 @@ function ConfirmationDialogRaw(props) {
   );
 }
 
-function Chips(props) {
+function Chips() {
+  console.log("work");
   const [modelopen, setModelopen] = useState(false);
-  const [label, setLabel] = useState("");
+  const [label, setLabel] = useState("sarah");
   const dispatch = useDispatch();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const id = open ? "pop" : undefined;
   const handleClose = (newValue) => {
-    setModelopen(false);
-
     if (newValue) {
       setLabel(newValue);
-
-      // data.map((item) => {
-      //   if (item.theme === newValue) {
-      //     newValue = item.imgs;
-      //     return newValue;
-      //   }
-      //   return newValue;
-      // });
-
-      // data.filter((item) => item.theme === newValue);
-
       dispatch(
         changeTheme(data.filter((item) => item.theme === newValue)[0].imgs)
       );
     }
-    setAnchorEl(null);
+
+    setModelopen(false);
   };
 
-  const handleOpen = (event) => {
+  const handleOpen = () => {
     setModelopen(true);
-    // setAnchorEl(event.currentTarget);
   };
 
   return (
-    <Box sx={{ display: "flex", m: 1 }}>
+    <Box sx={{ display: "flex", mx: 1 }}>
       <Chip
         variant="filled"
         color="success"
@@ -556,29 +377,14 @@ function Chips(props) {
         label={label}
         deleteIcon={<DoneIcon />}
         onClick={handleOpen}
-        onDelete={handleClose}
       />
-      <Pop
-        id={id}
-        open={open}
-        onClose={handleClose}
-        value={label}
-        anchorEl={anchorEl}
-      />
-      <ConfirmationDialogRaw
-        id="ringtone-menu"
-        keepMounted
-        open={modelopen}
-        onClose={handleClose}
-        value={label}
-      />
-      {/* <Model
+      <ThemeDialog
         id="theme-model"
         keepMounted
         open={modelopen}
-        onClose={handleClose}
-        value={label}
-      /> */}
+        handleClose={handleClose}
+        themevalue={label}
+      />
     </Box>
   );
 }
@@ -619,7 +425,9 @@ export default function NavItems(props) {
         </IconButton>
       </Tooltip>
       <Account {...props} />
+
       <Chips img={img} {...props} />
+
       <Right />
     </Box>
   );

@@ -1,4 +1,6 @@
 import React, { useState, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { useTheme } from "@mui/styles";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
@@ -97,6 +99,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 function User() {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   // const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -107,6 +111,7 @@ function User() {
 
   const handleClose = () => {
     dispatch(loginOut(false));
+    navigate("/login");
     setAnchorEl(null);
   };
   function handleListKeyDown(event) {

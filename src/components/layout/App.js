@@ -1,5 +1,7 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import CssBaseline from "@mui/material/CssBaseline";
 import jwt_decode from "jwt-decode";
 import Sidebar from "./Sidebar";
@@ -25,28 +27,27 @@ import { ColorModeContext } from "./theme-context";
 
 function App() {
   const dispatch = useDispatch();
-
+  const location = useLocation();
+  const navigate = useNavigate();
   const img = useSelector((state) => state.themeReducer.img);
-
   function checkToken() {
     try {
       const decoded = jwt_decode(localStorage.jwToken);
       const currentTime = Date.now() / 1000; //由毫秒转成秒
-      console.log(decoded.exp - currentTime);
+      console.log(decoded.exp - Math.round(currentTime));
       // 判断当前时间是否大于token中的exp时间;如果大于是为过期
-      if (decoded.exp < currentTime) {
+      if (decoded.exp - Math.round(currentTime) < 0) {
         localStorage.clear();
         dispatch(loginOut(false));
-        // loginOut(false);
-        // window.location.href="/login";
-        // history.push("/login")
-        console.log("已经退出登录！");
+        navigate("/login");
       }
     } catch (e) {
       return false;
     }
   }
-
+  useEffect(() => {
+    localStorage.jwToken && checkToken();
+  }, [location]);
   const [open, setOpen] = useState(true);
   const handleDrawerToggle = () => {
     open ? setOpen(false) : setOpen(true);

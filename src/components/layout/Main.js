@@ -11,6 +11,7 @@ import Checkout from "../home/checkout/Checkout";
 import NotFound from "../notfound/404";
 import Show from "../show/Show";
 import Photo from "../photo/Photo";
+import Warn from "../warnManage/warn";
 import Box from "@mui/material/Box";
 
 let ps;
@@ -97,6 +98,7 @@ function Main() {
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route path="show/*" element={<Show />} />
+          <Route path="warn/*" element={<Warn />} />
           <Route path="photo/*" element={<Photo />} />
           <Route component={NotFound} />
         </Routes>

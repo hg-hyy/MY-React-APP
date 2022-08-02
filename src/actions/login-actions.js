@@ -56,6 +56,7 @@ export const loginIn = (decoded) => {
   };
 };
 export const loginOut = (islogin) => {
+  localStorage.clear();
   return {
     type: SET_LOGIN_OUT,
     payload: islogin,

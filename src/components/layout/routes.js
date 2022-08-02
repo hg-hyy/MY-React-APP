@@ -102,17 +102,17 @@ const AppRoutes = [
     layout: "/admin",
   },
   {
-    path: "/",
-    name: "home",
-    icon: HomeIcon,
-    component: Home,
-    layout: "/admin",
-  },
-  {
     path: "/warn",
     name: "warn",
     icon: BugReport,
     component: Warn,
+    layout: "/admin",
+  },
+  {
+    path: "/",
+    name: "home",
+    icon: HomeIcon,
+    component: Home,
     layout: "/admin",
   },
 ];

@@ -43,7 +43,6 @@ const Profile = (props) => {
       justify="center"
       alignItems="center"
       className={classes.root}
-      style={{ backgroundImage: "url(" + img + ")" }}
     >
       <Grid item xs={4}>
         <Avatar

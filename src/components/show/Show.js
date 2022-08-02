@@ -1,4 +1,4 @@
-import React, { ref } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Routes,
@@ -8,7 +8,7 @@ import {
   Outlet,
   Navigate,
 } from "react-router-dom";
-import { loginIn, loginOut } from "../../actions/redux_actions";
+import { loginOut } from "../../actions/redux_actions";
 import Typography from "@mui/material/Typography";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
@@ -17,7 +17,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import LoginPage from "./LoginPage";
 import LovePage from "./LovePage";
 import PublicPage from "./PublicPage";
@@ -34,10 +33,7 @@ function NavBar() {
   const [value, setValue] = React.useState(0);
 
   return (
-    <Paper
-      sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-      elevation={3}
-    >
+    <Paper elevation={3}>
       <BottomNavigation
         value={value}
         onChange={(event, newValue) => {
@@ -120,63 +116,6 @@ function AuthButton() {
   );
 }
 
-function refreshMessages() {
-  const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max));
-
-  return Array.from(new Array(20)).map(
-    () => messageExamples[getRandomInt(messageExamples.length)]
-  );
-}
-
-function Show() {
-  const isAuthenticated = useSelector(
-    (state) => state.reduxReducer.isAuthenticated
-  );
-  const data = useSelector((state) => state.reduxReducer.data);
-  const ref = React.useRef(null);
-  const [messages, setMessages] = React.useState(() => refreshMessages());
-
-  React.useEffect(() => {
-    ref.current.ownerDocument.body.scrollTop = 0;
-    setMessages(refreshMessages());
-  }, []);
-  return (
-    <Container ref={ref} maxWidth="xxl" sx={{ pt: 3 }}>
-      <CssBaseline />
-      <AuthButton />
-      <Routes>
-        <Route index element={<PublicPage />} />
-        <Route
-          path="protected"
-          element={
-            isAuthenticated ? (
-              <ProtectedPage data={data} />
-            ) : (
-              <Navigate to="/show/signin" replace={true} />
-            )
-          }
-        />
-        <Route path="lovePage" element={<LovePage />} />
-        <Route
-          path="signin"
-          element={
-            <LoginPage signin={loginIn} isAuthenticated={isAuthenticated} />
-          }
-        />
-        <Route path="nesting/*" element={<NestingPage />} />
-        <Route path="hidden" element={<Hiddens width="md" />} />
-        <Route path="Iframe" element={<Iframe />} />
-        <Route path="message" element={<Message messages={messages} />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Outlet />
-      <NavBar />
-    </Container>
-  );
-}
-
-export default Show;
-
 const messageExamples = [
   {
     primary: "Brunch this week?",
@@ -221,3 +160,55 @@ const messageExamples = [
     person: require("../../images/yang.jpg"),
   },
 ];
+
+function refreshMessages() {
+  const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max));
+
+  return Array.from(new Array(5)).map(
+    () => messageExamples[getRandomInt(messageExamples.length)]
+  );
+}
+
+function Show() {
+  const isAuthenticated = useSelector(
+    (state) => state.reduxReducer.isAuthenticated
+  );
+  const data = useSelector((state) => state.reduxReducer.data);
+  const ref = React.useRef(null);
+  const [messages, setMessages] = React.useState(() => refreshMessages());
+
+  React.useEffect(() => {
+    ref.current.ownerDocument.body.scrollTop = 0;
+    setMessages(refreshMessages());
+  }, []);
+
+  return (
+    <Container ref={ref} maxWidth="xxl" sx={{ pt: 3 }}>
+      <NavBar />
+      <AuthButton />
+      <Routes>
+        <Route index element={<PublicPage />} />
+        <Route
+          path="protected"
+          element={
+            isAuthenticated ? (
+              <ProtectedPage data={data} />
+            ) : (
+              <Navigate to="/show/signin" replace={true} />
+            )
+          }
+        />
+        <Route path="lovePage" element={<LovePage />} />
+        <Route path="signin" element={<LoginPage />} />
+        <Route path="nesting/*" element={<NestingPage />} />
+        <Route path="hidden" element={<Hiddens width="md" />} />
+        <Route path="Iframe" element={<Iframe />} />
+        <Route path="message" element={<Message messages={messages} />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Outlet />
+    </Container>
+  );
+}
+
+export default Show;

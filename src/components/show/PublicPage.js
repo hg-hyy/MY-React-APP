@@ -12,7 +12,6 @@ import TextField from "@mui/material/TextField";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    height: 700,
   },
   button: {
     marginRight: theme.spacing(1),

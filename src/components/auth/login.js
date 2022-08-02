@@ -78,7 +78,7 @@ function Login(props) {
   };
 
   function handleSubmit(event) {
-    if (localStorage.jwToken) {
+    if (isAuthenticated && localStorage.jwToken) {
       console.log("请不要重复点击登录！");
       // history.replace(from);
       event.preventDefault();
@@ -89,7 +89,7 @@ function Login(props) {
   }
 
   useEffect(() => {
-    if (localStorage.jwToken) {
+    if (isAuthenticated && localStorage.jwToken) {
       navigate(from);
     }
   }, [from, navigate, isAuthenticated]);

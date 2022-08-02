@@ -9,6 +9,7 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
+import { Box } from "@mui/material";
 const r = require.context("../../images", true, /^\.\/.*\.png$/);
 const images = r.keys().map(r);
 
@@ -23,23 +24,17 @@ images.map((image, index) => {
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: "100%",
-    flexGrow: 1,
-  },
   header: {
     display: "flex",
     alignItems: "center",
-    height: 50,
+    height: 16,
     paddingLeft: theme.spacing(4),
     backgroundColor: theme.palette.background.default,
   },
   img: {
     height: 600,
-    display: "block",
-    maxWidth: "100%",
-    overflow: "hidden",
     width: "100%",
+    objectFit: "cover",
   },
 }));
 
@@ -62,7 +57,7 @@ export default function Carousel() {
   };
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ flexGrow: 1 }}>
       <Paper square elevation={0} className={classes.header}>
         <Typography>{tileData[activeStep].label}</Typography>
       </Paper>
@@ -114,6 +109,6 @@ export default function Carousel() {
           </Button>
         }
       />
-    </div>
+    </Box>
   );
 }

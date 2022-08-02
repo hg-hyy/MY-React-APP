@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CssBaseline from "@mui/material/CssBaseline";
 import jwt_decode from "jwt-decode";
 import Sidebar from "./Sidebar";
+import Footer from "./Footer";
 import Main from "./Main";
 import logo from "../../images/CL/CL1.jpg";
 import Routers from "./routes";
@@ -141,9 +142,9 @@ function App() {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <Box sx={{ display: "flex", flexGrow: 1 }}>
+        <Box sx={{ display: "flex", flexGrow: 1, flexWrap: 1 }}>
           <CssBaseline />
-          {/* <AppBar position="fixed" open={open}>
+          <AppBar position="fixed" open={open}>
             <Toolbar>
               <IconButton
                 color="inherit"
@@ -163,7 +164,7 @@ function App() {
               <Box sx={{ flexGrow: 1 }} />
               <NavItems changeTheme={changeTheme} />
             </Toolbar>
-          </AppBar> */}
+          </AppBar>
           <Drawer variant="permanent" open={open}>
             <Sidebar
               AppRoutes={Routers}
@@ -184,9 +185,10 @@ function App() {
               }}
             />
           </Drawer>
-          <Box sx={{ flexGrow: 1 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
             <DrawerHeader />
             <Main />
+            <Footer />
           </Box>
         </Box>
       </ThemeProvider>

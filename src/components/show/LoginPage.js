@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
@@ -10,7 +11,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-
+import { loginIn } from "../../actions/redux_actions";
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(1),
@@ -59,8 +60,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LoginPage(props) {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state) => state.reduxReducer.isAuthenticated
+  );
   const classes = useStyles();
-  const { isAuthenticated, signin } = props;
   let navigate = useNavigate();
   let location = useLocation();
   let { from } = location.state || { from: { pathname: "/show" } };
@@ -81,7 +85,7 @@ export default function LoginPage(props) {
   };
 
   function handleSubmit(event) {
-    signin(newUser);
+    dispatch(loginIn(newUser));
     event.preventDefault();
   }
 
@@ -105,7 +109,7 @@ export default function LoginPage(props) {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate.replace(from);
+      navigate(from);
     }
   });
 

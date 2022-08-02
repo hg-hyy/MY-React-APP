@@ -72,7 +72,11 @@ function Main() {
     <ErrorBoundary>
       <Box
         ref={mainPanel}
-        sx={{ position: "relative", width: "100%", height: "850px" }}
+        sx={{
+          position: "relative",
+          width: "100%",
+          height: `calc(100vh - 142.02px)`,
+        }}
       >
         <Routes>
           {Routers.map((item, index) => {
@@ -84,7 +88,7 @@ function Main() {
               />
             );
           })}
-          <Route path="/home" element={<Home />}>
+          <Route path="/" element={<Home />}>
             <Route index element={<Carousel />} />
             <Route path="price" element={<Price />} />
             <Route path="album" element={<Album />} />

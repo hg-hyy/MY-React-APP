@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useTheme } from "@mui/styles";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
@@ -46,7 +46,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { ColorModeContext } from "./theme-context";
 import { loginOut } from "../../actions/login-actions";
 import changeTheme from "../../actions/theme-actions";
-// const options = ["None", "purple", "blue", "green", "orange", "red"];
 const names = ["harlen", "moham", "sarah", "visual", "wesley", "zuhri"];
 const r = require.context("../../images/theme", false, /^\.\/.*\.jpg$/);
 const images = r.keys().map(r);
@@ -261,7 +260,7 @@ function Notify() {
 }
 
 function Account() {
-  const { user } = useSelector((state) => state.reduxReducer.data);
+  const user = useSelector((state) => state.loginReducer.user);
 
   return (
     <List sx={{ mx: 1 }}>
@@ -349,7 +348,6 @@ function ThemeDialog(props) {
 }
 
 function Chips() {
-  console.log("work");
   const [modelopen, setModelopen] = useState(false);
   const [label, setLabel] = useState("sarah");
   const dispatch = useDispatch();
@@ -424,7 +422,7 @@ export default function NavItems(props) {
           )}
         </IconButton>
       </Tooltip>
-      <Account {...props} />
+      <Account />
 
       <Chips img={img} {...props} />
 

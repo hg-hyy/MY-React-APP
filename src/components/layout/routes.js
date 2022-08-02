@@ -38,10 +38,6 @@ function Routers() {
   return element;
 }
 
-const Test = () => {
-  return <div>test undefined</div>;
-};
-
 const AppRoutes = [
   {
     path: "/todo",
@@ -106,17 +102,10 @@ const AppRoutes = [
     layout: "/admin",
   },
   {
-    path: "/home",
+    path: "/",
     name: "home",
     icon: HomeIcon,
     component: Home,
-    layout: "/admin",
-  },
-  {
-    path: "/",
-    name: "test",
-    icon: BugReport,
-    component: Test,
     layout: "/admin",
   },
 ];

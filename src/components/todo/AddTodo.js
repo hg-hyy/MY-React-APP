@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../reducers/todoSlice";
+import { addTodo } from "../../reducers/todoSlice";
 const AddTodo = () => {
   let input;
   const dispatch = useDispatch();

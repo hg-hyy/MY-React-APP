@@ -11,7 +11,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import { loginIn } from "../../actions/redux_actions";
+import { loginIn } from "../../reducers/reduxSlice";
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(1),

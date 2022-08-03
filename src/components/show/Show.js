@@ -8,7 +8,7 @@ import {
   Outlet,
   Navigate,
 } from "react-router-dom";
-import { loginOut } from "../../actions/redux_actions";
+import { loginOut } from "../../reducers/reduxSlice";
 import Typography from "@mui/material/Typography";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";

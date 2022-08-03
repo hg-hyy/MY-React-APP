@@ -8,8 +8,8 @@ import Footer from "./Footer";
 import Main from "./Main";
 import logo from "../../images/CL/CL1.jpg";
 import Routers from "./routes";
-import changeTheme from "../../actions/theme-actions";
-import { loginOut } from "../../actions/login-actions";
+import changeTheme from "../../reducers/themeSlice";
+import { logOut } from "../../reducers/authSlice";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -35,7 +35,7 @@ function App() {
       // 判断当前时间是否大于token中的exp时间;如果大于是为过期
       if (decoded.exp - Math.round(currentTime) < 0) {
         localStorage.clear();
-        dispatch(loginOut(false));
+        dispatch(logOut(false));
         navigate("/login");
       }
     } catch (e) {

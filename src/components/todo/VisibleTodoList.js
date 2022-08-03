@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleTodo } from "../reducers/todoSlice";
+import { toggleTodo } from "../../reducers/todoSlice";
 
 const TodoList = () => {
   const dispatch = useDispatch();

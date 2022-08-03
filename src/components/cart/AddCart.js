@@ -4,13 +4,13 @@ import Paper from "@mui/material/Paper";
 import clsx from "clsx";
 import { makeStyles } from "@mui/styles";
 
-import Deposits from "../components/cart/Deposits";
-import VerticalTabs from "../components/cart/VerticalTabs";
-import HorizontalTabs from "../components/cart/HorizontalTabs";
+import Deposits from "./Deposits";
+import VerticalTabs from "./VerticalTabs";
+import HorizontalTabs from "./HorizontalTabs";
 import CartTable from "./CartTable";
 import CartForm from "./CartForm";
-import Donut from "../components/cart/Donut";
-import Line from "../components/chart/Line";
+import Donut from "./Donut";
+import Line from "../chart/Line";
 
 import Container from "@mui/material/Container";
 

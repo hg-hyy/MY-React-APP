@@ -18,7 +18,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CartList from "../../containers/CartList";
+import CartList from "./CartList";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import TextField from "@mui/material/TextField";
 

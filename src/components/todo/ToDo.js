@@ -1,9 +1,9 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import AddTodo from "../../containers/AddTodo";
-import VisibleTodoList from "../../containers/VisibleTodoList";
-import UndoRedo from "../../containers/UndoRedo";
-import FilterLink from "../../containers/FilterLink";
+import AddTodo from "./AddTodo";
+import VisibleTodoList from "./VisibleTodoList";
+import UndoRedo from "./UndoRedo";
+import FilterLink from "./FilterLink";
 import { VisibilityFilters } from "../../reducers/todoSlice";
 import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";

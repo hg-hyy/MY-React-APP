@@ -26,7 +26,7 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
-      state.push({
+      state.cart.push({
         id: state.cart.length + 1,
         product: action.payload.product,
         quantity: action.payload.quantity,
@@ -34,18 +34,22 @@ export const cartSlice = createSlice({
       });
     },
     updateCart: (state, action) => {
-      state.cart.map((item) =>
-        item.product === action.payload.product ? action.payload : item
-      );
+      state.cart = state.cart.map((item) => {
+        return item.product === action.payload.product ? action.payload : item;
+      });
     },
     deleteFromCartByID: (state, action) => {
-      state.cart.filter((item) => item.id !== action.payload.id);
+      state.cart = state.cart.filter((item) => item.id !== action.payload);
     },
     deleteFromCart: (state, action) => {
-      state.cart.filter((item) => item.product !== action.payload.product);
+      state.cart = state.cart.filter(
+        (item) => item.product !== action.payload.product
+      );
     },
     seleteFromCart: (state, action) => {
-      state.cart.filter((item) => item.product === action.payload.product);
+      state.cart = state.cart.filter(
+        (item) => item.product === action.payload.product
+      );
     },
   },
 });

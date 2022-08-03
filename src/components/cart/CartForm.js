@@ -1,4 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addToCart,
+  updateCart,
+  deleteFromCart,
+  deleteFromCartByID,
+  seleteFromCart,
+} from "../../reducers/cartSlice";
 import Button from "@mui/material/Button";
 
 import TextField from "@mui/material/TextField";
@@ -58,7 +66,7 @@ function DialogSelect(props) {
   const { dialog, handleDialogClose } = props;
   const classes = useStyles();
   const [pdt, setPdt] = useState("");
-  const { carts, delCart } = props;
+  const { carts, deleteFromCart } = props;
 
   return (
     <div>
@@ -108,7 +116,7 @@ function DialogSelect(props) {
             color="primary"
             size="large"
             onClick={() => {
-              delCart(pdt);
+              deleteFromCart(pdt);
             }}
           >
             Delete
@@ -119,16 +127,16 @@ function DialogSelect(props) {
   );
 }
 
-export default function CartForm(props) {
+function CartForm(props) {
+  const carts = useSelector((state) => state.cartReducer.cart);
+  const dispatch = useDispatch();
   const classes = useStyles();
-  const { carts, addCart, updCart, delCart, delCartByID, seleteFromCart } =
-    props;
-  const queueRef = React.useRef([]);
+  const queueRef = useRef([]);
   const [id, setId] = useState(1);
-  const [proudct, setProudct] = useState("");
+  const [product, setProduct] = useState("");
   const [quantity, setQuantity] = useState(10);
   const [unitCost, setUnitCost] = useState(100);
-  const inputLabel = React.useRef(null);
+  const inputLabel = useRef(null);
   const [labelwidth, setLabelWidth] = React.useState(0);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
@@ -175,10 +183,10 @@ export default function CartForm(props) {
   };
 
   const handleDel = () => {
-    delCartByID(id);
+    dispatch(deleteFromCartByID(id));
   };
   const handleSelect = () => {
-    seleteFromCart(proudct);
+    dispatch(seleteFromCart(product));
   };
 
   const Alert = (
@@ -227,17 +235,18 @@ export default function CartForm(props) {
           // if (!input.value.trim()) {
           //   return;
           // }
-          if (!proudct && quantity && unitCost) {
+          if (!product && quantity && unitCost) {
             return;
           }
-          addCart(proudct, quantity, unitCost);
+          console.log(product, quantity, unitCost);
+          dispatch(addToCart({ product, quantity, unitCost }));
           // input.value = "";
         }}
       >
         {/* <input ref={node => (input = node)} /> */}
         <TextField
-          id="proudct"
-          label="proudct"
+          id="product"
+          label="product"
           style={{ padding: "0px 8px" }}
           placeholder="Placeholder"
           helperText="名称!"
@@ -247,8 +256,8 @@ export default function CartForm(props) {
             shrink: true,
           }}
           variant="outlined"
-          value={proudct}
-          onChange={(e) => setProudct(String(e.target.value))}
+          value={product}
+          onChange={(e) => setProduct(String(e.target.value))}
         />
         <TextField
           id="quantity"
@@ -315,9 +324,9 @@ export default function CartForm(props) {
           <Select
             labelId="demo-label"
             id="demo-simple-select-outlined"
-            value={proudct}
+            value={product}
             // displayEmpty
-            onChange={(e) => setProudct(String(e.target.value))}
+            onChange={(e) => setProduct(String(e.target.value))}
             labelwidth={labelwidth}
           >
             {carts.length === 0 ? (
@@ -360,7 +369,7 @@ export default function CartForm(props) {
             label="Update"
             icon={<EditIcon />}
             onClick={() => {
-              updCart(id, proudct, quantity, unitCost);
+              dispatch(updateCart({ id, product, quantity, unitCost }));
             }}
           />
           <BottomNavigationAction
@@ -383,10 +392,12 @@ export default function CartForm(props) {
       {Alert}
       <DialogSelect
         carts={carts}
-        delCart={delCart}
+        deleteFromCart={() => dispatch(deleteFromCart)}
         dialog={dialog}
         handleDialogClose={handleDialogClose}
       />
     </Grid>
   );
 }
+
+export default CartForm;

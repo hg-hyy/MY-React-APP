@@ -1,17 +1,19 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTodo } from "../reducers/todoSlice";
 
 const TodoList = () => {
   const dispatch = useDispatch();
-  // let todos = useSelector((state) => state.todoReducer.todos);
-  let todos = [];
-  const visibilityFilter = useSelector(
-    (state) => state.todoReducer.visibilityFilter
-  );
 
-  function getVisibleTodos(filter) {
+  const todos = useSelector((state) => {
+    const uncompletedTodos = getVisibleTodos(
+      state.todoReducer.todos,
+      state.todoReducer.visibilityFilter
+    );
+    return uncompletedTodos;
+  });
+
+  function getVisibleTodos(todos, filter) {
     switch (filter) {
       case "SHOW_COMPLETED":
         return todos.filter((t) => t.completed);
@@ -23,11 +25,6 @@ const TodoList = () => {
         return todos;
     }
   }
-
-  useEffect(() => {
-    todos = getVisibleTodos(visibilityFilter);
-    console.log(todos);
-  }, [visibilityFilter]);
 
   return (
     <ul>
@@ -45,17 +42,6 @@ const TodoList = () => {
         ))}
     </ul>
   );
-};
-
-TodoList.propTypes = {
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      completed: PropTypes.bool.isRequired,
-      text: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
-  toggleTodo: PropTypes.func.isRequired,
 };
 
 export default TodoList;

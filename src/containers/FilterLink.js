@@ -21,9 +21,7 @@ export const FilterLink = ({ children, filter }) => {
 };
 
 FilterLink.propTypes = {
-  active: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired,
 };
 
 export default FilterLink;

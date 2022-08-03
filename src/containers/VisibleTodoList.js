@@ -1,19 +1,33 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleTodo, getVisibleTodos } from "../reducers/todoSlice";
+import { toggleTodo } from "../reducers/todoSlice";
 
 const TodoList = () => {
   const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todoReducer.todos);
-  // let todos;
+  // let todos = useSelector((state) => state.todoReducer.todos);
+  let todos = [];
   const visibilityFilter = useSelector(
     (state) => state.todoReducer.visibilityFilter
   );
 
-  // useEffect(() => {
-  //   todos = dispatch(getVisibleTodos(visibilityFilter));
-  // }, [visibilityFilter]);
+  function getVisibleTodos(filter) {
+    switch (filter) {
+      case "SHOW_COMPLETED":
+        return todos.filter((t) => t.completed);
+      case "SHOW_ACTIVE":
+        return todos.filter((t) => !t.completed);
+      case "SHOW_ALL":
+        return todos;
+      default:
+        return todos;
+    }
+  }
+
+  useEffect(() => {
+    todos = getVisibleTodos(visibilityFilter);
+    console.log(todos);
+  }, [visibilityFilter]);
 
   return (
     <ul>

@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/styles";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
@@ -46,8 +45,8 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useSelector, useDispatch } from "react-redux";
 import { ColorModeContext } from "./theme-context";
-import { loginOut } from "../../actions/login-actions";
-import changeTheme from "../../actions/theme-actions";
+import { logOut } from "../../reducers/authSlice";
+import changeTheme from "../../reducers/themeSlice";
 const names = ["harlen", "moham", "sarah", "visual", "wesley", "zuhri"];
 const r = require.context("../../images/theme", false, /^\.\/.*\.jpg$/);
 const images = r.keys().map(r);
@@ -110,7 +109,7 @@ function User() {
   };
 
   const handleClose = () => {
-    dispatch(loginOut(false));
+    dispatch(logOut(false));
     navigate("/login");
     setAnchorEl(null);
   };
@@ -265,7 +264,7 @@ function Notify() {
 }
 
 function Account() {
-  const user = useSelector((state) => state.loginReducer.user);
+  const user = useSelector((state) => state.authReducer.user);
 
   return (
     <List sx={{ mx: 1 }}>
@@ -392,7 +391,7 @@ function Chips() {
   );
 }
 
-export default function NavItems(props) {
+export default function Navbar(props) {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
   return (

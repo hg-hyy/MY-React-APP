@@ -1,14 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
-import { addTodo } from "../actions/todo-actions";
-
-const AddTodo = ({ dispatch }) => {
+import { useDispatch } from "react-redux";
+import { addTodo } from "../reducers/todoSlice";
+const AddTodo = () => {
   let input;
-
+  const dispatch = useDispatch();
   return (
     <div>
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           if (!input.value.trim()) {
             return;
@@ -17,11 +16,11 @@ const AddTodo = ({ dispatch }) => {
           input.value = "";
         }}
       >
-        <input ref={node => (input = node)} />
+        <input ref={(node) => (input = node)} />
         <button type="submit">Add Todo</button>
       </form>
     </div>
   );
 };
 
-export default connect()(AddTodo);
+export default AddTodo;

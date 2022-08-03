@@ -6,9 +6,7 @@ import {
   useParams,
   matchPath,
   useLocation,
-  useMatch,
   useSearchParams,
-  useHref,
   Outlet,
 } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";

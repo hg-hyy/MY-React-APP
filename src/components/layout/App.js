@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-
 import CssBaseline from "@mui/material/CssBaseline";
 import jwt_decode from "jwt-decode";
 import Sidebar from "./Sidebar";
@@ -17,12 +16,10 @@ import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-
 import Typography from "@mui/material/Typography";
-
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import NavItems from "./NavItems";
+import Navbar from "./Navbar";
 import { ColorModeContext } from "./theme-context";
 
 function App() {
@@ -163,7 +160,7 @@ function App() {
                 MY-REACT-APP
               </Typography>
               <Box sx={{ flexGrow: 1 }} />
-              <NavItems changeTheme={changeTheme} />
+              <Navbar changeTheme={changeTheme} />
             </Toolbar>
           </AppBar>
           <Drawer variant="permanent" open={open}>

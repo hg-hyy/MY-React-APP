@@ -10,9 +10,9 @@ export default function Iframe() {
     // }
   }
 
-  // useEffect(() => {
-  //   window.addEventListener("message", receiveMessageFromIframe, false); // "message" name cannot be changed
-  // });
+  useEffect(() => {
+    window.addEventListener("message", receiveMessageFromIframe, false); // "message" name cannot be changed
+  });
 
   function handleParentClick() {
     //必须是iframe加载完成后才可以向子域发送数据

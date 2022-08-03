@@ -1,7 +1,37 @@
-import rootReducer from ".";
 import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "./counterSlice";
+import cartReducer from "./cart-reducer";
+import loginReducer from "./login-reducer";
+import registReducer from "./regist-reducer";
+import reduxReducer from "./redux-reducer";
+import themeReducer from "./theme-reducers";
+import { postsBySubreddit, selectedsubreddit } from "./subreddit-reducer";
+import todosReducer from "./todos-reducer";
+import visibilityFilter from "./visibilityFilter";
+
+const allReducers = {
+  cartReducer,
+  todosReducer,
+  visibilityFilter,
+  loginReducer,
+  postsBySubreddit,
+  selectedsubreddit,
+  reduxReducer,
+  registReducer,
+  themeReducer,
+  counterReducer,
+};
+
+const rootReducer = combineReducers(allReducers);
+
+// export  configureStore({
+//   reducer: {
+//     counterReducer,
+//   },
+// });
 
 const loggerMiddleware = createLogger();
 

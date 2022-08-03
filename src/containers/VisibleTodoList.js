@@ -1,62 +1,47 @@
-import React from "react";
-import { connect } from "react-redux";
-import { toggleTodo } from "../actions/todo-actions";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTodo, getVisibleTodos } from "../reducers/todoSlice";
 
-const Todo = ({ onClick, completed, text }) => (
-  <li
-    onClick={onClick}
-    style={{
-      textDecoration: completed ? "line-through" : "none"
-    }}
-  >
-    {text}
-  </li>
-);
+const TodoList = () => {
+  const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todoReducer.todos);
+  // let todos;
+  const visibilityFilter = useSelector(
+    (state) => state.todoReducer.visibilityFilter
+  );
 
-Todo.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  completed: PropTypes.bool.isRequired,
-  text: PropTypes.string.isRequired
+  // useEffect(() => {
+  //   todos = dispatch(getVisibleTodos(visibilityFilter));
+  // }, [visibilityFilter]);
+
+  return (
+    <ul>
+      {todos &&
+        todos.map((todo) => (
+          <li
+            key={todo.id}
+            onClick={() => dispatch(toggleTodo(todo.id))}
+            style={{
+              textDecoration: todo.completed ? "line-through" : "none",
+            }}
+          >
+            {todo.text}
+          </li>
+        ))}
+    </ul>
+  );
 };
-
-const TodoList = ({ todos, toggleTodo }) => (
-  <ul>
-    {todos&&todos.map(todo => (
-      <Todo key={todo.id} {...todo} onClick={() => toggleTodo(todo.id)} />
-    ))}
-  </ul>
-);
 
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       completed: PropTypes.bool.isRequired,
-      text: PropTypes.string.isRequired
+      text: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
-  toggleTodo: PropTypes.func.isRequired
+  toggleTodo: PropTypes.func.isRequired,
 };
 
-const getVisibleTodos = (todos, filter) => {
-  switch (filter) {
-    case "SHOW_COMPLETED":
-      return todos.filter(t => t.completed);
-    case "SHOW_ACTIVE":
-      return todos.filter(t => !t.completed);
-    case "SHOW_ALL":
-    default:
-      return todos;
-  }
-};
-
-const mapStateToProps = state => ({
-  todos: getVisibleTodos(state.todosReducer.present, state.visibilityFilter)
-});
-
-const mapDispatchToProps = dispatch => ({
-  toggleTodo: id => dispatch(toggleTodo(id))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default TodoList;

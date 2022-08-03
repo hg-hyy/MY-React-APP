@@ -18,6 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Hiddens(props) {
   const { width } = props;
+  // eslint-disable-next-line
   const hidden = useMediaQuery((theme) => theme.breakpoints.up("xs"));
   // const theme = useTheme();
   const theme = createTheme({

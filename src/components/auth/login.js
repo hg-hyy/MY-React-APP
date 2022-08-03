@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logIn } from "../../reducers/authSlice";
 import { useNavigate, useLocation } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -12,11 +13,10 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import Container from "@mui/material/Container";
-import { login } from "../../actions/login-actions";
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(3),
-    height: 820,
+    height: 790,
   },
   image: {
     backgroundImage: `url(${require("../../images/yang.jpg")})`,
@@ -50,23 +50,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// 判断登录的值是否为空值
-// eslint-disable-next-line
-const isEmpty = (value) => {
-  return (
-    value === undefined ||
-    value === null ||
-    (typeof value === "object" && Object.keys(value).length === 0) ||
-    (typeof value === "string" && value.trim().length === 0)
-  );
-};
-
-function Login(props) {
+export default function Login(props) {
   const classes = useStyles();
-  const { login, errors, isAuthenticated } = props;
+
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-
+  const errors = useSelector((state) => state.authReducer.errors);
+  const isAuthenticated = useSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   let location = useLocation();
 
@@ -84,7 +77,7 @@ function Login(props) {
       event.preventDefault();
       return false;
     }
-    login(newUser);
+    dispatch(logIn(newUser));
     event.preventDefault();
   }
 
@@ -188,14 +181,3 @@ function Login(props) {
     </Container>
   );
 }
-
-const mapDispatchToProps = (dispatch) => ({
-  login: (userData) => dispatch(login(userData)),
-});
-
-const mapStateToProps = (state) => ({
-  errors: state.loginReducer.errors,
-  isAuthenticated: state.loginReducer.isAuthenticated,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);

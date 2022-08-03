@@ -1,3 +1,4 @@
+import { useRoutes } from "react-router-dom";
 import Dashboard from "@mui/icons-material/Dashboard";
 import Person from "@mui/icons-material/Person";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
@@ -8,7 +9,6 @@ import AppsIcon from "@mui/icons-material/Apps";
 import HomeIcon from "@mui/icons-material/Home";
 import BugReport from "@mui/icons-material/BugReport";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
-import Warn from "../warnManage/warn";
 import ToDo from "../todo/ToDo";
 import Cart from "../cart/Cart";
 import Blog from "../Blog/Blog";
@@ -18,8 +18,9 @@ import Regist from "../auth/regist";
 import Show from "../show/Show";
 import Home from "../home/Home";
 import Photo from "../photo/Photo";
-import { useRoutes } from "react-router-dom";
-
+import Warn from "../warnManage/warn";
+import Counter from "../counter/Counter";
+// eslint-disable-next-line
 function Routers() {
   let element = useRoutes([
     {
@@ -106,6 +107,13 @@ const AppRoutes = [
     name: "warn",
     icon: BugReport,
     component: Warn,
+    layout: "/admin",
+  },
+  {
+    path: "/counter",
+    name: "counter",
+    icon: BugReport,
+    component: Counter,
     layout: "/admin",
   },
   {

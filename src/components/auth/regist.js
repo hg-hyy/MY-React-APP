@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { signUp } from "../../reducers/authSlice";
 import { useNavigate, useLocation } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -14,11 +15,10 @@ import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
-import { signUp } from "../../actions/regist-actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: 820,
+    height: 790,
     marginTop: theme.spacing(3),
   },
   image: {
@@ -52,11 +52,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Regist(props) {
+export default function Regist() {
   const classes = useStyles();
-  const { signUp, errors, isAuthenticated } = props;
-  // eslint-disable-next-line
 
+  const errors = useSelector((state) => state.authReducer.errors);
+  const isAuthenticated = useSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -67,18 +70,19 @@ function Regist(props) {
   let { from } = location.state || { from: { pathname: "/home" } };
   let newUser = {
     Username: username,
+    Email: email,
     Password: password,
   };
 
   // eslint-disable-next-line
   function handleSubmit(event) {
-    signUp(newUser);
+    dispatch(signUp(newUser));
     event.preventDefault();
   }
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate.replace(from);
+      navigate(from);
     }
   }, [isAuthenticated, from, navigate]);
 
@@ -195,13 +199,3 @@ function Regist(props) {
     </Container>
   );
 }
-const mapDispatchToProps = (dispatch) => ({
-  signUp: (userData) => dispatch(signUp(userData)),
-});
-
-const mapStateToProps = (state) => ({
-  errors: state.registReducer.errors,
-  isAuthenticated: state.registReducer.isAuthenticated,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Regist);

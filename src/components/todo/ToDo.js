@@ -4,7 +4,7 @@ import AddTodo from "../../containers/AddTodo";
 import VisibleTodoList from "../../containers/VisibleTodoList";
 import UndoRedo from "../../containers/UndoRedo";
 import FilterLink from "../../containers/FilterLink";
-import { VisibilityFilters } from "../../actions/todo-actions";
+import { VisibilityFilters } from "../../reducers/todoSlice";
 import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
 import Paper from "@mui/material/Paper";
@@ -136,7 +136,7 @@ MainFeaturedPost.propTypes = {
   post: PropTypes.object,
 };
 
-function ToDo() {
+export default function ToDo() {
   return (
     <Container maxWidth="xxl" sx={{ pt: 3 }}>
       <MainFeaturedPost />
@@ -150,11 +150,9 @@ function ToDo() {
           <FilterLink filter={VisibilityFilters.SHOW_COMPLETED}>
             Completed
           </FilterLink>
-          <UndoRedo />
+          {/* <UndoRedo /> */}
         </Grid>
       </Grid>
     </Container>
   );
 }
-
-export default ToDo;

@@ -105,7 +105,7 @@ export default function CartTable(props) {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleRowsPerPageChange = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -151,6 +151,7 @@ export default function CartTable(props) {
         page={page}
         onPageChange={handleChangePage}
         ActionsComponent={TablePaginationActions}
+        onRowsPerPageChange={handleRowsPerPageChange}
       />
     </TableContainer>
   );

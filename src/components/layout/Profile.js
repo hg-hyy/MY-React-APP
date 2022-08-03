@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Profile = (props) => {
   const classes = useStyles();
-  const { logo, logoText, img } = props;
+  const { logo, logoText } = props;
   const user = {
     name: logoText,
     avatar: logo,

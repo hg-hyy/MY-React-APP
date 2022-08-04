@@ -2,13 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import { setVisibilityFilter } from "../../reducers/todoSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Button from "@mui/material/Button";
 export const FilterLink = ({ children, filter }) => {
   const dispatch = useDispatch();
   const visibilityFilter = useSelector(
     (state) => state.todoReducer.visibilityFilter
   );
   return (
-    <button
+    <Button
+      variant="outlined"
       onClick={() => dispatch(setVisibilityFilter(filter))}
       disabled={visibilityFilter === filter}
       style={{
@@ -16,7 +18,7 @@ export const FilterLink = ({ children, filter }) => {
       }}
     >
       {children}
-    </button>
+    </Button>
   );
 };
 

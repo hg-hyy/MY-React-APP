@@ -41,45 +41,15 @@ const initialState = {
   },
 };
 
-function posts(
-  state = {
-    isFetching: false,
-    didInvalidate: false,
-    items: [],
-  },
-  action
-) {
-  switch (action.type) {
-    case INVALIDATE_SUBREDDIT:
-      return Object.assign({}, state, {
-        didInvalidate: true,
-      });
-    case REQUEST_POSTS:
-      return Object.assign({}, state, {
-        isFetching: true,
-        didInvalidate: false,
-      });
-    case RECEIVE_POSTS:
-      return Object.assign({}, state, {
-        isFetching: false,
-        didInvalidate: false,
-        items: action.posts,
-        lastUpdated: action.receivedAt,
-      });
-    default:
-      return state;
-  }
-}
-
 export function fetchPosts(subreddit) {
   return (dispatch) => {
     dispatch(requestPosts(subreddit));
-    return fetch(`http://127.0.0.1:8000/blog/login`)
+    return fetch(`http://127.0.0.1:8000/blog/signIn`)
       .then(
         (response) => response.json(),
         (error) => console.log("An error occurred.", error)
       )
-      .then((json) => dispatch(receivePosts(subreddit, json)));
+      .then((json) => dispatch(receivePosts({ subreddit, json })));
   };
 }
 
@@ -88,82 +58,93 @@ export const subredditSlice = createSlice({
   initialState: initialState,
   reducers: {
     selectSubreddit(state, action) {
-      state.selectedsubreddit = action.subreddit;
+      state.selectedsubreddit = action.payload;
     },
     requestPosts(state, action) {
-      Object.assign({}, state, {
-        [action.subreddit]: posts(state[action.subreddit], action),
+      return Object.assign({}, state, {
+        [action.payload]: posts(state[action.payload], action),
       });
     },
     receivePosts(state, action) {
-      state.img = action.payload.img;
+      return Object.assign({}, state, {
+        isFetching: false,
+        didInvalidate: false,
+        items: action.posts,
+        lastUpdated: action.receivedAt,
+      });
     },
-    invalidateSubreddit(state, action) {
-      state.img = action.payload.img;
+    invalidateSubreddit(state) {
+      return Object.assign({}, state, {
+        didInvalidate: true,
+      });
+    },
+    posts(
+      state = {
+        isFetching: false,
+        didInvalidate: false,
+        items: [],
+      },
+      action
+    ) {
+      switch (action.type) {
+        case INVALIDATE_SUBREDDIT:
+          return Object.assign({}, state, {
+            didInvalidate: true,
+          });
+        case REQUEST_POSTS:
+          return Object.assign({}, state, {
+            isFetching: true,
+            didInvalidate: false,
+          });
+        case RECEIVE_POSTS:
+          return Object.assign({}, state, {
+            isFetching: false,
+            didInvalidate: false,
+            items: action.posts,
+            lastUpdated: action.receivedAt,
+          });
+        default:
+          return state;
+      }
+    },
+    shouldFetchPosts(state, subreddit) {
+      const posts = state.postsBySubreddit[subreddit];
+      if (!posts) {
+        return true;
+      } else if (posts.isFetching) {
+        return false;
+      } else {
+        return posts.didInvalidate;
+      }
+    },
+    fetchPostsIfNeeded(subreddit) {
+      // 注意这个函数也接收了 getState() 方法
+      // 它让你选择接下来 dispatch 什么。
+
+      // 当缓存的值是可用时，
+      // 减少网络请求很有用。
+
+      return (dispatch, getState) => {
+        if (shouldFetchPosts(getState(), subreddit)) {
+          // 在 thunk 里 dispatch 另一个 thunk！
+          return dispatch(fetchPosts(subreddit));
+        } else {
+          // 告诉调用代码不需要再等待。
+          return Promise.resolve();
+        }
+      };
     },
   },
 });
 
-export function selectSubreddit(subreddit) {
-  return {
-    type: SELECT_SUBREDDIT,
-    subreddit,
-  };
-}
-
-function requestPosts(subreddit) {
-  return {
-    type: REQUEST_POSTS,
-    subreddit,
-  };
-}
-
-function receivePosts(subreddit, json) {
-  return {
-    type: RECEIVE_POSTS,
-    subreddit,
-    posts: json,
-    receivedAt: Date.now(),
-  };
-}
-
-export function invalidateSubreddit(subreddit) {
-  return {
-    type: INVALIDATE_SUBREDDIT,
-    subreddit,
-  };
-}
-
-function shouldFetchPosts(state, subreddit) {
-  const posts = state.postsBySubreddit[subreddit];
-  if (!posts) {
-    return true;
-  } else if (posts.isFetching) {
-    return false;
-  } else {
-    return posts.didInvalidate;
-  }
-}
-
-export function fetchPostsIfNeeded(subreddit) {
-  // 注意这个函数也接收了 getState() 方法
-  // 它让你选择接下来 dispatch 什么。
-
-  // 当缓存的值是可用时，
-  // 减少网络请求很有用。
-
-  return (dispatch, getState) => {
-    if (shouldFetchPosts(getState(), subreddit)) {
-      // 在 thunk 里 dispatch 另一个 thunk！
-      return dispatch(fetchPosts(subreddit));
-    } else {
-      // 告诉调用代码不需要再等待。
-      return Promise.resolve();
-    }
-  };
-}
-
-// Action creators are generated for each case reducer function
-export const { changeTheme } = subredditSlice.actions;
+export const {
+  posts,
+  selectSubreddit,
+  requestPosts,
+  receivePosts,
+  invalidateSubreddit,
+  shouldFetchPosts,
+  fetchPostsIfNeeded,
+} = subredditSlice.actions;
 
 export default subredditSlice.reducer;

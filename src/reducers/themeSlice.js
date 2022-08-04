@@ -5,7 +5,7 @@ export const themeSlice = createSlice({
   initialState: { img: null },
   reducers: {
     changeTheme(state, action) {
-      state.img = action.payload.img;
+      state.img = action.payload;
     },
   },
 });

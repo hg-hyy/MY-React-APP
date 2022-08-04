@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import Grid from "@mui/material/Grid";
-import AddTodo from "./AddTodo";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/Input";
 import VisibleTodoList from "./VisibleTodoList";
 import UndoRedo from "./UndoRedo";
 import FilterLink from "./FilterLink";
-import { VisibilityFilters } from "../../reducers/todoSlice";
+import {
+  VisibilityFilters,
+  saveNewTodo,
+  addTodo,
+} from "../../reducers/todoSlice";
 import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
 import Paper from "@mui/material/Paper";
@@ -20,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
-    marginBottom: theme.spacing(4),
+    marginBottom: theme.spacing(2),
     backgroundImage: "url(https://source.unsplash.com/random)",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
@@ -137,22 +144,68 @@ MainFeaturedPost.propTypes = {
 };
 
 export default function ToDo() {
+  const dispatch = useDispatch();
+  const [todo, setTodo] = useState("");
+
+  const handleChange = (e) => {
+    setTodo(e.target.value);
+  };
+
   return (
     <Container maxWidth="xxl" sx={{ pt: 3 }}>
       <MainFeaturedPost />
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <AddTodo />
-          <VisibleTodoList />
-          <span>Show: </span>
+      <Paper elevation={24}>
+        <Box
+          sx={{
+            display: "flex",
+            mx: 1,
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            id="outlined-name"
+            placeholder="add a todo"
+            label="Name"
+            value={todo}
+            onChange={handleChange}
+          />
+          <Button
+            variant="contained"
+            type="submit"
+            onClick={() => dispatch(addTodo(todo))}
+          >
+            Add Todo
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => dispatch(saveNewTodo(todo))}
+          >
+            Save Todo
+          </Button>
+        </Box>
+        <VisibleTodoList />
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyItems: "center",
+            alignItems: "center",
+            p: 1,
+          }}
+        >
+          <Typography variant="h6" component="span">
+            Show todo:
+          </Typography>
           <FilterLink filter={VisibilityFilters.SHOW_ALL}>All</FilterLink>
           <FilterLink filter={VisibilityFilters.SHOW_ACTIVE}>Active</FilterLink>
           <FilterLink filter={VisibilityFilters.SHOW_COMPLETED}>
             Completed
           </FilterLink>
-          {/* <UndoRedo /> */}
-        </Grid>
-      </Grid>
+        </Box>
+        {/* <UndoRedo /> */}
+      </Paper>
     </Container>
   );
 }

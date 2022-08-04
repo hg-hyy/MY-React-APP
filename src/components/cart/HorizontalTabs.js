@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@mui/styles";
-import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -18,24 +16,16 @@ import Button from "@mui/material/Button";
 import img2 from "../../images/chanel/2.jpg";
 import img3 from "../../images/chanel/3.jpg";
 import img4 from "../../images/chanel/4.jpg";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-    // maxWidth: 646,
-    width: "100%",
-  },
-}));
 
 function ImgMediaCard(props) {
-  const classes = useStyles();
   const { img } = props;
   return (
-    <Card className={classes.root}>
+    <Card>
       <CardActionArea>
         <CardMedia
+          height="300"
+          alt="green iguana"
           component="img"
-          alt="Contemplative Reptile"
           image={img}
           title="Contemplative Reptile"
         />
@@ -91,7 +81,6 @@ function a11yProps(index) {
 }
 
 export default function HorizontalTabs() {
-  const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -99,23 +88,21 @@ export default function HorizontalTabs() {
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          // variant="scrollable"
-          // scrollButtons="on"
-          indicatorColor="primary"
-          textColor="primary"
-          aria-label="scrollable force tabs"
-          centered
-        >
-          <Tab icon={<PhoneIcon />} {...a11yProps(0)} />
-          <Tab icon={<FavoriteIcon />} {...a11yProps(1)} />
-          <Tab icon={<PersonPinIcon />} {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
+    <Box sx={{ width: "50%", bgcolor: "background.paper" }}>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        // variant="scrollable"
+        // scrollButtons="on"
+        indicatorColor="primary"
+        textColor="primary"
+        aria-label="scrollable force tabs"
+        centered
+      >
+        <Tab icon={<PhoneIcon />} {...a11yProps(0)} />
+        <Tab icon={<FavoriteIcon />} {...a11yProps(1)} />
+        <Tab icon={<PersonPinIcon />} {...a11yProps(2)} />
+      </Tabs>
       <TabPanel value={value} index={0}>
         <ImgMediaCard img={img4} />
       </TabPanel>
@@ -125,6 +112,6 @@ export default function HorizontalTabs() {
       <TabPanel value={value} index={2}>
         <ImgMediaCard img={img3} />
       </TabPanel>
-    </div>
+    </Box>
   );
 }

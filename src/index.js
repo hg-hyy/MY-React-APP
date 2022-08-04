@@ -5,12 +5,14 @@ import App from "./components/layout/App";
 import "./assets/material-react.css";
 import "./assets/App.css";
 import * as serviceWorker from "./serviceWorker";
-// import store from "./reducers/store";
 import store from "./reducers/appStore";
+import { selectSubreddit, fetchPosts } from "./reducers/subredditSlice";
 import { createRoot } from "react-dom/client";
 const container = document.getElementById("app");
 const root = createRoot(container);
 
+store.dispatch(selectSubreddit("reactjs"));
+store.dispatch(fetchPosts("reactjs"));
 root.render(
   <Provider store={store}>
     <BrowserRouter>

@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import jwt_decode from "jwt-decode";
 import Sidebar from "./Sidebar";
@@ -21,7 +21,33 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Navbar from "./Navbar";
 import { ColorModeContext } from "./theme-context";
+import loadScript from "../../assets/utils/loadScript";
+let dependenciesLoaded = false;
 
+function loadDependencies() {
+  if (dependenciesLoaded) {
+    return;
+  }
+
+  dependenciesLoaded = true;
+
+  loadScript(
+    "https://buttons.github.io/buttons.js",
+    document.querySelector("head")
+  );
+}
+
+const GettingStartedLink = React.forwardRef((props, ref) => {
+  return (
+    <Link
+      href="/getting-started/installation"
+      naked
+      prefetch
+      ref={ref}
+      {...props}
+    />
+  );
+});
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -43,8 +69,10 @@ function App() {
     }
   }
   useEffect(() => {
+    loadDependencies();
     localStorage.jwToken && checkToken();
-  }, [location]);
+  }, [location, dependenciesLoaded]);
+
   const [open, setOpen] = useState(true);
   const handleDrawerToggle = () => {
     open ? setOpen(false) : setOpen(true);

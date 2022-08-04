@@ -6,6 +6,7 @@ import authReducer from "./authSlice";
 import reduxReducer from "./reduxSlice";
 import themeReducer from "./themeSlice";
 import todoReducer from "./todoSlice";
+import subredditReducer from "./subredditSlice";
 
 export default configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export default configureStore({
     reduxReducer,
     themeReducer,
     counterReducer,
+    subredditReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

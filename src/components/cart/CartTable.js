@@ -94,7 +94,7 @@ function TablePaginationActions(props) {
 
 export default function CartTable(props) {
   const { carts } = props;
-  const classes = useStyles();
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -111,10 +111,10 @@ export default function CartTable(props) {
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="ReduxTable" className={classes.table}>
+    <TableContainer component={Paper} sx={{ maxWidth: "50%" }}>
+      <Table aria-label="ReduxTable">
         <TableHead>
-          <TableRow className={classes.head}>
+          <TableRow>
             <TableCell>#</TableCell>
             <TableCell>商品名称</TableCell>
             <TableCell align="right">数量</TableCell>

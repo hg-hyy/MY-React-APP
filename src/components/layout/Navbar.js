@@ -46,7 +46,7 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useSelector, useDispatch } from "react-redux";
 import { ColorModeContext } from "./theme-context";
 import { logOut } from "../../reducers/authSlice";
-import changeTheme from "../../reducers/themeSlice";
+import { changeTheme } from "../../reducers/themeSlice";
 const names = ["harlen", "moham", "sarah", "visual", "wesley", "zuhri"];
 const r = require.context("../../images/theme", false, /^\.\/.*\.jpg$/);
 const images = r.keys().map(r);

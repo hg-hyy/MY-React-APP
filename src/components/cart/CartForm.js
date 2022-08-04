@@ -226,7 +226,7 @@ function CartForm(props) {
   }, []);
 
   return (
-    <Grid>
+    <Grid sx={{ maxWidth: "50%" }}>
       <form
         noValidate
         autoComplete="off"

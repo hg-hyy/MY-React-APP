@@ -42,7 +42,7 @@ function Routers() {
 const AppRoutes = [
   {
     path: "/todo",
-    name: "todo",
+    name: "Todo",
     icon: AppsIcon,
     component: ToDo,
     layout: "/admin",
@@ -50,7 +50,7 @@ const AppRoutes = [
   },
   {
     path: "/cart",
-    name: "cart",
+    name: "Cart",
     icon: Dashboard,
     component: Cart,
     layout: "/admin",
@@ -58,7 +58,7 @@ const AppRoutes = [
   },
   {
     path: "/blog",
-    name: "blog",
+    name: "Blog",
     icon: EditIcon,
     component: Blog,
     layout: "/admin",
@@ -66,7 +66,7 @@ const AppRoutes = [
   },
   {
     path: "/profile",
-    name: "profile",
+    name: "Profile",
     icon: FavoriteIcon,
     component: Profile,
     layout: "/admin",
@@ -74,7 +74,7 @@ const AppRoutes = [
   },
   {
     path: "/show",
-    name: "show",
+    name: "Show",
     icon: ChatIcon,
     component: Show,
     layout: "/admin",
@@ -82,7 +82,7 @@ const AppRoutes = [
   },
   {
     path: "/photo",
-    name: "photo",
+    name: "Photo",
     icon: PhotoCameraIcon,
     component: Photo,
     layout: "/admin",
@@ -90,35 +90,35 @@ const AppRoutes = [
   },
   {
     path: "/login",
-    name: "login",
+    name: "Login",
     icon: LockOpenIcon,
     component: Login,
     layout: "/admin",
   },
   {
     path: "/regist",
-    name: "regist",
+    name: "Regist",
     icon: Person,
     component: Regist,
     layout: "/admin",
   },
   {
     path: "/warn",
-    name: "warn",
+    name: "Warn",
     icon: BugReport,
     component: Warn,
     layout: "/admin",
   },
   {
     path: "/counter",
-    name: "counter",
+    name: "Redux",
     icon: BugReport,
     component: Counter,
     layout: "/admin",
   },
   {
     path: "/",
-    name: "home",
+    name: "Home",
     icon: HomeIcon,
     component: Home,
     layout: "/admin",

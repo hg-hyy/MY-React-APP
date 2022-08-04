@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@mui/styles";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
@@ -22,26 +21,88 @@ import CartList from "./CartList";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import TextField from "@mui/material/TextField";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-    display: "flex",
-    height: 268,
-    borderRadius: 5,
-    // overflow: "auto"
-  },
-  tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`,
-  },
-  inline: {
-    display: "inline",
-  },
-  type: {
-    overflow: "auto",
-    width: "100%",
-  },
-}));
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `vertical-tab-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`,
+  };
+}
+
+export default function VerticalTabs({ carts }) {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Box
+      sx={{
+        flexGrow: 1,
+        bgcolor: "background.paper",
+        display: "flex",
+        height: 300,
+        maxWidth: "50%",
+      }}
+    >
+      <Tabs
+        orientation="vertical"
+        variant="scrollable"
+        value={value}
+        onChange={handleChange}
+        aria-label="Vertical tabs example"
+        sx={{ borderRight: 1, borderColor: "divider" }}
+      >
+        <Tab label="Item One" {...a11yProps(0)} />
+        <Tab label="Item Two" {...a11yProps(1)} />
+        <Tab label="Item Three" {...a11yProps(2)} />
+        <Tab label="Item Four" {...a11yProps(3)} />
+        <Tab label="Item Five" {...a11yProps(4)} />
+      </Tabs>
+      <TabPanel value={value} index={0}>
+        <AlignItemsList />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <ListOfMes />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <CartList carts={carts} />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <MultilineTextFields />
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <MaxHeightTextarea />
+      </TabPanel>
+    </Box>
+  );
+}
 
 function MultilineTextFields() {
   const [value, setValue] = React.useState("Controlled");
@@ -67,11 +128,8 @@ function MultilineTextFields() {
 }
 
 function MaxHeightTextarea() {
-  const classes = useStyles();
-
   return (
     <TextareaAutosize
-      className={classes.type}
       rowsMax={10}
       aria-label="maximum height"
       placeholder="Maximum 4 rows"
@@ -83,12 +141,6 @@ function MaxHeightTextarea() {
 
 const r = require.context("../../images", true, /^\.\/.*\.jpg$/);
 const images = r.keys().map(r);
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
 
 function ListOfMes() {
   return (
@@ -160,8 +212,6 @@ function ListOfMes() {
   );
 }
 function AlignItemsList() {
-  const classes = useStyles();
-
   return (
     <List>
       <ListItem alignItems="center">
@@ -172,12 +222,7 @@ function AlignItemsList() {
           primary="Brunch this weekend?"
           secondary={
             <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
+              <Typography component="span" variant="body2" color="textPrimary">
                 Ali Connors
               </Typography>
               {" — I'll be in your neighborhood doing errands this…"}
@@ -194,12 +239,7 @@ function AlignItemsList() {
           primary="Summer BBQ"
           secondary={
             <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
+              <Typography component="span" variant="body2" color="textPrimary">
                 to Scott, Alex, Jennifer
               </Typography>
               {" — Wish I could come, but I'm out of town this…"}
@@ -216,12 +256,7 @@ function AlignItemsList() {
           primary="Oui Oui"
           secondary={
             <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
+              <Typography component="span" variant="body2" color="textPrimary">
                 Sandra Adams
               </Typography>
               {" — Do you have Paris recommendations? Have you ever…"}
@@ -230,77 +265,5 @@ function AlignItemsList() {
         />
       </ListItem>
     </List>
-  );
-}
-
-function TabPanel(props) {
-  const classes = useStyles();
-  const { children, value, index, ...other } = props;
-  return (
-    <Typography
-      className={classes.type}
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box p={1}>{children}</Box>}
-    </Typography>
-  );
-}
-
-function a11yProps(index) {
-  return {
-    id: `vertical-tab-${index}`,
-    "aria-controls": `vertical-tabpanel-${index}`,
-  };
-}
-
-export default function VerticalTabs({ carts }) {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  return (
-    <div className={classes.root}>
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        className={classes.tabs}
-      >
-        <Tab label="AlignList" {...a11yProps(0)} />
-        <Tab label="ListOfMes" {...a11yProps(1)} />
-        <Tab label="CartsList" {...a11yProps(2)} />
-        <Tab label="Textarea" {...a11yProps(3)} />
-        <Tab label="Textarea" {...a11yProps(4)} />
-        <Tab label="Textarea" {...a11yProps(5)} />
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        <AlignItemsList />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <ListOfMes />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <CartList carts={carts} />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <MultilineTextFields />
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        <MaxHeightTextarea />
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        <MaxHeightTextarea />
-      </TabPanel>
-    </div>
   );
 }

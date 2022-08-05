@@ -60,8 +60,6 @@ function Sidebar(props) {
                       primary={item.name}
                       sx={{
                         opacity: open ? 1 : 0,
-                        color: "black",
-                        // bgcolor: "primary.main",
                       }}
                     />
                   </ListItemButton>

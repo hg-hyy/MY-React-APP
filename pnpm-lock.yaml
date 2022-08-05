@@ -23,6 +23,7 @@ specifiers:
   '@testing-library/jest-dom': ^5.16.4
   '@testing-library/react': ^13.3.0
   '@testing-library/user-event': ^13.5.0
+  '@tinymce/tinymce-react': ^4.2.0
   animate.css: 3.7.2
   antd: ^4.21.7
   axios: ^0.27.2
@@ -88,6 +89,7 @@ dependencies:
   '@testing-library/jest-dom': registry.npmmirror.com/@testing-library/jest-dom/5.16.4
   '@testing-library/react': registry.npmmirror.com/@testing-library/react/13.3.0_biqbaboplfbrettd7655fr4n2y
   '@testing-library/user-event': registry.npmmirror.com/@testing-library/user-event/13.5.0_gwcpuyfvwbszhlmedmugzivgzu
+  '@tinymce/tinymce-react': registry.npmmirror.com/@tinymce/tinymce-react/4.2.0_biqbaboplfbrettd7655fr4n2y
   animate.css: registry.npmmirror.com/animate.css/3.7.2
   antd: registry.npmmirror.com/antd/4.21.7_biqbaboplfbrettd7655fr4n2y
   axios: registry.npmmirror.com/axios/0.27.2
@@ -3966,6 +3968,21 @@ packages:
     dependencies:
       '@babel/runtime': registry.npmmirror.com/@babel/runtime/7.18.9
       '@testing-library/dom': registry.npmmirror.com/@testing-library/dom/8.16.0
+    dev: false
+
+  registry.npmmirror.com/@tinymce/tinymce-react/4.2.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-Oyi/hDvARR29oqUwTgYXDnMV9E/c7C8V+iK+gUj9tndVXsfSJRYVOw3MTK9CCC9f7alN/S4CYaPpIaA3f4VZzw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@tinymce/tinymce-react/-/tinymce-react-4.2.0.tgz}
+    id: registry.npmmirror.com/@tinymce/tinymce-react/4.2.0
+    name: '@tinymce/tinymce-react'
+    version: 4.2.0
+    peerDependencies:
+      react: ^18.0.0 || ^17.0.1 || ^16.7.0
+      react-dom: ^18.0.0 || ^17.0.1 || ^16.7.0
+    dependencies:
+      prop-types: registry.npmmirror.com/prop-types/15.8.1
+      react: registry.npmmirror.com/react/18.2.0
+      react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
+      tinymce: registry.npmmirror.com/tinymce/6.1.2
     dev: false
 
   registry.npmmirror.com/@tootallnate/once/1.1.2:
@@ -14818,6 +14835,12 @@ packages:
     resolution: {integrity: sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/tiny-warning/-/tiny-warning-1.0.3.tgz}
     name: tiny-warning
     version: 1.0.3
+    dev: false
+
+  registry.npmmirror.com/tinymce/6.1.2:
+    resolution: {integrity: sha512-tl4KbEKdPzyPTatJkblN2AqzRj9jaRGyATnwaSnsLFGKb4AI6B+4e0Gc8dUDXuqAjgSnHokhzamrQJLbSn4CmQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/tinymce/-/tinymce-6.1.2.tgz}
+    name: tinymce
+    version: 6.1.2
     dev: false
 
   registry.npmmirror.com/tmpl/1.0.5:

@@ -41,6 +41,7 @@ specifiers:
   jwt-decode: ^3.1.2
   markdown-to-jsx: ^7.1.7
   moment: ^2.29.4
+  notistack: ^2.0.5
   perfect-scrollbar: ^1.5.5
   pnotify: ^5.2.0
   prop-types: ^15.8.1
@@ -104,6 +105,7 @@ dependencies:
   jwt-decode: registry.npmmirror.com/jwt-decode/3.1.2
   markdown-to-jsx: registry.npmmirror.com/markdown-to-jsx/7.1.7_react@18.2.0
   moment: registry.npmmirror.com/moment/2.29.4
+  notistack: registry.npmmirror.com/notistack/2.0.5_r77wrw6tsidtyq5ckpz73kvb3a
   perfect-scrollbar: registry.npmmirror.com/perfect-scrollbar/1.5.5
   pnotify: registry.npmmirror.com/pnotify/5.2.0_n3biftgcckxz6vxndlmrjlamsu
   prop-types: registry.npmmirror.com/prop-types/15.8.1
@@ -10621,6 +10623,32 @@ packages:
     name: normalize-url
     version: 6.1.0
     engines: {node: '>=10'}
+    dev: false
+
+  registry.npmmirror.com/notistack/2.0.5_r77wrw6tsidtyq5ckpz73kvb3a:
+    resolution: {integrity: sha512-Ig2T1Muqkc1PaSQcEDrK7diKv6cBxw02Iq6uv074ySfgq524TV5lK41diAb6OSsaiWfp3aRt+T3+0MF8m2EcJQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/notistack/-/notistack-2.0.5.tgz}
+    id: registry.npmmirror.com/notistack/2.0.5
+    name: notistack
+    version: 2.0.5
+    peerDependencies:
+      '@emotion/react': ^11.4.1
+      '@emotion/styled': ^11.3.0
+      '@mui/material': ^5.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/react':
+        optional: true
+      '@emotion/styled':
+        optional: true
+    dependencies:
+      '@emotion/react': registry.npmmirror.com/@emotion/react/11.9.3_lxeixztqul6ae7cp3cpkyxlhzm
+      '@emotion/styled': registry.npmmirror.com/@emotion/styled/11.9.3_lrdyawhmscavswn6eqk2uibmxm
+      '@mui/material': registry.npmmirror.com/@mui/material/5.9.1_qsuhhlyfbpdicstla2jcf7xfmy
+      clsx: registry.npmmirror.com/clsx/1.2.1
+      hoist-non-react-statics: registry.npmmirror.com/hoist-non-react-statics/3.3.2
+      react: registry.npmmirror.com/react/18.2.0
+      react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
     dev: false
 
   registry.npmmirror.com/npm-run-path/4.0.1:

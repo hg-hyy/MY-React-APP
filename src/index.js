@@ -8,6 +8,8 @@ import * as serviceWorker from "./serviceWorker";
 import store from "./reducers/appStore";
 import { selectSubreddit, fetchPosts } from "./reducers/subredditSlice";
 import { createRoot } from "react-dom/client";
+import { SnackbarProvider } from "notistack";
+
 const container = document.getElementById("app");
 const root = createRoot(container);
 
@@ -16,7 +18,23 @@ store.dispatch(fetchPosts("reactjs"));
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <SnackbarProvider
+        maxSnack={5}
+        autoHideDuration={2000}
+        preventDuplicate
+        iconVariant={{
+          success: "✅",
+          error: "✖️",
+          warning: "⚠️",
+          info: "ℹ️",
+        }}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <App />
+      </SnackbarProvider>
     </BrowserRouter>
   </Provider>
 );

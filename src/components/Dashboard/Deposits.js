@@ -253,9 +253,24 @@ function ScrollDialog() {
   }, [open]);
 
   return (
-    <div>
-      <Button onClick={handleClickOpen("paper")}>scroll=paper</Button>
-      <Button onClick={handleClickOpen("body")}>scroll=body</Button>
+    <Box sx={{ p: 3 }}>
+      <Typography color="textSecondary">
+        时间：{new Date().toLocaleString()}
+      </Typography>
+      <Button
+        onClick={handleClickOpen("paper")}
+        variant="contained"
+        color="success"
+      >
+        scroll paper
+      </Button>
+      <Button
+        onClick={handleClickOpen("body")}
+        variant="contained"
+        color="error"
+      >
+        scroll body
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -289,39 +304,15 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Box>
   );
 }
 
 export default function Deposits() {
   return (
-    <Box sx={{ width: "50%", bgcolor: "background.paper" }}>
-      <Paper>
-        <Typography component="h2" variant="h6" color="primary" gutterBottom>
-          Recent Deposits
-        </Typography>
-        <Typography component="p" variant="h4">
-          $3,024.00
-        </Typography>
-        <Typography color="textSecondary">
-          {new Date().toLocaleString()}
-        </Typography>
-
-        <Link
-          color="primary"
-          href="http://www.baidu.com"
-          to="/"
-          onClick={(event) => {
-            event.preventDefault();
-          }}
-        >
-          View balance
-        </Link>
-
-        <ScrollDialog />
-
-        <CustomizedSlider />
-      </Paper>
+    <Box sx={{ width: "50%", bgcolor: "background.paper", p: 1 }}>
+      <ScrollDialog />
+      <CustomizedSlider />
     </Box>
   );
 }

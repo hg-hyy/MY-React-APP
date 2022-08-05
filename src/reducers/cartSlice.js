@@ -41,10 +41,8 @@ export const cartSlice = createSlice({
     deleteFromCartByID: (state, action) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload);
     },
-    deleteFromCart: (state, action) => {
-      state.cart = state.cart.filter(
-        (item) => item.product !== action.payload.product
-      );
+    clearCart: (state, action) => {
+      state.cart = [];
     },
     seleteFromCart: (state, action) => {
       state.cart = state.cart.filter(
@@ -59,7 +57,7 @@ export const {
   addToCart,
   updateCart,
   deleteFromCartByID,
-  deleteFromCart,
+  clearCart,
   seleteFromCart,
 } = cartSlice.actions;
 

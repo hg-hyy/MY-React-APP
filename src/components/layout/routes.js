@@ -3,14 +3,19 @@ import Dashboard from "@mui/icons-material/Dashboard";
 import Person from "@mui/icons-material/Person";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import ChatIcon from "@mui/icons-material/Chat";
 import EditIcon from "@mui/icons-material/Edit";
 import AppsIcon from "@mui/icons-material/Apps";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import HomeIcon from "@mui/icons-material/Home";
 import BugReport from "@mui/icons-material/BugReport";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import ToDo from "../todo/ToDo";
 import Cart from "../cart/Cart";
+import Dash from "../Dashboard/Dashboard";
 import Blog from "../Blog/Blog";
 import Login from "../auth/login";
 import Profile from "../profile/Profile";
@@ -41,9 +46,17 @@ function Routers() {
 
 const AppRoutes = [
   {
+    path: "/dashboard",
+    name: "Dashboard",
+    icon: Dashboard,
+    component: Dash,
+    layout: "/admin",
+    auth: false,
+  },
+  {
     path: "/todo",
     name: "Todo",
-    icon: AppsIcon,
+    icon: PlaylistAddCheckIcon,
     component: ToDo,
     layout: "/admin",
     auth: false,
@@ -51,11 +64,12 @@ const AppRoutes = [
   {
     path: "/cart",
     name: "Cart",
-    icon: Dashboard,
+    icon: ShoppingCartCheckoutIcon,
     component: Cart,
     layout: "/admin",
     auth: false,
   },
+
   {
     path: "/blog",
     name: "Blog",
@@ -67,7 +81,7 @@ const AppRoutes = [
   {
     path: "/profile",
     name: "Profile",
-    icon: FavoriteIcon,
+    icon: AccountBoxIcon,
     component: Profile,
     layout: "/admin",
     auth: false,
@@ -98,7 +112,7 @@ const AppRoutes = [
   {
     path: "/regist",
     name: "Regist",
-    icon: Person,
+    icon: HowToRegIcon,
     component: Regist,
     layout: "/admin",
   },

@@ -1,33 +1,75 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { Layout, Menu } from "antd";
-import { SettingOutlined } from "@ant-design/icons";
+import {
+  AppstoreOutlined,
+  MailOutlined,
+  SettingOutlined,
+  SmileOutlined,
+} from "@ant-design/icons";
 import Currentwarn from "./currentwarn";
 import UnHandlewarn from "./unHandlewarn";
 import Handledwarn from "./handledwarn";
 const { Header, Content } = Layout;
-const { SubMenu } = Menu;
+
+const items = [
+  getItem(
+    "home",
+    "sub1",
+    <Link to="home">
+      <SettingOutlined />
+    </Link>
+  ),
+  getItem("warn", "sub2", <AppstoreOutlined />, [
+    getItem(
+      "currentwarn",
+      "1",
+      <Link to="currentwarn">
+        <MailOutlined />
+      </Link>
+    ),
+    getItem(
+      "unHandlewarn",
+      "2",
+      <Link to="unHandlewarn">
+        <SettingOutlined />
+      </Link>
+    ),
+    getItem(
+      "handledwarn",
+      "3",
+      <Link to="handledwarn">
+        <SmileOutlined />
+      </Link>
+    ),
+  ]),
+];
+
+function getItem(label, key, icon, children, type) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  };
+}
+
 function Warn() {
+  const onClick = (e) => {
+    // console.log("click ", e);
+  };
   return (
     <Layout>
       <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
         <div className="logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
-          <Menu.Item key="1">
-            <Link to="/warn">Home</Link>
-          </Menu.Item>
-
-          <SubMenu key="SubMenu" icon={<SettingOutlined />} title="报警管理">
-            <Menu.Item key="setting:1">
-              <Link to="unHandlewarn">未处理报警</Link>
-            </Menu.Item>
-            <Menu.Item key="setting:2">
-              <Link to="currentwarn">当前报警</Link>
-            </Menu.Item>
-            <Menu.Item key="setting:3">
-              <Link to="handledwarn">已处理报警</Link>
-            </Menu.Item>
-          </SubMenu>
-        </Menu>
+        <Menu
+          theme="dark"
+          onClick={onClick}
+          defaultSelectedKeys={["sub1"]}
+          defaultOpenKeys={["sub1"]}
+          mode="horizontal"
+          items={items}
+        />
       </Header>
       <Content
         className="site-layout"

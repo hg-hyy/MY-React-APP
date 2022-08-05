@@ -1,14 +1,13 @@
 import React, { useState, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addToCart,
   updateCart,
-  deleteFromCart,
+  clearCart,
   deleteFromCartByID,
   seleteFromCart,
 } from "../../reducers/cartSlice";
 import Button from "@mui/material/Button";
-
 import TextField from "@mui/material/TextField";
 import { makeStyles } from "@mui/styles";
 import InputLabel from "@mui/material/InputLabel";
@@ -16,14 +15,13 @@ import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import EditIcon from "@mui/icons-material/Edit";
-
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-
 import DialogTitle from "@mui/material/DialogTitle";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
@@ -31,6 +29,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import NoteOutlinedIcon from "@mui/icons-material/NoteOutlined";
+import { useSnackbar } from "notistack";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -41,14 +41,11 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
-    // color: theme.palette.text.secondary
   },
   formControl: {
     paddingLeft: theme.spacing(1),
-    minWidth: 50,
-    // marginLeft: theme.spacing(1),
-    // marginRight: theme.spacing(1),
-    width: 193.5,
+    minWidth: 100,
+    width: "20%",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -66,7 +63,7 @@ function DialogSelect(props) {
   const { dialog, handleDialogClose } = props;
   const classes = useStyles();
   const [pdt, setPdt] = useState("");
-  const { carts, deleteFromCart } = props;
+  const { carts, clearCart } = props;
 
   return (
     <div>
@@ -116,7 +113,7 @@ function DialogSelect(props) {
             color="primary"
             size="large"
             onClick={() => {
-              deleteFromCart(pdt);
+              clearCart(pdt);
             }}
           >
             Delete
@@ -127,17 +124,16 @@ function DialogSelect(props) {
   );
 }
 
-function CartForm(props) {
-  const carts = useSelector((state) => state.cartReducer.cart);
+export default function CartForm(props) {
+  const { carts } = props;
   const dispatch = useDispatch();
   const classes = useStyles();
   const queueRef = useRef([]);
-  const [id, setId] = useState(1);
+  const [id, setId] = useState(0);
   const [product, setProduct] = useState("");
-  const [quantity, setQuantity] = useState(10);
-  const [unitCost, setUnitCost] = useState(100);
+  const [quantity, setQuantity] = useState(0);
+  const [unitCost, setUnitCost] = useState(0);
   const inputLabel = useRef(null);
-  const [labelwidth, setLabelWidth] = React.useState(0);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
   const [messageInfo, setMessageInfo] = useState(undefined);
@@ -155,9 +151,6 @@ function CartForm(props) {
       setMessageInfo(queueRef.current.shift());
       setOpen(true);
     }
-  };
-  const handleExited = () => {
-    processQueue();
   };
 
   const handleClick = (message) => () => {
@@ -189,119 +182,70 @@ function CartForm(props) {
     dispatch(seleteFromCart(product));
   };
 
-  const Alert = (
-    <div>
-      <Snackbar
-        key={messageInfo ? messageInfo.key : undefined}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        onExited={handleExited}
-        message={messageInfo ? messageInfo.message : undefined}
-        action={
-          <React.Fragment>
-            <Button color="secondary" size="small" onClick={handleClose}>
-              UNDO
-            </Button>
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              className={classes.close}
-              onClick={handleClose}
-            >
-              <CloseIcon />
-            </IconButton>
-          </React.Fragment>
-        }
-      />
-    </div>
-  );
+  const handleSubmit = (e) => {
+    if (!product && quantity && unitCost) {
+      return;
+    }
+    dispatch(addToCart({ product, quantity, unitCost }));
+    e.preventDefault();
+  };
 
-  React.useEffect(() => {
-    setLabelWidth(inputLabel.current.offsetWidth);
-  }, []);
+  const handleoperabyid = (e) => {
+    const cart = carts.find((t) => t.id === Number(e.target.value));
 
-  return (
-    <Grid sx={{ maxWidth: "50%" }}>
-      <form
-        noValidate
-        autoComplete="off"
-        onSubmit={(e) => {
-          e.preventDefault();
-          // if (!input.value.trim()) {
-          //   return;
-          // }
-          if (!product && quantity && unitCost) {
-            return;
-          }
-          console.log(product, quantity, unitCost);
-          dispatch(addToCart({ product, quantity, unitCost }));
-          // input.value = "";
+    setId(Number(e.target.value));
+    setProduct(String(cart.product));
+    setQuantity(Number(cart.quantity));
+    setUnitCost(Number(cart.unitCost));
+  };
+  const handleoperabyp = (e) => {
+    const cart = carts.find((t) => t.product === String(e.target.value));
+    setProduct(e.target.value);
+    setId(Number(cart.id));
+    setQuantity(Number(cart.quantity));
+    setUnitCost(Number(cart.unitCost));
+  };
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  const openSnackbar = (message, variant, action) => () => {
+    // variant could be success, error, warning, info, or default
+    enqueueSnackbar(message, {
+      variant,
+      action,
+    });
+  };
+  const action = (snackbarId) => (
+    <>
+      <Button
+        onClick={() => {
+          alert(`I belong to snackbar with id ${snackbarId}`);
         }}
       >
-        {/* <input ref={node => (input = node)} /> */}
-        <TextField
-          id="product"
-          label="product"
-          style={{ padding: "0px 8px" }}
-          placeholder="Placeholder"
-          helperText="名称!"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-          value={product}
-          onChange={(e) => setProduct(String(e.target.value))}
-        />
-        <TextField
-          id="quantity"
-          className={classes.formControl}
-          label="quantity"
-          // style={{ padding: 5 }}
-          placeholder="Placeholder"
-          helperText="数量!"
-          // fullWidth
-          // margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-          value={quantity}
-          onChange={(e) => setQuantity(Number(e.target.value))}
-        />
-        <TextField
-          id="unitCost"
-          className={classes.formControl}
-          label="unitCost"
-          // style={{ padding: 5 }}
-          placeholder="Placeholder"
-          helperText="单价!"
-          // fullWidth
-          // margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-          value={unitCost}
-          onChange={(e) => setUnitCost(Number(e.target.value))}
-        />
+        Alert
+      </Button>
+      <Button
+        onClick={() => {
+          closeSnackbar(snackbarId);
+        }}
+      >
+        Dismiss
+      </Button>
+    </>
+  );
+
+  return (
+    <Grid sx={{ mt: 5, width: "100%" }}>
+      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <FormControl variant="outlined" className={classes.formControl}>
           <InputLabel ref={inputLabel} id="pid">
             ID
           </InputLabel>
           <Select
             labelId="pid"
-            id="demo-simple-select-outlined"
+            id="product-id"
             value={id}
-            // displayEmpty
-            onChange={(e) => setId(Number(e.target.value))}
-            labelwidth={labelwidth}
+            onChange={handleoperabyid}
           >
             {carts.length === 0 ? (
               <MenuItem value="">
@@ -326,8 +270,7 @@ function CartForm(props) {
             id="demo-simple-select-outlined"
             value={product}
             // displayEmpty
-            onChange={(e) => setProduct(String(e.target.value))}
-            labelwidth={labelwidth}
+            onChange={handleoperabyp}
           >
             {carts.length === 0 ? (
               <MenuItem value="">
@@ -344,13 +287,52 @@ function CartForm(props) {
           </Select>
         </FormControl>
 
-        {/* <Box
-            display="flex"
-            p={1}
-            bgcolor="background.paper"
-            justifyContent="center"
-            alignItems="center"
-          ></Box> */}
+        <TextField
+          id="product"
+          className={classes.formControl}
+          label="product"
+          placeholder="product name"
+          helperText="商品名称!"
+          // fullWidth
+          // margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+          value={product}
+          onChange={(e) => setProduct(String(e.target.value))}
+        />
+        <TextField
+          id="quantity"
+          className={classes.formControl}
+          label="quantity"
+          placeholder="quantity"
+          helperText="数量!"
+          // fullWidth
+          // margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+          value={quantity}
+          onChange={(e) => setQuantity(Number(e.target.value))}
+        />
+        <TextField
+          id="unitCost"
+          className={classes.formControl}
+          label="unitCost"
+          // style={{ padding: 5 }}
+          placeholder="unitCost"
+          helperText="单价!"
+          // fullWidth
+          // margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+          value={unitCost}
+          onChange={(e) => setUnitCost(Number(e.target.value))}
+        />
 
         <BottomNavigation
           value={value}
@@ -363,25 +345,34 @@ function CartForm(props) {
             label="Add"
             icon={<AddIcon />}
             type="submit"
-            onClick={handleClick("新增一条记录！")}
-          />
-          <BottomNavigationAction
-            label="Update"
-            icon={<EditIcon />}
-            onClick={() => {
-              dispatch(updateCart({ id, product, quantity, unitCost }));
-            }}
-          />
-          <BottomNavigationAction
-            label="Select"
-            icon={<EditIcon />}
-            onClick={handleSelect}
+            onClick={openSnackbar("新增一条记录！", "success", action)}
           />
           <BottomNavigationAction
             label="Delete"
             icon={<RemoveIcon />}
-            onClick={handleDel}
+            onClick={
+              (() => {
+                dispatch(deleteFromCartByID(id));
+              },
+              openSnackbar("删除一条记录！", "success", action))
+            }
           />
+          <BottomNavigationAction
+            label="Update"
+            icon={<EditIcon />}
+            onClick={
+              (() => {
+                dispatch(updateCart({ id, product, quantity, unitCost }));
+              },
+              openSnackbar("更新一条记录！", "success", action))
+            }
+          />
+          <BottomNavigationAction
+            label="Clear"
+            icon={<ClearIcon />}
+            onClick={handleSelect}
+          />
+
           <BottomNavigationAction
             label="Dialog"
             icon={<NoteOutlinedIcon />}
@@ -389,15 +380,12 @@ function CartForm(props) {
           />
         </BottomNavigation>
       </form>
-      {Alert}
       <DialogSelect
         carts={carts}
-        deleteFromCart={() => dispatch(deleteFromCart)}
+        clearCart={() => dispatch(clearCart)}
         dialog={dialog}
         handleDialogClose={handleDialogClose}
       />
     </Grid>
   );
 }
-
-export default CartForm;
